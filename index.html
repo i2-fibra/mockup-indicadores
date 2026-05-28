@@ -198,6 +198,184 @@
   .kpi-trend.down { color: var(--color-destructive); }
   .kpi-trend .material-symbols-outlined { font-size: 14px; }
 
+  /* ===== Filtros de data (3 pills no topo da página) ===== */
+  .date-filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .date-pill {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--ghost-border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.16s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .date-pill:hover {
+    border-color: var(--color-strong);
+    background: rgba(36, 43, 41, 0.45);
+  }
+  .date-pill.active {
+    border-color: var(--color-gold);
+    background: rgba(254, 203, 0, 0.06);
+    box-shadow: var(--neural-glow);
+  }
+  .date-pill-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .date-pill.active .date-pill-label { color: var(--color-gold); }
+  .date-pill-value {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--color-foreground);
+    letter-spacing: -0.3px;
+  }
+  .date-pill-sub {
+    font-size: 11px;
+    color: var(--color-fg-muted);
+  }
+  .date-pill .material-symbols-outlined {
+    font-size: 16px;
+    vertical-align: -3px;
+    margin-right: 4px;
+    color: var(--color-fg-muted);
+  }
+  .date-pill.active .material-symbols-outlined { color: var(--color-gold); }
+
+  /* ===== Linha de indicador (substitui texto descritivo dos deptos) ===== */
+  .indicador-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 100px 220px 60px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--ghost-border-color);
+    transition: background 0.16s;
+  }
+  .indicador-row:hover { background: rgba(254, 203, 0, 0.03); }
+  .indicador-row:last-child { border-bottom: none; }
+  .indicador-row.principal {
+    background: rgba(254, 203, 0, 0.04);
+    border-left: 3px solid var(--color-gold);
+    padding-left: 11px;
+  }
+  .ind-row-nome {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .ind-row-nome-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .ind-row-titulo {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+  .ind-row-principal-tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-gold);
+    background: rgba(254, 203, 0, 0.12);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ind-row-desc {
+    font-size: 11px;
+    color: var(--color-fg-dim);
+  }
+  .ind-row-meta, .ind-row-real {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ind-row-meta { color: var(--color-fg-muted); }
+  .ind-row-real { color: var(--color-foreground); }
+  .ind-row-meta-label, .ind-row-real-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .ind-row-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ind-row-bar {
+    height: 6px;
+    background: var(--color-surface-container);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .ind-row-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .ind-row-bar-fill.success { background: linear-gradient(90deg, var(--color-success), #4ade80); }
+  .ind-row-bar-fill.warning { background: linear-gradient(90deg, var(--color-warning), #fbbf24); }
+  .ind-row-bar-fill.error { background: linear-gradient(90deg, var(--color-destructive), #fca5a5); }
+  .ind-row-bar-fill.gold { background: linear-gradient(90deg, var(--color-gold), var(--color-gold-hi)); }
+  .ind-row-pct {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    font-weight: 800;
+  }
+  .ind-row-pct.success { color: var(--color-success); }
+  .ind-row-pct.warning { color: var(--color-warning); }
+  .ind-row-pct.error { color: var(--color-destructive); }
+  .ind-row-pct.gold { color: var(--color-gold); }
+  .ind-row-pct.empty { color: var(--color-fg-dim); font-style: italic; font-size: 11px; }
+
+  /* Mobile: linha vira card empilhado */
+  @media (max-width: 767px) {
+    .date-filters { grid-template-columns: 1fr; gap: 8px; }
+    .date-pill { padding: 12px 14px; flex-direction: row; align-items: center; justify-content: space-between; }
+    .date-pill-value { font-size: 16px; }
+
+    .indicador-row {
+      grid-template-columns: 1fr auto;
+      gap: 6px 12px;
+      padding: 12px;
+    }
+    .ind-row-nome { grid-column: 1 / -1; }
+    .ind-row-meta, .ind-row-real { font-size: 12px; }
+    .ind-row-meta { grid-column: 1; text-align: left; }
+    .ind-row-meta-label, .ind-row-real-label { display: inline; margin-right: 4px; }
+    .ind-row-real { grid-column: 2; }
+    .ind-row-progress { grid-column: 1 / -1; }
+    .ind-row-pct { font-size: 13px; }
+  }
+
   /* ===== Tabs ===== */
   .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--ghost-border-color); padding-bottom: 0; }
   .tab { padding: 12px 20px; cursor: pointer; color: var(--color-fg-muted); font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; }
@@ -729,6 +907,25 @@
       </div>
     </div>
 
+    <!-- ===== Filtros de data (3 pills) ===== -->
+    <div class="date-filters" id="dateFilters">
+      <div class="date-pill active" data-period="atual" onclick="setPeriod('atual')">
+        <div class="date-pill-label"><span class="material-symbols-outlined">today</span>Mês atual</div>
+        <div class="date-pill-value">Maio / 2026</div>
+        <div class="date-pill-sub">do dia 01 ao dia 28 (parcial)</div>
+      </div>
+      <div class="date-pill" data-period="anterior" onclick="setPeriod('anterior')">
+        <div class="date-pill-label"><span class="material-symbols-outlined">history</span>Mês anterior</div>
+        <div class="date-pill-value">Abril / 2026</div>
+        <div class="date-pill-sub">fechado · 30 dias</div>
+      </div>
+      <div class="date-pill" data-period="ytd" onclick="setPeriod('ytd')">
+        <div class="date-pill-label"><span class="material-symbols-outlined">calendar_month</span>Período todo (YTD)</div>
+        <div class="date-pill-value">Jan → Mai/26</div>
+        <div class="date-pill-sub">acumulado do ano</div>
+      </div>
+    </div>
+
     <!-- ===== KPIs no topo: Base global + indicadores transversais ===== -->
     <div class="kpi-grid">
       <!-- KPI Global: Base de clientes ativos + projeção 10k -->
@@ -925,8 +1122,8 @@
           </div>
         </div>
 
-        <!-- ===== Sub-headers de departamento (desktop) ===== -->
-        <div class="desktop-table" style="padding: 16px;">
+        <!-- ===== Sub-headers de departamento (sempre visível, responsivo) ===== -->
+        <div class="always-visible" style="padding: 16px;">
 
           <!-- DEPTO 1: Vendas (12 indicadores) -->
           <div class="depto-section">
@@ -936,13 +1133,150 @@
                 Vendas
                 <span class="depto-meta">· 12 indicadores · Resp: Gestor A1</span>
               </div>
-              <div class="depto-pct success">95%</div>
+              <div class="depto-pct success" data-pct-atual="95" data-pct-anterior="88" data-pct-ytd="92">95%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Vendas habilitadas ↑ · Novas vendas ↑ · Taxa de habilitação ↑ · MRR mensal ↑ ·
-              Ticket médio ↑ · Upgrades líquidos ↑ · % mix plano 1G ↑ · Vendas por indicação ↑ ·
-              Auditoria de vendas ↑ · Auditoria upgrade/downgrade ↑ · Engajamento equipe Vendas
+
+            <div class="indicador-row principal" data-ind="vendas-habilitadas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Vendas habilitadas</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Contratos novos efetivamente instalados · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="220" data-meta-anterior="200" data-meta-ytd="950"><span class="ind-row-meta-label">Meta</span>220</div>
+              <div class="ind-row-real" data-real-atual="231" data-real-anterior="188" data-real-ytd="935"><span class="ind-row-real-label">Realizado</span>231</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="94" data-pct-ytd="98" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="94" data-pct-ytd="98">105%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="novas-vendas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Novas vendas</span></div>
+                <div class="ind-row-desc">Vendas registradas no Hubsoft · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="270" data-meta-anterior="245" data-meta-ytd="1180"><span class="ind-row-meta-label">Meta</span>270</div>
+              <div class="ind-row-real" data-real-atual="283" data-real-anterior="232" data-real-ytd="1156"><span class="ind-row-real-label">Realizado</span>283</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="98" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="98">105%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="taxa-habilitacao">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Taxa de habilitação</span></div>
+                <div class="ind-row-desc">Habilitadas / vendas · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="85" data-meta-anterior="82" data-meta-ytd="84"><span class="ind-row-meta-label">Meta</span>85%</div>
+              <div class="ind-row-real" data-real-atual="81,6" data-real-anterior="81,0" data-real-ytd="80,9"><span class="ind-row-real-label">Realizado</span>81,6%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="99" data-pct-ytd="96" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="99" data-pct-ytd="96">96%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="mrr-mensal">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">MRR mensal</span></div>
+                <div class="ind-row-desc">Receita recorrente das habilitadas · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="24.200" data-meta-anterior="22.000" data-meta-ytd="104.500"><span class="ind-row-meta-label">Meta</span>R$ 24.200</div>
+              <div class="ind-row-real" data-real-atual="25.341" data-real-anterior="20.823" data-real-ytd="102.815"><span class="ind-row-real-label">Realizado</span>R$ 25.341</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="98" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="98">105%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="ticket-medio">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Ticket médio</span></div>
+                <div class="ind-row-desc">MRR / vendas habilitadas · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="110,00" data-meta-anterior="110,00" data-meta-ytd="110,00"><span class="ind-row-meta-label">Meta</span>R$ 110</div>
+              <div class="ind-row-real" data-real-atual="109,70" data-real-anterior="110,75" data-real-ytd="110,01"><span class="ind-row-real-label">Realizado</span>R$ 109,70</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="101" data-pct-ytd="100" style="width:99,7%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="101" data-pct-ytd="100">100%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="upgrades-liquidos">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Upgrades líquidos</span></div>
+                <div class="ind-row-desc">Upgrades − Downgrades · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="40" data-meta-anterior="35" data-meta-ytd="180"><span class="ind-row-meta-label">Meta</span>40</div>
+              <div class="ind-row-real" data-real-atual="32" data-real-anterior="29" data-real-ytd="148"><span class="ind-row-real-label">Realizado</span>32</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="80" data-pct-anterior="83" data-pct-ytd="82" style="width:80%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="80" data-pct-anterior="83" data-pct-ytd="82">80%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="mix-1g">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% mix plano 1G nas vendas</span></div>
+                <div class="ind-row-desc">Vendas plano 1Gbps / total · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80%</div>
+              <div class="ind-row-real" data-real-atual="42" data-real-anterior="38" data-real-ytd="35"><span class="ind-row-real-label">Realizado</span>42%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="53" data-pct-anterior="48" data-pct-ytd="44" style="width:53%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="53" data-pct-anterior="48" data-pct-ytd="44">53%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="vendas-indicacao">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Vendas por indicação</span></div>
+                <div class="ind-row-desc">Vendas vindas de indicação · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="15" data-meta-anterior="15" data-meta-ytd="15"><span class="ind-row-meta-label">Meta</span>15%</div>
+              <div class="ind-row-real" data-real-atual="11,2" data-real-anterior="10,5" data-real-ytd="10,9"><span class="ind-row-real-label">Realizado</span>11,2%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="75" data-pct-anterior="70" data-pct-ytd="73" style="width:75%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="75" data-pct-anterior="70" data-pct-ytd="73">75%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="auditoria-vendas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de vendas</span></div>
+                <div class="ind-row-desc">Nota de conformidade (0–100) · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="91" data-real-anterior="88" data-real-ytd="89"><span class="ind-row-real-label">Realizado</span>91</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="94" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="94">96%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="auditoria-upgrade">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria upgrade/downgrade</span></div>
+                <div class="ind-row-desc">Nota de conformidade (0–100) · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="93" data-real-anterior="91" data-real-ytd="92"><span class="ind-row-real-label">Realizado</span>93</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97">98%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="engajamento-vendas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado: eNPS + pesquisa pulse · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="74" data-real-ytd="76"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="93" data-pct-ytd="95" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="93" data-pct-ytd="95">98%</div>
             </div>
           </div>
 
@@ -952,31 +1286,164 @@
               <div class="depto-title">
                 <span class="material-symbols-outlined">favorite</span>
                 Pós-venda / Sucesso do Cliente
-                <span class="depto-meta">· 4 indicadores · Resp: Gestor B2</span>
+                <span class="depto-meta">· 5 indicadores · Resp: Gestor B2</span>
               </div>
-              <div class="depto-pct warning">82%</div>
+              <div class="depto-pct warning" data-pct-atual="82" data-pct-anterior="76" data-pct-ytd="79">82%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Churn mensal ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Crescimento de base ↑ ·
-              Churn score médio ↓ · Cancelamento precoce D+90 ↓ · Engajamento equipe Pós-venda
+
+            <div class="indicador-row principal" data-ind="churn-mensal">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Churn mensal</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Cancelados / base inicial · % · ↓ (menor é melhor)</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 100" data-meta-anterior="≤ 130" data-meta-ytd="≤ 550"><span class="ind-row-meta-label">Meta</span>≤ 100</div>
+              <div class="ind-row-real" data-real-atual="123" data-real-anterior="135" data-real-ytd="612"><span class="ind-row-real-label">Realizado</span>123</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="81" data-pct-anterior="96" data-pct-ytd="90" style="width:81%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="81" data-pct-anterior="96" data-pct-ytd="90">81%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="crescimento-base">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Crescimento de base</span></div>
+                <div class="ind-row-desc">Habilitadas − Churn · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="180" data-meta-anterior="155" data-meta-ytd="780"><span class="ind-row-meta-label">Meta</span>+180</div>
+              <div class="ind-row-real" data-real-atual="108" data-real-anterior="53" data-real-ytd="323"><span class="ind-row-real-label">Realizado</span>+108</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="60" data-pct-anterior="34" data-pct-ytd="41" style="width:60%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="60" data-pct-anterior="34" data-pct-ytd="41">60%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="churn-score">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Churn score médio (carteira)</span></div>
+                <div class="ind-row-desc">Preditivo · 0-100 · ↓ (menor é melhor)</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 30" data-meta-anterior="≤ 30" data-meta-ytd="≤ 30"><span class="ind-row-meta-label">Meta</span>≤ 30</div>
+              <div class="ind-row-real" data-real-atual="28,4" data-real-anterior="29,2" data-real-ytd="28,9"><span class="ind-row-real-label">Realizado</span>28,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="102" data-pct-ytd="104" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="102" data-pct-ytd="104">105%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="cancelamento-precoce">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Cancelamento precoce (D+90)</span></div>
+                <div class="ind-row-desc">Clientes que cancelam em até 90 dias · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5%</div>
+              <div class="ind-row-real" data-real-atual="7,1" data-real-anterior="6,5" data-real-ytd="6,8"><span class="ind-row-real-label">Realizado</span>7,1%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="70" data-pct-anterior="77" data-pct-ytd="74" style="width:70%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="70" data-pct-anterior="77" data-pct-ytd="74">70%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="engajamento-posvenda">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="76" data-real-anterior="71" data-real-ytd="74"><span class="ind-row-real-label">Realizado</span>76</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="95" data-pct-anterior="89" data-pct-ytd="93" style="width:95%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="95" data-pct-anterior="89" data-pct-ytd="93">95%</div>
             </div>
           </div>
 
-          <!-- DEPTO 3: Marketing (5) -->
+          <!-- DEPTO 3: Marketing (6) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
                 <span class="material-symbols-outlined">campaign</span>
                 Marketing
-                <span class="depto-meta">· 5 indicadores · Resp: Resp C1</span>
+                <span class="depto-meta">· 6 indicadores · Resp: Resp C1</span>
               </div>
-              <div class="depto-pct success">93%</div>
+              <div class="depto-pct success" data-pct-atual="93" data-pct-anterior="89" data-pct-ytd="91">93%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Nº de prospectos ↑ · Conversão de prospectos ↑ · Prospectos pendentes &gt;5 dias ↓ ·
-              SLA resposta ao prospecto ≤5min ↑ · CPL (custo por prospecto) ↓ · Engajamento equipe Marketing
+
+            <div class="indicador-row principal" data-ind="prospectos">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nº de prospectos</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Leads qualificados (Hubsoft) · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="450" data-meta-anterior="420" data-meta-ytd="2000"><span class="ind-row-meta-label">Meta</span>450</div>
+              <div class="ind-row-real" data-real-atual="475" data-real-anterior="398" data-real-ytd="2050"><span class="ind-row-real-label">Realizado</span>475</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="106" data-pct-anterior="95" data-pct-ytd="103" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="106" data-pct-anterior="95" data-pct-ytd="103">106%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="conversao-prospectos">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Conversão de prospectos</span></div>
+                <div class="ind-row-desc">Prospectos → venda · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="60" data-meta-anterior="60" data-meta-ytd="60"><span class="ind-row-meta-label">Meta</span>60%</div>
+              <div class="ind-row-real" data-real-atual="59,6" data-real-anterior="58,3" data-real-ytd="57,8"><span class="ind-row-real-label">Realizado</span>59,6%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="99" data-pct-anterior="97" data-pct-ytd="96" style="width:99%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="99" data-pct-anterior="97" data-pct-ytd="96">99%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="pendentes-5d">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Prospectos pendentes &gt;5 dias</span></div>
+                <div class="ind-row-desc">Funil parado · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 10" data-meta-anterior="≤ 10" data-meta-ytd="≤ 10"><span class="ind-row-meta-label">Meta</span>≤ 10%</div>
+              <div class="ind-row-real" data-real-atual="12,3" data-real-anterior="14,1" data-real-ytd="13,2"><span class="ind-row-real-label">Realizado</span>12,3%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="81" data-pct-anterior="71" data-pct-ytd="76" style="width:81%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="81" data-pct-anterior="71" data-pct-ytd="76">81%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="sla-resposta">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">SLA resposta ao prospecto</span></div>
+                <div class="ind-row-desc">Tempo até primeira resposta · min · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5 min</div>
+              <div class="ind-row-real" data-real-atual="4,2" data-real-anterior="5,8" data-real-ytd="5,1"><span class="ind-row-real-label">Realizado</span>4,2 min</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="119" data-pct-anterior="86" data-pct-ytd="98" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="119" data-pct-anterior="86" data-pct-ytd="98">119%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="cpl">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">CPL (custo por prospecto)</span></div>
+                <div class="ind-row-desc">Investimento mkt / prospectos · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 35" data-meta-anterior="≤ 35" data-meta-ytd="≤ 35"><span class="ind-row-meta-label">Meta</span>≤ R$ 35</div>
+              <div class="ind-row-real" data-real-atual="38,40" data-real-anterior="36,20" data-real-ytd="37,80"><span class="ind-row-real-label">Realizado</span>R$ 38,40</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="91" data-pct-anterior="97" data-pct-ytd="93" style="width:91%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="91" data-pct-anterior="97" data-pct-ytd="93">91%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="engajamento-marketing">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="82" data-real-anterior="80" data-real-ytd="81"><span class="ind-row-real-label">Realizado</span>82</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101">103%</div>
             </div>
           </div>
 
@@ -988,12 +1455,59 @@
                 Lojas físicas
                 <span class="depto-meta">· 4 indicadores · Resp: Resp D1</span>
               </div>
-              <div class="depto-pct success">100%</div>
+              <div class="depto-pct success" data-pct-atual="100" data-pct-anterior="98" data-pct-ytd="99">100%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Vendas habilitadas em loja ↑ · Atendimentos em loja ↑ ·
-              Conversão atendimento→venda ↑ · Engajamento equipe Lojas
+
+            <div class="indicador-row principal" data-ind="vendas-loja">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Vendas habilitadas em loja</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Vendas presenciais · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="55" data-meta-anterior="50" data-meta-ytd="240"><span class="ind-row-meta-label">Meta</span>55</div>
+              <div class="ind-row-real" data-real-atual="57" data-real-anterior="48" data-real-ytd="242"><span class="ind-row-real-label">Realizado</span>57</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="104" data-pct-anterior="96" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="104" data-pct-anterior="96" data-pct-ytd="101">104%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="atendimentos-loja">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Atendimentos em loja</span></div>
+                <div class="ind-row-desc">Fluxo total · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="200" data-meta-anterior="180" data-meta-ytd="880"><span class="ind-row-meta-label">Meta</span>200</div>
+              <div class="ind-row-real" data-real-atual="218" data-real-anterior="172" data-real-ytd="903"><span class="ind-row-real-label">Realizado</span>218</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="109" data-pct-anterior="96" data-pct-ytd="103" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="109" data-pct-anterior="96" data-pct-ytd="103">109%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="conversao-loja">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Conversão atendimento→venda</span></div>
+                <div class="ind-row-desc">Vendas / atendimentos · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="28" data-meta-anterior="28" data-meta-ytd="28"><span class="ind-row-meta-label">Meta</span>28%</div>
+              <div class="ind-row-real" data-real-atual="26,1" data-real-anterior="27,9" data-real-ytd="26,8"><span class="ind-row-real-label">Realizado</span>26,1%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="93" data-pct-anterior="100" data-pct-ytd="96" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="100" data-pct-ytd="96">93%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="engajamento-lojas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="84" data-real-anterior="82" data-real-ytd="83"><span class="ind-row-real-label">Realizado</span>84</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="103" data-pct-ytd="104" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="103" data-pct-ytd="104">105%</div>
             </div>
           </div>
 
@@ -1005,117 +1519,69 @@
                 Corporativo / PJ
                 <span class="depto-meta">· 4 indicadores · Resp: Resp E1</span>
               </div>
-              <div class="depto-pct error">68%</div>
+              <div class="depto-pct error" data-pct-atual="68" data-pct-anterior="62" data-pct-ytd="65">68%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Vendas habilitadas PJ ↑ · MRR PJ ↑ ·
-              Ticket médio PJ ↑ · Engajamento equipe Corporativo
+
+            <div class="indicador-row principal" data-ind="vendas-pj">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Vendas habilitadas PJ</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Contratos B2B ativados · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="20" data-meta-anterior="18" data-meta-ytd="85"><span class="ind-row-meta-label">Meta</span>20</div>
+              <div class="ind-row-real" data-real-atual="14" data-real-anterior="11" data-real-ytd="58"><span class="ind-row-real-label">Realizado</span>14</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="70" data-pct-anterior="61" data-pct-ytd="68" style="width:70%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="70" data-pct-anterior="61" data-pct-ytd="68">70%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="mrr-pj">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">MRR PJ</span></div>
+                <div class="ind-row-desc">Receita PJ nova · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="14.000" data-meta-anterior="12.000" data-meta-ytd="60.000"><span class="ind-row-meta-label">Meta</span>R$ 14.000</div>
+              <div class="ind-row-real" data-real-atual="9.800" data-real-anterior="7.700" data-real-ytd="40.600"><span class="ind-row-real-label">Realizado</span>R$ 9.800</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="70" data-pct-anterior="64" data-pct-ytd="68" style="width:70%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="70" data-pct-anterior="64" data-pct-ytd="68">70%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="ticket-pj">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Ticket médio PJ</span></div>
+                <div class="ind-row-desc">MRR PJ / vendas PJ · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="700" data-meta-anterior="700" data-meta-ytd="700"><span class="ind-row-meta-label">Meta</span>R$ 700</div>
+              <div class="ind-row-real" data-real-atual="700" data-real-anterior="700" data-real-ytd="700"><span class="ind-row-real-label">Realizado</span>R$ 700</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+
+            <div class="indicador-row" data-ind="engajamento-pj">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="68" data-real-anterior="62" data-real-ytd="65"><span class="ind-row-real-label">Realizado</span>68</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="85" data-pct-anterior="78" data-pct-ytd="81" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="78" data-pct-ytd="81">85%</div>
             </div>
           </div>
 
-          <!-- Hint: detalhes ao clicar -->
+          <!-- Hint -->
           <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
             <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
-            Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
+            Clique em qualquer indicador para ver histórico, lançar realizado e ajustar meta.
           </div>
         </div>
 
-        <!-- ===== Mobile: cards por departamento ===== -->
-        <div class="mobile-cards">
-
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">point_of_sale</span>
-                Vendas
-                <div class="desc">12 indicadores · Resp: Gestor A1</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct green">95%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
-              Vendas habilitadas ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · Novas vendas · Taxa de habilitação · MRR mensal · Ticket médio · Upgrades líquidos · % mix plano 1G · Vendas por indicação · Auditorias · Engajamento
-            </div>
-          </div>
-
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">favorite</span>
-                Pós-venda / Sucesso do Cliente
-                <div class="desc">4 indicadores · Resp: Gestor B2</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct amber">82%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
-              Churn mensal ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Crescimento de base · Churn score médio · Cancelamento precoce D+90 · Engajamento
-            </div>
-          </div>
-
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">campaign</span>
-                Marketing
-                <div class="desc">5 indicadores · Resp: Resp C1</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct green">93%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
-              Nº prospectos ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · Conversão · Pendentes &gt;5d · SLA resposta ≤5min · CPL · Engajamento
-            </div>
-          </div>
-
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">store</span>
-                Lojas físicas
-                <div class="desc">4 indicadores · Resp: Resp D1</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct green">100%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
-              Vendas em loja ↑ · Atendimentos em loja · Conversão atendimento→venda · Engajamento
-            </div>
-          </div>
-
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">business_center</span>
-                Corporativo / PJ
-                <div class="desc">4 indicadores · Resp: Resp E1</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct red">68%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
-              Vendas habilitadas PJ ↑ · MRR PJ · Ticket médio PJ · Engajamento
-            </div>
-          </div>
-
-          <div style="margin-top:14px;padding:10px;background:var(--bg-secondary-soft);border-radius:8px;font-size:11px;color:var(--color-fg-muted);border-left:3px solid var(--color-gold);">
-            <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:14px;color:var(--color-gold);">info</span>
-            Toque em um departamento para ver detalhes e fazer lançamento.
-          </div>
-
-
-      </div>
     </div>
 
     <!-- ===== TAB OPERAÇÕES ===== -->
@@ -1134,7 +1600,7 @@
 
         <div class="always-visible" style="padding: 16px;">
 
-          <!-- DEPTO 1: Campo + Rotas (9) -->
+          <!-- Campo + Rotas (9) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1142,18 +1608,119 @@
                 Campo + Rotas
                 <span class="depto-meta">· 9 indicadores · Resp: Gestor F1</span>
               </div>
-              <div class="depto-pct warning">76%</div>
+              <div class="depto-pct warning" data-pct-atual="76" data-pct-anterior="72" data-pct-ytd="74">76%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              SLA reparo ≤6h ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · SLA demais serviços ≤12h ↑ ·
-              Produtividade técnico (8 pts/dia) ↑ · Reincidência de OS ≤5% ↓ · KM médio por OS ↓ ·
-              NPS pós-OS ≥85% ↑ · Auditoria de execução de OS ↑ · Auditoria de serviço em campo ↑ ·
-              Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="sla-reparo">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">SLA reparo ≤6h</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">OS de reparo dentro do prazo · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="88" data-real-anterior="82" data-real-ytd="85"><span class="ind-row-real-label">Realizado</span>88</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="86" data-pct-ytd="89" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="86" data-pct-ytd="89">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="sla-demais">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">SLA demais serviços ≤12h</span></div>
+                <div class="ind-row-desc">OS regulares dentro do prazo · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="90" data-meta-anterior="90" data-meta-ytd="90"><span class="ind-row-meta-label">Meta</span>90</div>
+              <div class="ind-row-real" data-real-atual="83" data-real-anterior="79" data-real-ytd="81"><span class="ind-row-real-label">Realizado</span>83</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="92" data-pct-anterior="88" data-pct-ytd="90" style="width:92%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="92" data-pct-anterior="88" data-pct-ytd="90">92%</div>
+            </div>
+            <div class="indicador-row" data-ind="prod-tecnico">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Produtividade técnico</span></div>
+                <div class="ind-row-desc">Pontos por dia (sistema interno) · pts · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="8" data-meta-anterior="8" data-meta-ytd="8"><span class="ind-row-meta-label">Meta</span>8</div>
+              <div class="ind-row-real" data-real-atual="7,2" data-real-anterior="6,8" data-real-ytd="7,0"><span class="ind-row-real-label">Realizado</span>7,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="90" data-pct-anterior="85" data-pct-ytd="87" style="width:90%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="90" data-pct-anterior="85" data-pct-ytd="87">90%</div>
+            </div>
+            <div class="indicador-row" data-ind="reinc-os">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Reincidência de OS</span></div>
+                <div class="ind-row-desc">OS reabertas em 30d · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="6,2" data-real-anterior="7,1" data-real-ytd="6,7"><span class="ind-row-real-label">Realizado</span>6,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="81" data-pct-anterior="70" data-pct-ytd="75" style="width:81%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="81" data-pct-anterior="70" data-pct-ytd="75">81%</div>
+            </div>
+            <div class="indicador-row" data-ind="km-os">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">KM médio por OS</span></div>
+                <div class="ind-row-desc">Combustível otimizado · km · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 22" data-meta-anterior="≤ 22" data-meta-ytd="≤ 22"><span class="ind-row-meta-label">Meta</span>≤ 22</div>
+              <div class="ind-row-real" data-real-atual="24,8" data-real-anterior="26,1" data-real-ytd="25,4"><span class="ind-row-real-label">Realizado</span>24,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="89" data-pct-anterior="84" data-pct-ytd="87" style="width:89%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="89" data-pct-anterior="84" data-pct-ytd="87">89%</div>
+            </div>
+            <div class="indicador-row" data-ind="nps-pos-os">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">NPS pós-OS</span></div>
+                <div class="ind-row-desc">Satisfação após atendimento · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 85" data-meta-anterior="≥ 85" data-meta-ytd="≥ 85"><span class="ind-row-meta-label">Meta</span>≥ 85</div>
+              <div class="ind-row-real" data-real-atual="79" data-real-anterior="76" data-real-ytd="78"><span class="ind-row-real-label">Realizado</span>79</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="89" data-pct-ytd="92" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="89" data-pct-ytd="92">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-os">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de execução de OS</span></div>
+                <div class="ind-row-desc">Nota de conformidade · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="91" data-real-anterior="88" data-real-ytd="89"><span class="ind-row-real-label">Realizado</span>91</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="94" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="94">96%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-campo">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria serviço em campo</span></div>
+                <div class="ind-row-desc">Nota de conformidade · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="89" data-real-anterior="86" data-real-ytd="87"><span class="ind-row-real-label">Realizado</span>89</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="92" style="width:94%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="92">94%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-campo">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="74" data-real-anterior="70" data-real-ytd="72"><span class="ind-row-real-label">Realizado</span>74</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="90" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="90">93%</div>
             </div>
           </div>
-
-          <!-- DEPTO 2: Central de Atendimento (14) -->
+          <!-- Central de Atendimento (CAC) (14) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1161,19 +1728,179 @@
                 Central de Atendimento (CAC)
                 <span class="depto-meta">· 14 indicadores · Resp: Gestor G1</span>
               </div>
-              <div class="depto-pct success">88%</div>
+              <div class="depto-pct success" data-pct-atual="88" data-pct-anterior="84" data-pct-ytd="87">88%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Nº de atendimentos ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              Atendimentos 100% resolvidos pela IA ↑ · Atendimento/dia/atendente ↑ · TMA ↓ · TME ↓ ·
-              Abandono de chamada ↓ · CSAT ↑ · FCR ↑ · Incidentes 3min sem resposta ↓ ·
-              NPS de atendimento ↑ · NPS geral cliente ↑ · Reclamações Anatel (RA1000) ↓ ·
-              Auditoria de atendimento ↑ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="num-atend">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nº de atendimentos</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Volume total · nº · ↓ (menos é melhor)</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 1.200" data-meta-anterior="≤ 1.200" data-meta-ytd="≤ 6.000"><span class="ind-row-meta-label">Meta</span>≤ 1.200</div>
+              <div class="ind-row-real" data-real-atual="1.418" data-real-anterior="1.523" data-real-ytd="6.892"><span class="ind-row-real-label">Realizado</span>1.418</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="87" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="87">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="atend-ia">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Atendimentos 100% resolvidos pela IA</span></div>
+                <div class="ind-row-desc">Sem handoff humano · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="60" data-meta-anterior="55" data-meta-ytd="55"><span class="ind-row-meta-label">Meta</span>60</div>
+              <div class="ind-row-real" data-real-atual="62" data-real-anterior="58" data-real-ytd="59"><span class="ind-row-real-label">Realizado</span>62</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="103" data-pct-anterior="105" data-pct-ytd="107" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="103" data-pct-anterior="105" data-pct-ytd="107">103%</div>
+            </div>
+            <div class="indicador-row" data-ind="atend-dia-atend">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Atendimento/dia/atendente</span></div>
+                <div class="ind-row-desc">Produtividade individual · nº · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="40" data-meta-anterior="40" data-meta-ytd="40"><span class="ind-row-meta-label">Meta</span>40</div>
+              <div class="ind-row-real" data-real-atual="42" data-real-anterior="38" data-real-ytd="40"><span class="ind-row-real-label">Realizado</span>42</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="95" data-pct-ytd="100">105%</div>
+            </div>
+            <div class="indicador-row" data-ind="tma">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">TMA</span></div>
+                <div class="ind-row-desc">Tempo médio atendimento · min · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 6" data-meta-anterior="≤ 6" data-meta-ytd="≤ 6"><span class="ind-row-meta-label">Meta</span>≤ 6</div>
+              <div class="ind-row-real" data-real-atual="5,8" data-real-anterior="6,2" data-real-ytd="6,0"><span class="ind-row-real-label">Realizado</span>5,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="103" data-pct-anterior="97" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="103" data-pct-anterior="97" data-pct-ytd="100">103%</div>
+            </div>
+            <div class="indicador-row" data-ind="tme">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">TME</span></div>
+                <div class="ind-row-desc">Tempo médio espera · min · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2" data-meta-anterior="≤ 2" data-meta-ytd="≤ 2"><span class="ind-row-meta-label">Meta</span>≤ 2</div>
+              <div class="ind-row-real" data-real-atual="2,4" data-real-anterior="2,8" data-real-ytd="2,6"><span class="ind-row-real-label">Realizado</span>2,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="83" data-pct-anterior="71" data-pct-ytd="77" style="width:83%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="83" data-pct-anterior="71" data-pct-ytd="77">83%</div>
+            </div>
+            <div class="indicador-row" data-ind="aband">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Abandono de chamada</span></div>
+                <div class="ind-row-desc">Cliente desliga · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="4,2" data-real-anterior="5,1" data-real-ytd="4,7"><span class="ind-row-real-label">Realizado</span>4,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="119" data-pct-anterior="98" data-pct-ytd="106" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="119" data-pct-anterior="98" data-pct-ytd="106">119%</div>
+            </div>
+            <div class="indicador-row" data-ind="csat">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">CSAT</span></div>
+                <div class="ind-row-desc">Satisfação por atendimento · 1-5 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="4,5" data-meta-anterior="4,5" data-meta-ytd="4,5"><span class="ind-row-meta-label">Meta</span>4,5</div>
+              <div class="ind-row-real" data-real-atual="4,3" data-real-anterior="4,2" data-real-ytd="4,3"><span class="ind-row-real-label">Realizado</span>4,3</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="96" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="93" data-pct-ytd="96">96%</div>
+            </div>
+            <div class="indicador-row" data-ind="fcr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">FCR</span></div>
+                <div class="ind-row-desc">First call resolution · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="75" data-meta-anterior="75" data-meta-ytd="75"><span class="ind-row-meta-label">Meta</span>75</div>
+              <div class="ind-row-real" data-real-atual="71" data-real-anterior="68" data-real-ytd="69"><span class="ind-row-real-label">Realizado</span>71</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="95" data-pct-anterior="91" data-pct-ytd="92" style="width:95%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="95" data-pct-anterior="91" data-pct-ytd="92">95%</div>
+            </div>
+            <div class="indicador-row" data-ind="inc-3min">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Incidentes 3min sem resposta</span></div>
+                <div class="ind-row-desc">Atendimento parado · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 10" data-meta-anterior="≤ 10" data-meta-ytd="≤ 50"><span class="ind-row-meta-label">Meta</span>≤ 10</div>
+              <div class="ind-row-real" data-real-atual="14" data-real-anterior="18" data-real-ytd="78"><span class="ind-row-real-label">Realizado</span>14</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="71" data-pct-anterior="56" data-pct-ytd="64" style="width:71%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="71" data-pct-anterior="56" data-pct-ytd="64">71%</div>
+            </div>
+            <div class="indicador-row" data-ind="nps-atend">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">NPS de atendimento</span></div>
+                <div class="ind-row-desc">Satisfação Connect · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 75" data-meta-anterior="≥ 75" data-meta-ytd="≥ 75"><span class="ind-row-meta-label">Meta</span>≥ 75</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="74" data-real-ytd="76"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="104" data-pct-anterior="99" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="104" data-pct-anterior="99" data-pct-ytd="101">104%</div>
+            </div>
+            <div class="indicador-row" data-ind="nps-geral">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">NPS geral cliente</span></div>
+                <div class="ind-row-desc">Pesquisa anual · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 70" data-meta-anterior="≥ 70" data-meta-ytd="≥ 70"><span class="ind-row-meta-label">Meta</span>≥ 70</div>
+              <div class="ind-row-real" data-real-atual="68" data-real-anterior="66" data-real-ytd="67"><span class="ind-row-real-label">Realizado</span>68</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="97" data-pct-anterior="94" data-pct-ytd="96" style="width:97%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="97" data-pct-anterior="94" data-pct-ytd="96">97%</div>
+            </div>
+            <div class="indicador-row" data-ind="anatel">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Reclamações Anatel (RA1000)</span></div>
+                <div class="ind-row-desc">Registros formais · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 25"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="3" data-real-anterior="4" data-real-ytd="18"><span class="ind-row-real-label">Realizado</span>3</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="167" data-pct-anterior="125" data-pct-ytd="139" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="167" data-pct-anterior="125" data-pct-ytd="139">167%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-atend">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de atendimento</span></div>
+                <div class="ind-row-desc">Conformidade Connect · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="92" data-real-anterior="89" data-real-ytd="90"><span class="ind-row-real-label">Realizado</span>92</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="97" data-pct-anterior="94" data-pct-ytd="95" style="width:97%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="97" data-pct-anterior="94" data-pct-ytd="95">97%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-cac">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="77" data-real-anterior="73" data-real-ytd="75"><span class="ind-row-real-label">Realizado</span>77</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="91" data-pct-ytd="94" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="91" data-pct-ytd="94">96%</div>
             </div>
           </div>
-
-          <!-- DEPTO 3: Redes (NOC) (9) -->
+          <!-- Redes (NOC) (9) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1181,18 +1908,119 @@
                 Redes (NOC)
                 <span class="depto-meta">· 9 indicadores · Resp: Gestor H1</span>
               </div>
-              <div class="depto-pct success">93%</div>
+              <div class="depto-pct success" data-pct-atual="93" data-pct-anterior="89" data-pct-ytd="91">93%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Uptime da rede ≥99,5% ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              MTTR ↓ · MTBF ↑ · Alertas críticos abertos ↓ · Saturação dos links ↓ ·
-              CPEs offline ↓ · Tempo médio incidente crítico ↓ ·
-              Auditoria de mudanças de rede ↑ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="uptime">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Uptime da rede</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Disponibilidade fim-a-fim · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 99,5" data-meta-anterior="≥ 99,5" data-meta-ytd="≥ 99,5"><span class="ind-row-meta-label">Meta</span>≥ 99,5</div>
+              <div class="ind-row-real" data-real-atual="99,8" data-real-anterior="99,6" data-real-ytd="99,7"><span class="ind-row-real-label">Realizado</span>99,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="mttr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">MTTR</span></div>
+                <div class="ind-row-desc">Tempo médio reparo incidente · h · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2" data-meta-anterior="≤ 2" data-meta-ytd="≤ 2"><span class="ind-row-meta-label">Meta</span>≤ 2</div>
+              <div class="ind-row-real" data-real-atual="1,8" data-real-anterior="2,3" data-real-ytd="2,0"><span class="ind-row-real-label">Realizado</span>1,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="111" data-pct-anterior="87" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="111" data-pct-anterior="87" data-pct-ytd="100">111%</div>
+            </div>
+            <div class="indicador-row" data-ind="mtbf">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">MTBF</span></div>
+                <div class="ind-row-desc">Tempo médio entre falhas · h · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 720" data-meta-anterior="≥ 720" data-meta-ytd="≥ 720"><span class="ind-row-meta-label">Meta</span>≥ 720</div>
+              <div class="ind-row-real" data-real-atual="768" data-real-anterior="702" data-real-ytd="735"><span class="ind-row-real-label">Realizado</span>768</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="107" data-pct-anterior="98" data-pct-ytd="102" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="107" data-pct-anterior="98" data-pct-ytd="102">107%</div>
+            </div>
+            <div class="indicador-row" data-ind="alertas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Alertas críticos abertos</span></div>
+                <div class="ind-row-desc">Média mensal · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 8" data-meta-anterior="≤ 8" data-meta-ytd="≤ 8"><span class="ind-row-meta-label">Meta</span>≤ 8</div>
+              <div class="ind-row-real" data-real-atual="6" data-real-anterior="9" data-real-ytd="7"><span class="ind-row-real-label">Realizado</span>6</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="133" data-pct-anterior="89" data-pct-ytd="114" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="133" data-pct-anterior="89" data-pct-ytd="114">133%</div>
+            </div>
+            <div class="indicador-row" data-ind="satur">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Saturação dos links</span></div>
+                <div class="ind-row-desc">Pico no horário nobre · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 70" data-meta-anterior="≤ 70" data-meta-ytd="≤ 70"><span class="ind-row-meta-label">Meta</span>≤ 70</div>
+              <div class="ind-row-real" data-real-atual="64" data-real-anterior="68" data-real-ytd="66"><span class="ind-row-real-label">Realizado</span>64</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="109" data-pct-anterior="103" data-pct-ytd="106" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="109" data-pct-anterior="103" data-pct-ytd="106">109%</div>
+            </div>
+            <div class="indicador-row" data-ind="cpe-off">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">CPEs offline</span></div>
+                <div class="ind-row-desc">Média mensal · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2" data-meta-anterior="≤ 2" data-meta-ytd="≤ 2"><span class="ind-row-meta-label">Meta</span>≤ 2</div>
+              <div class="ind-row-real" data-real-atual="1,7" data-real-anterior="2,1" data-real-ytd="1,9"><span class="ind-row-real-label">Realizado</span>1,7</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="118" data-pct-anterior="95" data-pct-ytd="105" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="118" data-pct-anterior="95" data-pct-ytd="105">118%</div>
+            </div>
+            <div class="indicador-row" data-ind="tempo-inc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio incidente crítico ativo</span></div>
+                <div class="ind-row-desc">Antes da resolução · min · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 30" data-meta-anterior="≤ 30" data-meta-ytd="≤ 30"><span class="ind-row-meta-label">Meta</span>≤ 30</div>
+              <div class="ind-row-real" data-real-atual="24" data-real-anterior="32" data-real-ytd="28"><span class="ind-row-real-label">Realizado</span>24</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="125" data-pct-anterior="94" data-pct-ytd="107" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="125" data-pct-anterior="94" data-pct-ytd="107">125%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-mud">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de mudanças de rede</span></div>
+                <div class="ind-row-desc">% sem incidente pós-mudança · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 95" data-meta-anterior="≥ 95" data-meta-ytd="≥ 95"><span class="ind-row-meta-label">Meta</span>≥ 95</div>
+              <div class="ind-row-real" data-real-atual="94" data-real-anterior="92" data-real-ytd="93"><span class="ind-row-real-label">Realizado</span>94</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="99" data-pct-anterior="97" data-pct-ytd="98" style="width:99%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="99" data-pct-anterior="97" data-pct-ytd="98">99%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-noc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="85" data-real-anterior="83" data-real-ytd="84"><span class="ind-row-real-label">Realizado</span>85</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="106" data-pct-anterior="104" data-pct-ytd="105" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="106" data-pct-anterior="104" data-pct-ytd="105">106%</div>
             </div>
           </div>
-
-          <!-- DEPTO 4: TI (9) -->
+          <!-- TI · Sistemas internos (9) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1200,18 +2028,119 @@
                 TI · Sistemas internos
                 <span class="depto-meta">· 9 indicadores · Resp: Resp I1</span>
               </div>
-              <div class="depto-pct warning">71%</div>
+              <div class="depto-pct warning" data-pct-atual="71" data-pct-anterior="67" data-pct-ytd="69">71%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Uptime sistemas internos ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              SLA chamados internos ↑ · Chamados internos abertos ↓ · Incidentes críticos sistemas ↓ ·
-              Tempo médio resolução chamado interno ↓ · % deploy sem rollback ↑ ·
-              Cobertura de backup ↑ · Auditoria de segurança ↑ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="uptime-sys">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Uptime sistemas internos</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Hubsoft + Platform + n8n · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 99" data-meta-anterior="≥ 99" data-meta-ytd="≥ 99"><span class="ind-row-meta-label">Meta</span>≥ 99</div>
+              <div class="ind-row-real" data-real-atual="98,2" data-real-anterior="97,5" data-real-ytd="97,9"><span class="ind-row-real-label">Realizado</span>98,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="99" data-pct-anterior="98" data-pct-ytd="99" style="width:99%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="99" data-pct-anterior="98" data-pct-ytd="99">99%</div>
+            </div>
+            <div class="indicador-row" data-ind="sla-int">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">SLA chamados internos</span></div>
+                <div class="ind-row-desc">Atendimento helpdesk · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="90" data-meta-anterior="90" data-meta-ytd="90"><span class="ind-row-meta-label">Meta</span>90</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="74" data-real-ytd="76"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="87" data-pct-anterior="82" data-pct-ytd="84" style="width:87%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="87" data-pct-anterior="82" data-pct-ytd="84">87%</div>
+            </div>
+            <div class="indicador-row" data-ind="cham-int">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Chamados internos abertos</span></div>
+                <div class="ind-row-desc">Backlog · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 20" data-meta-anterior="≤ 20" data-meta-ytd="≤ 20"><span class="ind-row-meta-label">Meta</span>≤ 20</div>
+              <div class="ind-row-real" data-real-atual="28" data-real-anterior="34" data-real-ytd="31"><span class="ind-row-real-label">Realizado</span>28</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="71" data-pct-anterior="59" data-pct-ytd="65" style="width:71%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="71" data-pct-anterior="59" data-pct-ytd="65">71%</div>
+            </div>
+            <div class="indicador-row" data-ind="inc-cri-ti">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Incidentes críticos sistemas</span></div>
+                <div class="ind-row-desc">Sistemas caíram · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 3" data-meta-anterior="≤ 3" data-meta-ytd="≤ 15"><span class="ind-row-meta-label">Meta</span>≤ 3</div>
+              <div class="ind-row-real" data-real-atual="4" data-real-anterior="5" data-real-ytd="21"><span class="ind-row-real-label">Realizado</span>4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="75" data-pct-anterior="60" data-pct-ytd="71" style="width:75%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="75" data-pct-anterior="60" data-pct-ytd="71">75%</div>
+            </div>
+            <div class="indicador-row" data-ind="tmr-int">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio resolução chamado interno</span></div>
+                <div class="ind-row-desc">h · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 4" data-meta-anterior="≤ 4" data-meta-ytd="≤ 4"><span class="ind-row-meta-label">Meta</span>≤ 4</div>
+              <div class="ind-row-real" data-real-atual="5,2" data-real-anterior="6,1" data-real-ytd="5,7"><span class="ind-row-real-label">Realizado</span>5,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="77" data-pct-anterior="66" data-pct-ytd="70" style="width:77%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="77" data-pct-anterior="66" data-pct-ytd="70">77%</div>
+            </div>
+            <div class="indicador-row" data-ind="deploy">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% deploy sem rollback</span></div>
+                <div class="ind-row-desc">Qualidade técnica · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 95" data-meta-anterior="≥ 95" data-meta-ytd="≥ 95"><span class="ind-row-meta-label">Meta</span>≥ 95</div>
+              <div class="ind-row-real" data-real-atual="92" data-real-anterior="88" data-real-ytd="90"><span class="ind-row-real-label">Realizado</span>92</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="97" data-pct-anterior="93" data-pct-ytd="95" style="width:97%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="97" data-pct-anterior="93" data-pct-ytd="95">97%</div>
+            </div>
+            <div class="indicador-row" data-ind="backup">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Cobertura de backup</span></div>
+                <div class="ind-row-desc">% sistemas com backup OK · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="98" data-real-anterior="96" data-real-ytd="97"><span class="ind-row-real-label">Realizado</span>98</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-seg">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de segurança</span></div>
+                <div class="ind-row-desc">MFA, revogações, acessos · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="95" data-meta-anterior="95" data-meta-ytd="95"><span class="ind-row-meta-label">Meta</span>95</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="74" data-real-ytd="76"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="82" data-pct-anterior="78" data-pct-ytd="80" style="width:82%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="82" data-pct-anterior="78" data-pct-ytd="80">82%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-ti">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="73" data-real-anterior="70" data-real-ytd="72"><span class="ind-row-real-label">Realizado</span>73</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="91" data-pct-anterior="88" data-pct-ytd="90" style="width:91%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="91" data-pct-anterior="88" data-pct-ytd="90">91%</div>
             </div>
           </div>
-
-          <!-- DEPTO 5: Frotas (8) -->
+          <!-- Frotas (8) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1219,18 +2148,107 @@
                 Frotas
                 <span class="depto-meta">· 8 indicadores · Resp: Resp J1</span>
               </div>
-              <div class="depto-pct error">62%</div>
+              <div class="depto-pct error" data-pct-atual="62" data-pct-anterior="56" data-pct-ytd="59">62%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Disponibilidade da frota ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              Custo médio por km ↓ · Custo médio mensal por veículo ↓ ·
-              Manutenções preventivas em dia ↑ · Manutenções corretivas ↓ · Sinistros/multas ↓ ·
-              Km rodado/OS atendida ↓ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="disp-frota">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Disponibilidade da frota</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">% veículos operacionais · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="74" data-real-anterior="68" data-real-ytd="71"><span class="ind-row-real-label">Realizado</span>74</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="82" data-pct-anterior="76" data-pct-ytd="79" style="width:82%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="82" data-pct-anterior="76" data-pct-ytd="79">82%</div>
+            </div>
+            <div class="indicador-row" data-ind="custo-km">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Custo médio por km</span></div>
+                <div class="ind-row-desc">Combustível + manutenção · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 1,50" data-meta-anterior="≤ 1,50" data-meta-ytd="≤ 1,50"><span class="ind-row-meta-label">Meta</span>R$ ≤ 1,50</div>
+              <div class="ind-row-real" data-real-atual="1,68" data-real-anterior="1,72" data-real-ytd="1,70"><span class="ind-row-real-label">Realizado</span>R$ 1,68</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="89" data-pct-anterior="87" data-pct-ytd="88" style="width:89%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="89" data-pct-anterior="87" data-pct-ytd="88">89%</div>
+            </div>
+            <div class="indicador-row" data-ind="custo-veic">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Custo médio mensal por veículo</span></div>
+                <div class="ind-row-desc">Total / frota · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 3.500" data-meta-anterior="≤ 3.500" data-meta-ytd="≤ 17.500"><span class="ind-row-meta-label">Meta</span>R$ ≤ 3.500</div>
+              <div class="ind-row-real" data-real-atual="4.120" data-real-anterior="4.480" data-real-ytd="21.480"><span class="ind-row-real-label">Realizado</span>R$ 4.120</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="78" data-pct-ytd="81" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="78" data-pct-ytd="81">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="manut-prev">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Manutenções preventivas em dia</span></div>
+                <div class="ind-row-desc">% · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="72" data-real-anterior="68" data-real-ytd="70"><span class="ind-row-real-label">Realizado</span>72</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="72" data-pct-anterior="68" data-pct-ytd="70" style="width:72%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="72" data-pct-anterior="68" data-pct-ytd="70">72%</div>
+            </div>
+            <div class="indicador-row" data-ind="manut-corr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Manutenções corretivas/mês</span></div>
+                <div class="ind-row-desc">nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 25"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="9" data-real-anterior="11" data-real-ytd="47"><span class="ind-row-real-label">Realizado</span>9</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="56" data-pct-anterior="45" data-pct-ytd="53" style="width:56%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="56" data-pct-anterior="45" data-pct-ytd="53">56%</div>
+            </div>
+            <div class="indicador-row" data-ind="sinistros">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Sinistros/multas no mês</span></div>
+                <div class="ind-row-desc">nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2" data-meta-anterior="≤ 2" data-meta-ytd="≤ 10"><span class="ind-row-meta-label">Meta</span>≤ 2</div>
+              <div class="ind-row-real" data-real-atual="4" data-real-anterior="5" data-real-ytd="18"><span class="ind-row-real-label">Realizado</span>4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="50" data-pct-anterior="40" data-pct-ytd="56" style="width:50%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="50" data-pct-anterior="40" data-pct-ytd="56">50%</div>
+            </div>
+            <div class="indicador-row" data-ind="km-os-frota">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Km rodado/OS atendida</span></div>
+                <div class="ind-row-desc">Eficiência rota × frota · km · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 18" data-meta-anterior="≤ 18" data-meta-ytd="≤ 18"><span class="ind-row-meta-label">Meta</span>≤ 18</div>
+              <div class="ind-row-real" data-real-atual="21,2" data-real-anterior="22,8" data-real-ytd="22,0"><span class="ind-row-real-label">Realizado</span>21,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-frota">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="66" data-real-anterior="62" data-real-ytd="64"><span class="ind-row-real-label">Realizado</span>66</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="83" data-pct-anterior="78" data-pct-ytd="80" style="width:83%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="83" data-pct-anterior="78" data-pct-ytd="80">83%</div>
             </div>
           </div>
-
-          <!-- DEPTO 6: Estoque (9) -->
+          <!-- Estoque (9) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1238,17 +2256,118 @@
                 Estoque
                 <span class="depto-meta">· 9 indicadores · Resp: Resp K1</span>
               </div>
-              <div class="depto-pct success">85%</div>
+              <div class="depto-pct success" data-pct-atual="85" data-pct-anterior="80" data-pct-ytd="82">85%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Ruptura de estoque ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              Giro de estoque ↑ · Valor parado em estoque ↓ · % comodatos vs próprio (acompanhar) ·
-              Comodatos perdidos ↓ · Acurácia do inventário ↑ · Tempo médio reposição ↓ ·
-              Auditoria de saída de estoque ↑ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="ruptura">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Ruptura de estoque</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Itens críticos zerados · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="0" data-meta-anterior="0" data-meta-ytd="0"><span class="ind-row-meta-label">Meta</span>0</div>
+              <div class="ind-row-real" data-real-atual="1" data-real-anterior="2" data-real-ytd="4"><span class="ind-row-real-label">Realizado</span>1</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="80" data-pct-anterior="70" data-pct-ytd="78" style="width:80%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="80" data-pct-anterior="70" data-pct-ytd="78">80%</div>
+            </div>
+            <div class="indicador-row" data-ind="giro">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Giro de estoque</span></div>
+                <div class="ind-row-desc">Vezes que vira/mês · x · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 3" data-meta-anterior="≥ 3" data-meta-ytd="≥ 3"><span class="ind-row-meta-label">Meta</span>≥ 3</div>
+              <div class="ind-row-real" data-real-atual="2,8" data-real-anterior="2,6" data-real-ytd="2,7"><span class="ind-row-real-label">Realizado</span>2,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="87" data-pct-ytd="90" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="87" data-pct-ytd="90">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="valor-parado">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Valor parado em estoque</span></div>
+                <div class="ind-row-desc">>6m sem uso · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 15.000" data-meta-anterior="≤ 15.000" data-meta-ytd="≤ 15.000"><span class="ind-row-meta-label">Meta</span>R$ ≤ 15.000</div>
+              <div class="ind-row-real" data-real-atual="12.400" data-real-anterior="13.800" data-real-ytd="13.100"><span class="ind-row-real-label">Realizado</span>R$ 12.400</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="121" data-pct-anterior="109" data-pct-ytd="115" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="121" data-pct-anterior="109" data-pct-ytd="115">121%</div>
+            </div>
+            <div class="indicador-row" data-ind="comod-prop">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% comodatos vs próprio</span></div>
+                <div class="ind-row-desc">CPEs em campo · %</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="monitorar" data-meta-anterior="monitorar" data-meta-ytd="monitorar"><span class="ind-row-meta-label">Meta</span>monitorar</div>
+              <div class="ind-row-real" data-real-atual="78%" data-real-anterior="76%" data-real-ytd="77%"><span class="ind-row-real-label">Realizado</span>78%</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="comod-perd">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Comodatos perdidos</span></div>
+                <div class="ind-row-desc">Cliente cancelou e não devolveu · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 8" data-meta-anterior="≤ 8" data-meta-ytd="≤ 40"><span class="ind-row-meta-label">Meta</span>≤ 8</div>
+              <div class="ind-row-real" data-real-atual="12" data-real-anterior="15" data-real-ytd="64"><span class="ind-row-real-label">Realizado</span>12</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="67" data-pct-anterior="53" data-pct-ytd="63" style="width:67%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="67" data-pct-anterior="53" data-pct-ytd="63">67%</div>
+            </div>
+            <div class="indicador-row" data-ind="acuracia">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Acurácia do inventário</span></div>
+                <div class="ind-row-desc">% contagem física vs sistema · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 98" data-meta-anterior="≥ 98" data-meta-ytd="≥ 98"><span class="ind-row-meta-label">Meta</span>≥ 98</div>
+              <div class="ind-row-real" data-real-atual="96,2" data-real-anterior="95,8" data-real-ytd="96,0"><span class="ind-row-real-label">Realizado</span>96,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="98" data-pct-anterior="98" data-pct-ytd="98" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="98" data-pct-anterior="98" data-pct-ytd="98">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="tempo-rep">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio reposição</span></div>
+                <div class="ind-row-desc">Pedido → chegada · dias · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 7" data-meta-anterior="≤ 7" data-meta-ytd="≤ 7"><span class="ind-row-meta-label">Meta</span>≤ 7</div>
+              <div class="ind-row-real" data-real-atual="8,2" data-real-anterior="9,1" data-real-ytd="8,6"><span class="ind-row-real-label">Realizado</span>8,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="77" data-pct-ytd="81" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="77" data-pct-ytd="81">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-est">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditoria de saída de estoque</span></div>
+                <div class="ind-row-desc">% movimentações conferidas · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 95" data-meta-anterior="≥ 95" data-meta-ytd="≥ 95"><span class="ind-row-meta-label">Meta</span>≥ 95</div>
+              <div class="ind-row-real" data-real-atual="93" data-real-anterior="90" data-real-ytd="91"><span class="ind-row-real-label">Realizado</span>93</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="95" data-pct-ytd="96" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="95" data-pct-ytd="96">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-est">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="75" data-real-ytd="77"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="96" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="96">98%</div>
             </div>
           </div>
-
           <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
             <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
             Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
@@ -1273,7 +2392,7 @@
 
         <div class="always-visible" style="padding: 16px;">
 
-          <!-- DEPTO 1: DH (RH + DP) com subdivisão -->
+          <!-- DH · Desenvolvimento Humano (17) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1281,33 +2400,215 @@
                 DH · Desenvolvimento Humano
                 <span class="depto-meta">· 17 indicadores · Resp: Gestor L1</span>
               </div>
-              <div class="depto-pct success">89%</div>
+              <div class="depto-pct success" data-pct-atual="89" data-pct-anterior="85" data-pct-ytd="87">89%</div>
             </div>
 
-            <!-- Sub RH -->
-            <div class="subdept-header">RH · Recursos Humanos (10)</div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Turnover total ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Turnover precoce &lt;90d ↓ ·
-              Absenteísmo ↓ · eNPS ↑ · Clima organizacional ↑ · Headcount (acompanhar) ·
-              Tempo médio de contratação ↓ · Custo médio por contratação ↓ ·
-              Horas de treinamento/colaborador ↑ · ROI de treinamento ↑ · Onboarding concluído ↑
+            <div class="indicador-row principal" data-ind="turnover">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Turnover total</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Saídas / headcount médio · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 3" data-meta-anterior="≤ 3" data-meta-ytd="≤ 3"><span class="ind-row-meta-label">Meta</span>≤ 3</div>
+              <div class="ind-row-real" data-real-atual="2,4" data-real-anterior="2,8" data-real-ytd="2,6"><span class="ind-row-real-label">Realizado</span>2,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="125" data-pct-anterior="107" data-pct-ytd="115" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="125" data-pct-anterior="107" data-pct-ytd="115">125%</div>
             </div>
-
-            <!-- Sub DP -->
-            <div class="subdept-header">DP · Departamento Pessoal (5)</div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              % folha em dia ↑ · % FGTS/INSS sem atraso ↑ · % férias programadas no prazo ↑ ·
-              Erros na folha ↓ · Tempo médio rescisão ↓
+            <div class="indicador-row" data-ind="turn-precoce">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Turnover precoce <90d</span></div>
+                <div class="ind-row-desc">Falha em seleção/onboarding · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="6,1" data-real-anterior="7,2" data-real-ytd="6,7"><span class="ind-row-real-label">Realizado</span>6,1</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="82" data-pct-anterior="69" data-pct-ytd="75" style="width:82%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="82" data-pct-anterior="69" data-pct-ytd="75">82%</div>
             </div>
-
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 11px; font-style: italic;">
-              + Engajamento da equipe DH
+            <div class="indicador-row" data-ind="absent">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Absenteísmo</span></div>
+                <div class="ind-row-desc">% horas perdidas · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2" data-meta-anterior="≤ 2" data-meta-ytd="≤ 2"><span class="ind-row-meta-label">Meta</span>≤ 2</div>
+              <div class="ind-row-real" data-real-atual="1,8" data-real-anterior="2,1" data-real-ytd="2,0"><span class="ind-row-real-label">Realizado</span>1,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="111" data-pct-anterior="95" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="111" data-pct-anterior="95" data-pct-ytd="100">111%</div>
+            </div>
+            <div class="indicador-row" data-ind="enps">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">eNPS</span></div>
+                <div class="ind-row-desc">Recomendaria a i2? · -100 a +100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 50" data-meta-anterior="≥ 50" data-meta-ytd="≥ 50"><span class="ind-row-meta-label">Meta</span>≥ 50</div>
+              <div class="ind-row-real" data-real-atual="42" data-real-anterior="38" data-real-ytd="40"><span class="ind-row-real-label">Realizado</span>42</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="84" data-pct-anterior="76" data-pct-ytd="80" style="width:84%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="84" data-pct-anterior="76" data-pct-ytd="80">84%</div>
+            </div>
+            <div class="indicador-row" data-ind="clima">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Clima organizacional</span></div>
+                <div class="ind-row-desc">Pesquisa de clima · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 80" data-meta-anterior="≥ 80" data-meta-ytd="≥ 80"><span class="ind-row-meta-label">Meta</span>≥ 80</div>
+              <div class="ind-row-real" data-real-atual="76" data-real-anterior="74" data-real-ytd="75"><span class="ind-row-real-label">Realizado</span>76</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="95" data-pct-anterior="93" data-pct-ytd="94" style="width:95%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="95" data-pct-anterior="93" data-pct-ytd="94">95%</div>
+            </div>
+            <div class="indicador-row" data-ind="headcount">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Headcount</span></div>
+                <div class="ind-row-desc">Efetivo total · nº</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="monitorar" data-meta-anterior="monitorar" data-meta-ytd="monitorar"><span class="ind-row-meta-label">Meta</span>monitorar</div>
+              <div class="ind-row-real" data-real-atual="94" data-real-anterior="92" data-real-ytd="93"><span class="ind-row-real-label">Realizado</span>94</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="tempo-contr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio de contratação</span></div>
+                <div class="ind-row-desc">Início → fechamento · dias · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 30" data-meta-anterior="≤ 30" data-meta-ytd="≤ 30"><span class="ind-row-meta-label">Meta</span>≤ 30</div>
+              <div class="ind-row-real" data-real-atual="42" data-real-anterior="48" data-real-ytd="45"><span class="ind-row-real-label">Realizado</span>42</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="71" data-pct-anterior="63" data-pct-ytd="67" style="width:71%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="71" data-pct-anterior="63" data-pct-ytd="67">71%</div>
+            </div>
+            <div class="indicador-row" data-ind="custo-contr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Custo médio por contratação</span></div>
+                <div class="ind-row-desc">Recrutador + anúncio + onboard · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2.500" data-meta-anterior="≤ 2.500" data-meta-ytd="≤ 2.500"><span class="ind-row-meta-label">Meta</span>R$ ≤ 2.500</div>
+              <div class="ind-row-real" data-real-atual="2.380" data-real-anterior="2.610" data-real-ytd="2.495"><span class="ind-row-real-label">Realizado</span>R$ 2.380</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="105" data-pct-anterior="96" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="105" data-pct-anterior="96" data-pct-ytd="100">105%</div>
+            </div>
+            <div class="indicador-row" data-ind="horas-treino">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Horas de treinamento/colab</span></div>
+                <div class="ind-row-desc">Por colaborador/mês · h · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 8" data-meta-anterior="≥ 8" data-meta-ytd="≥ 40"><span class="ind-row-meta-label">Meta</span>≥ 8</div>
+              <div class="ind-row-real" data-real-atual="6,4" data-real-anterior="5,8" data-real-ytd="32"><span class="ind-row-real-label">Realizado</span>6,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="80" data-pct-anterior="73" data-pct-ytd="80" style="width:80%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="80" data-pct-anterior="73" data-pct-ytd="80">80%</div>
+            </div>
+            <div class="indicador-row" data-ind="roi-treino">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">ROI de treinamento</span></div>
+                <div class="ind-row-desc">Impacto pós-treinamento · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 150" data-meta-anterior="≥ 150" data-meta-ytd="≥ 150"><span class="ind-row-meta-label">Meta</span>≥ 150</div>
+              <div class="ind-row-real" data-real-atual="128" data-real-anterior="118" data-real-ytd="123"><span class="ind-row-real-label">Realizado</span>128</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="onboarding">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Onboarding concluído</span></div>
+                <div class="ind-row-desc">% novos contratados que completaram · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="74" data-real-ytd="76"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="78" data-pct-anterior="74" data-pct-ytd="76" style="width:78%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="78" data-pct-anterior="74" data-pct-ytd="76">78%</div>
+            </div>
+            <div class="indicador-row" data-ind="folha-dia">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% folha em dia</span></div>
+                <div class="ind-row-desc">Sem atraso/erro · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="99,2" data-real-anterior="98,8" data-real-ytd="99,0"><span class="ind-row-real-label">Realizado</span>99,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="99" data-pct-anterior="99" data-pct-ytd="99" style="width:99%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="99" data-pct-anterior="99" data-pct-ytd="99">99%</div>
+            </div>
+            <div class="indicador-row" data-ind="fgts">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% FGTS/INSS sem atraso</span></div>
+                <div class="ind-row-desc">Encargos no prazo · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="100" data-real-anterior="100" data-real-ytd="100"><span class="ind-row-real-label">Realizado</span>100</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="ferias">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% férias programadas no prazo</span></div>
+                <div class="ind-row-desc">Compliance trabalhista · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="88" data-real-anterior="82" data-real-ytd="85"><span class="ind-row-real-label">Realizado</span>88</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="88" data-pct-anterior="82" data-pct-ytd="85" style="width:88%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="88" data-pct-anterior="82" data-pct-ytd="85">88%</div>
+            </div>
+            <div class="indicador-row" data-ind="erros-folha">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Erros na folha</span></div>
+                <div class="ind-row-desc">Correções/mês · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="0" data-meta-anterior="0" data-meta-ytd="0"><span class="ind-row-meta-label">Meta</span>0</div>
+              <div class="ind-row-real" data-real-atual="2" data-real-anterior="4" data-real-ytd="12"><span class="ind-row-real-label">Realizado</span>2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="80" data-pct-anterior="60" data-pct-ytd="64" style="width:80%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="80" data-pct-anterior="60" data-pct-ytd="64">80%</div>
+            </div>
+            <div class="indicador-row" data-ind="rescisao">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio rescisão</span></div>
+                <div class="ind-row-desc">Pedido → quitação · dias · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 10" data-meta-anterior="≤ 10" data-meta-ytd="≤ 10"><span class="ind-row-meta-label">Meta</span>≤ 10</div>
+              <div class="ind-row-real" data-real-atual="8,2" data-real-anterior="9,1" data-real-ytd="8,6"><span class="ind-row-real-label">Realizado</span>8,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="118" data-pct-anterior="109" data-pct-ytd="114" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="118" data-pct-anterior="109" data-pct-ytd="114">118%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-dh">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe DH</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="79" data-real-anterior="77" data-real-ytd="78"><span class="ind-row-real-label">Realizado</span>79</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="99" data-pct-anterior="96" data-pct-ytd="98" style="width:99%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="99" data-pct-anterior="96" data-pct-ytd="98">99%</div>
             </div>
           </div>
-
-          <!-- DEPTO 2: Contábil (7) -->
+          <!-- Contábil (7) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1315,17 +2616,95 @@
                 Contábil
                 <span class="depto-meta">· 7 indicadores · Resp: Externo (contabilidade)</span>
               </div>
-              <div class="depto-pct success">95%</div>
+              <div class="depto-pct success" data-pct-atual="95" data-pct-anterior="92" data-pct-ytd="94">95%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Liquidez corrente · Liquidez imediata · Endividamento total ↓ · Margem líquida ↑ ·
-              Tempo médio fechamento contábil ↓ · % conciliações em dia ↑ ·
-              Engajamento equipe Contábil
+
+            <div class="indicador-row principal" data-ind="liq-corr">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Liquidez corrente</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Ativo circulante / passivo circulante · x</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 1,5" data-meta-anterior="≥ 1,5" data-meta-ytd="≥ 1,5"><span class="ind-row-meta-label">Meta</span>≥ 1,5</div>
+              <div class="ind-row-real" data-real-atual="1,68" data-real-anterior="1,72" data-real-ytd="1,70"><span class="ind-row-real-label">Realizado</span>1,68</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="112" data-pct-anterior="115" data-pct-ytd="113" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="112" data-pct-anterior="115" data-pct-ytd="113">112%</div>
+            </div>
+            <div class="indicador-row" data-ind="liq-imed">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Liquidez imediata</span></div>
+                <div class="ind-row-desc">Caixa / passivo circulante · x</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 0,3" data-meta-anterior="≥ 0,3" data-meta-ytd="≥ 0,3"><span class="ind-row-meta-label">Meta</span>≥ 0,3</div>
+              <div class="ind-row-real" data-real-atual="0,42" data-real-anterior="0,38" data-real-ytd="0,40"><span class="ind-row-real-label">Realizado</span>0,42</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="140" data-pct-anterior="127" data-pct-ytd="133" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="140" data-pct-anterior="127" data-pct-ytd="133">140%</div>
+            </div>
+            <div class="indicador-row" data-ind="endiv">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Endividamento total</span></div>
+                <div class="ind-row-desc">Capital terceiros / total · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 60" data-meta-anterior="≤ 60" data-meta-ytd="≤ 60"><span class="ind-row-meta-label">Meta</span>≤ 60</div>
+              <div class="ind-row-real" data-real-atual="54" data-real-anterior="57" data-real-ytd="55"><span class="ind-row-real-label">Realizado</span>54</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="111" data-pct-anterior="105" data-pct-ytd="109" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="111" data-pct-anterior="105" data-pct-ytd="109">111%</div>
+            </div>
+            <div class="indicador-row" data-ind="margem-liq">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Margem líquida</span></div>
+                <div class="ind-row-desc">Lucro líquido / receita · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 12" data-meta-anterior="≥ 12" data-meta-ytd="≥ 12"><span class="ind-row-meta-label">Meta</span>≥ 12</div>
+              <div class="ind-row-real" data-real-atual="11,2" data-real-anterior="10,8" data-real-ytd="11,0"><span class="ind-row-real-label">Realizado</span>11,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="90" data-pct-ytd="92" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="90" data-pct-ytd="92">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="fech-cont">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio fechamento contábil</span></div>
+                <div class="ind-row-desc">Dias após fim do mês · dias · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 5" data-meta-anterior="≤ 5" data-meta-ytd="≤ 5"><span class="ind-row-meta-label">Meta</span>≤ 5</div>
+              <div class="ind-row-real" data-real-atual="4,2" data-real-anterior="4,8" data-real-ytd="4,5"><span class="ind-row-real-label">Realizado</span>4,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="119" data-pct-anterior="104" data-pct-ytd="111" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="119" data-pct-anterior="104" data-pct-ytd="111">119%</div>
+            </div>
+            <div class="indicador-row" data-ind="concil">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% conciliações em dia</span></div>
+                <div class="ind-row-desc">Bancárias + fornecedores · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="98" data-real-anterior="96" data-real-ytd="97"><span class="ind-row-real-label">Realizado</span>98</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="98" data-pct-anterior="96" data-pct-ytd="97">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-cont">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe Contábil</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="82" data-real-anterior="80" data-real-ytd="81"><span class="ind-row-real-label">Realizado</span>82</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101">103%</div>
             </div>
           </div>
-
-          <!-- DEPTO 3: Jurídico (11) -->
+          <!-- Jurídico (11) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1333,19 +2712,143 @@
                 Jurídico
                 <span class="depto-meta">· 11 indicadores · Resp: Resp M1</span>
               </div>
-              <div class="depto-pct warning">79%</div>
+              <div class="depto-pct warning" data-pct-atual="79" data-pct-anterior="73" data-pct-ytd="76">79%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Volume de processos ativos ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              Processos trabalhistas ativos ↓ · Turnover jurídico trabalhista ↓ ·
-              Processos cíveis (consumidor) ↓ · Taxa de acordos ↑ · Custo médio por processo ↓ ·
-              Provisão de contingências (acompanhar) · Tempo médio duração processo ↓ ·
-              Taxa de êxito ↑ · % contratos revisados no prazo ↑ · Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="proc-ativos">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Volume de processos ativos</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Total contra a i2 · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 25" data-meta-anterior="≤ 25" data-meta-ytd="≤ 25"><span class="ind-row-meta-label">Meta</span>≤ 25</div>
+              <div class="ind-row-real" data-real-atual="28" data-real-anterior="31" data-real-ytd="29"><span class="ind-row-real-label">Realizado</span>28</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="89" data-pct-anterior="81" data-pct-ytd="86" style="width:89%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="89" data-pct-anterior="81" data-pct-ytd="86">89%</div>
+            </div>
+            <div class="indicador-row" data-ind="proc-trab">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Processos trabalhistas ativos</span></div>
+                <div class="ind-row-desc">nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 10" data-meta-anterior="≤ 10" data-meta-ytd="≤ 10"><span class="ind-row-meta-label">Meta</span>≤ 10</div>
+              <div class="ind-row-real" data-real-atual="12" data-real-anterior="14" data-real-ytd="13"><span class="ind-row-real-label">Realizado</span>12</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="83" data-pct-anterior="71" data-pct-ytd="77" style="width:83%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="83" data-pct-anterior="71" data-pct-ytd="77">83%</div>
+            </div>
+            <div class="indicador-row" data-ind="turn-jur">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Turnover jurídico trabalhista</span></div>
+                <div class="ind-row-desc">Processos / demissões · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 8" data-meta-anterior="≤ 8" data-meta-ytd="≤ 8"><span class="ind-row-meta-label">Meta</span>≤ 8</div>
+              <div class="ind-row-real" data-real-atual="7,2" data-real-anterior="8,4" data-real-ytd="7,8"><span class="ind-row-real-label">Realizado</span>7,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="111" data-pct-anterior="95" data-pct-ytd="103" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="111" data-pct-anterior="95" data-pct-ytd="103">111%</div>
+            </div>
+            <div class="indicador-row" data-ind="proc-civ">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Processos cíveis (consumidor)</span></div>
+                <div class="ind-row-desc">Anatel/Procon/JEC · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 15" data-meta-anterior="≤ 15" data-meta-ytd="≤ 15"><span class="ind-row-meta-label">Meta</span>≤ 15</div>
+              <div class="ind-row-real" data-real-atual="14" data-real-anterior="16" data-real-ytd="15"><span class="ind-row-real-label">Realizado</span>14</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="107" data-pct-anterior="94" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="107" data-pct-anterior="94" data-pct-ytd="100">107%</div>
+            </div>
+            <div class="indicador-row" data-ind="acordos">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Taxa de acordos</span></div>
+                <div class="ind-row-desc">% acordos / resolvidos · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 60" data-meta-anterior="≥ 60" data-meta-ytd="≥ 60"><span class="ind-row-meta-label">Meta</span>≥ 60</div>
+              <div class="ind-row-real" data-real-atual="58" data-real-anterior="54" data-real-ytd="56"><span class="ind-row-real-label">Realizado</span>58</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="97" data-pct-anterior="90" data-pct-ytd="93" style="width:97%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="97" data-pct-anterior="90" data-pct-ytd="93">97%</div>
+            </div>
+            <div class="indicador-row" data-ind="custo-proc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Custo médio por processo</span></div>
+                <div class="ind-row-desc">Despesa total / processos · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 4.500" data-meta-anterior="≤ 4.500" data-meta-ytd="≤ 4.500"><span class="ind-row-meta-label">Meta</span>R$ ≤ 4.500</div>
+              <div class="ind-row-real" data-real-atual="4.820" data-real-anterior="5.100" data-real-ytd="4.960"><span class="ind-row-real-label">Realizado</span>R$ 4.820</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="91" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="91">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="contingenc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Provisão de contingências</span></div>
+                <div class="ind-row-desc">R$ provisionado · R$ · monitorar</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="monitorar" data-meta-anterior="monitorar" data-meta-ytd="monitorar"><span class="ind-row-meta-label">Meta</span>monitorar</div>
+              <div class="ind-row-real" data-real-atual="128.000" data-real-anterior="125.000" data-real-ytd="126.500"><span class="ind-row-real-label">Realizado</span>R$ 128.000</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="tempo-proc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Tempo médio duração processo</span></div>
+                <div class="ind-row-desc">meses · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 24" data-meta-anterior="≤ 24" data-meta-ytd="≤ 24"><span class="ind-row-meta-label">Meta</span>≤ 24</div>
+              <div class="ind-row-real" data-real-atual="28" data-real-anterior="30" data-real-ytd="29"><span class="ind-row-real-label">Realizado</span>28</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="86" data-pct-anterior="80" data-pct-ytd="83" style="width:86%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="86" data-pct-anterior="80" data-pct-ytd="83">86%</div>
+            </div>
+            <div class="indicador-row" data-ind="exito">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Taxa de êxito</span></div>
+                <div class="ind-row-desc">% favoráveis à i2 · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 65" data-meta-anterior="≥ 65" data-meta-ytd="≥ 65"><span class="ind-row-meta-label">Meta</span>≥ 65</div>
+              <div class="ind-row-real" data-real-atual="62" data-real-anterior="58" data-real-ytd="60"><span class="ind-row-real-label">Realizado</span>62</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="95" data-pct-anterior="89" data-pct-ytd="92" style="width:95%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="95" data-pct-anterior="89" data-pct-ytd="92">95%</div>
+            </div>
+            <div class="indicador-row" data-ind="contr-rev">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% contratos revisados no prazo</span></div>
+                <div class="ind-row-desc">B2B · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="88" data-real-anterior="84" data-real-ytd="86"><span class="ind-row-real-label">Realizado</span>88</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="88" data-pct-anterior="84" data-pct-ytd="86" style="width:88%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="88" data-pct-anterior="84" data-pct-ytd="86">88%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-jur">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe Jurídico</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="74" data-real-anterior="70" data-real-ytd="72"><span class="ind-row-real-label">Realizado</span>74</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="90" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="88" data-pct-ytd="90">93%</div>
             </div>
           </div>
-
-          <!-- DEPTO 4: Gestão da Qualidade (11) -->
+          <!-- Gestão da Qualidade (11) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1353,22 +2856,143 @@
                 Gestão da Qualidade
                 <span class="depto-meta">· 11 indicadores · Resp: Resp N1</span>
               </div>
-              <div class="depto-pct success">91%</div>
+              <div class="depto-pct success" data-pct-atual="91" data-pct-anterior="88" data-pct-ytd="90">91%</div>
             </div>
-            <div class="subdept-header">Consolidados (puxa de outros setores) (4)</div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              Nota geral consolidada ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              Nota Comercial ↑ · Nota Operações ↑ · Nota Administrativo ↑
+
+            <div class="indicador-row principal" data-ind="nota-geral">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nota geral consolidada</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Média ponderada de todos setores · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="91" data-real-anterior="88" data-real-ytd="90"><span class="ind-row-real-label">Realizado</span>91</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="101" data-pct-anterior="98" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="101" data-pct-anterior="98" data-pct-ytd="100">101%</div>
             </div>
-            <div class="subdept-header">Próprios do depto (7)</div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              NCs abertas ↓ · Taxa fechamento NCs no prazo ↑ · Taxa de reincidência NC ↓ ·
-              Auditorias planejadas vs realizadas ↑ · CAPA implementadas no prazo ↑ ·
-              % POPs documentados ↑ · Engajamento da equipe
+            <div class="indicador-row" data-ind="nota-com">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nota Comercial</span></div>
+                <div class="ind-row-desc">Auditorias do setor · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="92" data-real-anterior="89" data-real-ytd="91"><span class="ind-row-real-label">Realizado</span>92</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="102" data-pct-anterior="99" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="102" data-pct-anterior="99" data-pct-ytd="101">102%</div>
+            </div>
+            <div class="indicador-row" data-ind="nota-op">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nota Operações</span></div>
+                <div class="ind-row-desc">Auditorias do setor · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="88" data-real-anterior="85" data-real-ytd="87"><span class="ind-row-real-label">Realizado</span>88</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="97" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="97">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="nota-adm">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Nota Administrativo</span></div>
+                <div class="ind-row-desc">Auditorias do setor · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="92" data-real-anterior="90" data-real-ytd="91"><span class="ind-row-real-label">Realizado</span>92</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="102" data-pct-anterior="100" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="102" data-pct-anterior="100" data-pct-ytd="101">102%</div>
+            </div>
+            <div class="indicador-row" data-ind="nc-abertas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">NCs abertas</span></div>
+                <div class="ind-row-desc">Backlog de não-conformidades · nº · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 8" data-meta-anterior="≤ 8" data-meta-ytd="≤ 8"><span class="ind-row-meta-label">Meta</span>≤ 8</div>
+              <div class="ind-row-real" data-real-atual="10" data-real-anterior="12" data-real-ytd="11"><span class="ind-row-real-label">Realizado</span>10</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="80" data-pct-anterior="67" data-pct-ytd="73" style="width:80%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="80" data-pct-anterior="67" data-pct-ytd="73">80%</div>
+            </div>
+            <div class="indicador-row" data-ind="nc-fech">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Taxa fechamento NCs no prazo</span></div>
+                <div class="ind-row-desc">% · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 90" data-meta-anterior="≥ 90" data-meta-ytd="≥ 90"><span class="ind-row-meta-label">Meta</span>≥ 90</div>
+              <div class="ind-row-real" data-real-atual="88" data-real-anterior="84" data-real-ytd="86"><span class="ind-row-real-label">Realizado</span>88</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="93" data-pct-ytd="96" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="93" data-pct-ytd="96">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="nc-reinc">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Taxa de reincidência NC</span></div>
+                <div class="ind-row-desc">Voltam por mesma causa · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 10" data-meta-anterior="≤ 10" data-meta-ytd="≤ 10"><span class="ind-row-meta-label">Meta</span>≤ 10</div>
+              <div class="ind-row-real" data-real-atual="8,2" data-real-anterior="9,1" data-real-ytd="8,6"><span class="ind-row-real-label">Realizado</span>8,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="122" data-pct-anterior="110" data-pct-ytd="116" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="122" data-pct-anterior="110" data-pct-ytd="116">122%</div>
+            </div>
+            <div class="indicador-row" data-ind="aud-plan">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Auditorias planejadas vs realizadas</span></div>
+                <div class="ind-row-desc">% · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="92" data-real-anterior="88" data-real-ytd="90"><span class="ind-row-real-label">Realizado</span>92</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="92" data-pct-anterior="88" data-pct-ytd="90" style="width:92%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="92" data-pct-anterior="88" data-pct-ytd="90">92%</div>
+            </div>
+            <div class="indicador-row" data-ind="capa">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">CAPA implementadas no prazo</span></div>
+                <div class="ind-row-desc">Ações corretivas · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 95" data-meta-anterior="≥ 95" data-meta-ytd="≥ 95"><span class="ind-row-meta-label">Meta</span>≥ 95</div>
+              <div class="ind-row-real" data-real-atual="89" data-real-anterior="86" data-real-ytd="88"><span class="ind-row-real-label">Realizado</span>89</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="93" style="width:94%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="93">94%</div>
+            </div>
+            <div class="indicador-row" data-ind="pops">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% POPs documentados</span></div>
+                <div class="ind-row-desc">Procedimentos operacionais padrão · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="100" data-meta-anterior="100" data-meta-ytd="100"><span class="ind-row-meta-label">Meta</span>100</div>
+              <div class="ind-row-real" data-real-atual="64" data-real-anterior="60" data-real-ytd="62"><span class="ind-row-real-label">Realizado</span>64</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill error" data-pct-atual="64" data-pct-anterior="60" data-pct-ytd="62" style="width:64%"></div></div>
+              </div>
+              <div class="ind-row-pct error" data-pct-atual="64" data-pct-anterior="60" data-pct-ytd="62">64%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-qual">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe Qualidade</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="82" data-real-anterior="80" data-real-ytd="81"><span class="ind-row-real-label">Realizado</span>82</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="103" data-pct-anterior="100" data-pct-ytd="101">103%</div>
             </div>
           </div>
-
-          <!-- DEPTO 5: Financeiro (17) -->
+          <!-- Financeiro (17) -->
           <div class="depto-section">
             <div class="depto-header">
               <div class="depto-title">
@@ -1376,20 +3000,214 @@
                 Financeiro
                 <span class="depto-meta">· 17 indicadores · Resp: Gestor O1</span>
               </div>
-              <div class="depto-pct warning">81%</div>
+              <div class="depto-pct warning" data-pct-atual="81" data-pct-anterior="77" data-pct-ytd="79">81%</div>
             </div>
-            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
-              <strong style="color: var(--color-foreground);">Indicadores:</strong>
-              Faturamento total mensal ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
-              % Inadimplência ↓ · DSO ↓ · % Recuperação de inadimplência ↑ ·
-              Inadimplência 1ª fatura (FPD) ↓ · Distribuição inadimplência por faixa ↓ ·
-              Ticket médio fatura ↑ · Fluxo de caixa ↑ · Margem operacional ↑ ·
-              EBITDA mensal ↑ · Margem EBITDA ↑ · Dívida Líquida/EBITDA ↓ ·
-              CAC ↓ · LTV ↑ · LTV/CAC ↑ · Custo operacional/receita ≤65% ↓ ·
-              Engajamento da equipe
+
+            <div class="indicador-row principal" data-ind="fatur">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Faturamento total mensal</span><span class="ind-row-principal-tag">Principal</span></div>
+                <div class="ind-row-desc">Receita bruta · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 1.080k" data-meta-anterior="≥ 1.020k" data-meta-ytd="≥ 5.100k"><span class="ind-row-meta-label">Meta</span>R$ ≥ 1.080k</div>
+              <div class="ind-row-real" data-real-atual="1.054k" data-real-anterior="993k" data-real-ytd="4.985k"><span class="ind-row-real-label">Realizado</span>R$ 1.054k</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="97" data-pct-ytd="98" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="97" data-pct-ytd="98">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="inad">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% Inadimplência</span></div>
+                <div class="ind-row-desc">Vencidas + não pagas · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 6" data-meta-anterior="≤ 6" data-meta-ytd="≤ 6"><span class="ind-row-meta-label">Meta</span>≤ 6</div>
+              <div class="ind-row-real" data-real-atual="7,2" data-real-anterior="7,8" data-real-ytd="7,5"><span class="ind-row-real-label">Realizado</span>7,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="83" data-pct-anterior="77" data-pct-ytd="80" style="width:83%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="83" data-pct-anterior="77" data-pct-ytd="80">83%</div>
+            </div>
+            <div class="indicador-row" data-ind="dso">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">DSO</span></div>
+                <div class="ind-row-desc">Days Sales Outstanding · dias · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 12" data-meta-anterior="≤ 12" data-meta-ytd="≤ 12"><span class="ind-row-meta-label">Meta</span>≤ 12</div>
+              <div class="ind-row-real" data-real-atual="14,2" data-real-anterior="15,1" data-real-ytd="14,6"><span class="ind-row-real-label">Realizado</span>14,2</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82" style="width:85%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="85" data-pct-anterior="79" data-pct-ytd="82">85%</div>
+            </div>
+            <div class="indicador-row" data-ind="recup">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">% Recuperação inadimplência</span></div>
+                <div class="ind-row-desc">Vencido virado em pago · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 40" data-meta-anterior="≥ 40" data-meta-ytd="≥ 40"><span class="ind-row-meta-label">Meta</span>≥ 40</div>
+              <div class="ind-row-real" data-real-atual="38" data-real-anterior="36" data-real-ytd="37"><span class="ind-row-real-label">Realizado</span>38</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="95" data-pct-anterior="90" data-pct-ytd="93" style="width:95%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="95" data-pct-anterior="90" data-pct-ytd="93">95%</div>
+            </div>
+            <div class="indicador-row" data-ind="fpd">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">FPD (1ª fatura não paga)</span></div>
+                <div class="ind-row-desc">Fraude/má venda · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 3" data-meta-anterior="≤ 3" data-meta-ytd="≤ 3"><span class="ind-row-meta-label">Meta</span>≤ 3</div>
+              <div class="ind-row-real" data-real-atual="2,8" data-real-anterior="3,4" data-real-ytd="3,1"><span class="ind-row-real-label">Realizado</span>2,8</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="107" data-pct-anterior="88" data-pct-ytd="97" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="107" data-pct-anterior="88" data-pct-ytd="97">107%</div>
+            </div>
+            <div class="indicador-row" data-ind="dist-faixas">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Distribuição inadimplência por faixa</span></div>
+                <div class="ind-row-desc">+90d em % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 15" data-meta-anterior="≤ 15" data-meta-ytd="≤ 15"><span class="ind-row-meta-label">Meta</span>≤ 15</div>
+              <div class="ind-row-real" data-real-atual="18" data-real-anterior="20" data-real-ytd="19"><span class="ind-row-real-label">Realizado</span>18</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="83" data-pct-anterior="75" data-pct-ytd="79" style="width:83%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="83" data-pct-anterior="75" data-pct-ytd="79">83%</div>
+            </div>
+            <div class="indicador-row" data-ind="ticket-fat">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Ticket médio fatura</span></div>
+                <div class="ind-row-desc">R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 115" data-meta-anterior="≥ 115" data-meta-ytd="≥ 115"><span class="ind-row-meta-label">Meta</span>R$ ≥ 115</div>
+              <div class="ind-row-real" data-real-atual="112,4" data-real-anterior="109,2" data-real-ytd="110,8"><span class="ind-row-real-label">Realizado</span>R$ 112,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="95" data-pct-ytd="96" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="95" data-pct-ytd="96">98%</div>
+            </div>
+            <div class="indicador-row" data-ind="fluxo">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Fluxo de caixa</span></div>
+                <div class="ind-row-desc">Entrada − saída · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 180k" data-meta-anterior="≥ 180k" data-meta-ytd="≥ 900k"><span class="ind-row-meta-label">Meta</span>R$ ≥ 180k</div>
+              <div class="ind-row-real" data-real-atual="162k" data-real-anterior="138k" data-real-ytd="742k"><span class="ind-row-real-label">Realizado</span>R$ 162k</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="90" data-pct-anterior="77" data-pct-ytd="82" style="width:90%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="90" data-pct-anterior="77" data-pct-ytd="82">90%</div>
+            </div>
+            <div class="indicador-row" data-ind="margem-op">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Margem operacional</span></div>
+                <div class="ind-row-desc">Receita − despesas op / receita · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 25" data-meta-anterior="≥ 25" data-meta-ytd="≥ 25"><span class="ind-row-meta-label">Meta</span>≥ 25</div>
+              <div class="ind-row-real" data-real-atual="22,4" data-real-anterior="20,8" data-real-ytd="21,6"><span class="ind-row-real-label">Realizado</span>22,4</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="90" data-pct-anterior="83" data-pct-ytd="86" style="width:90%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="90" data-pct-anterior="83" data-pct-ytd="86">90%</div>
+            </div>
+            <div class="indicador-row" data-ind="ebitda">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">EBITDA mensal</span></div>
+                <div class="ind-row-desc">Lucro antes juros/imposto · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 320k" data-meta-anterior="≥ 320k" data-meta-ytd="≥ 1.600k"><span class="ind-row-meta-label">Meta</span>R$ ≥ 320k</div>
+              <div class="ind-row-real" data-real-atual="298k" data-real-anterior="276k" data-real-ytd="1.385k"><span class="ind-row-real-label">Realizado</span>R$ 298k</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="93" data-pct-anterior="86" data-pct-ytd="87" style="width:93%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="93" data-pct-anterior="86" data-pct-ytd="87">93%</div>
+            </div>
+            <div class="indicador-row" data-ind="marg-ebitda">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Margem EBITDA</span></div>
+                <div class="ind-row-desc">EBITDA / receita · % · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 30" data-meta-anterior="≥ 30" data-meta-ytd="≥ 30"><span class="ind-row-meta-label">Meta</span>≥ 30</div>
+              <div class="ind-row-real" data-real-atual="28,3" data-real-anterior="27,8" data-real-ytd="27,8"><span class="ind-row-real-label">Realizado</span>28,3</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="94" data-pct-anterior="93" data-pct-ytd="93" style="width:94%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="94" data-pct-anterior="93" data-pct-ytd="93">94%</div>
+            </div>
+            <div class="indicador-row" data-ind="div-ebitda">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Dívida Líquida / EBITDA</span></div>
+                <div class="ind-row-desc">Saúde financeira · x · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 2,0" data-meta-anterior="≤ 2,0" data-meta-ytd="≤ 2,0"><span class="ind-row-meta-label">Meta</span>≤ 2,0</div>
+              <div class="ind-row-real" data-real-atual="2,3" data-real-anterior="2,5" data-real-ytd="2,4"><span class="ind-row-real-label">Realizado</span>2,3</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="87" data-pct-anterior="80" data-pct-ytd="83" style="width:87%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="87" data-pct-anterior="80" data-pct-ytd="83">87%</div>
+            </div>
+            <div class="indicador-row" data-ind="cac">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">CAC</span></div>
+                <div class="ind-row-desc">Custo aquisição cliente · R$ · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 280" data-meta-anterior="≤ 280" data-meta-ytd="≤ 280"><span class="ind-row-meta-label">Meta</span>R$ ≤ 280</div>
+              <div class="ind-row-real" data-real-atual="312" data-real-anterior="328" data-real-ytd="320"><span class="ind-row-real-label">Realizado</span>R$ 312</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="90" data-pct-anterior="85" data-pct-ytd="88" style="width:90%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="90" data-pct-anterior="85" data-pct-ytd="88">90%</div>
+            </div>
+            <div class="indicador-row" data-ind="ltv">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">LTV</span></div>
+                <div class="ind-row-desc">Lifetime value · R$ · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 4.500" data-meta-anterior="≥ 4.500" data-meta-ytd="≥ 4.500"><span class="ind-row-meta-label">Meta</span>R$ ≥ 4.500</div>
+              <div class="ind-row-real" data-real-atual="4.218" data-real-anterior="4.082" data-real-ytd="4.150"><span class="ind-row-real-label">Realizado</span>R$ 4.218</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="92" style="width:94%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="94" data-pct-anterior="91" data-pct-ytd="92">94%</div>
+            </div>
+            <div class="indicador-row" data-ind="ltv-cac">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">LTV/CAC</span></div>
+                <div class="ind-row-desc">Sustentabilidade comercial · x · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≥ 3,0" data-meta-anterior="≥ 3,0" data-meta-ytd="≥ 3,0"><span class="ind-row-meta-label">Meta</span>≥ 3,0</div>
+              <div class="ind-row-real" data-real-atual="13,5" data-real-anterior="12,4" data-real-ytd="13,0"><span class="ind-row-real-label">Realizado</span>13,5</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100" style="width:100%"></div></div>
+              </div>
+              <div class="ind-row-pct success" data-pct-atual="100" data-pct-anterior="100" data-pct-ytd="100">100%</div>
+            </div>
+            <div class="indicador-row" data-ind="custo-rec">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Custo operacional / receita</span></div>
+                <div class="ind-row-desc">Eficiência · % · ↓</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="≤ 65" data-meta-anterior="≤ 65" data-meta-ytd="≤ 65"><span class="ind-row-meta-label">Meta</span>≤ 65</div>
+              <div class="ind-row-real" data-real-atual="68" data-real-anterior="71" data-real-ytd="69"><span class="ind-row-real-label">Realizado</span>68</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="96" data-pct-anterior="92" data-pct-ytd="94" style="width:96%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="96" data-pct-anterior="92" data-pct-ytd="94">96%</div>
+            </div>
+            <div class="indicador-row" data-ind="eng-fin">
+              <div class="ind-row-nome">
+                <div class="ind-row-nome-line"><span class="ind-row-titulo">Engajamento da equipe Financeiro</span></div>
+                <div class="ind-row-desc">Combinado · 0-100 · ↑</div>
+              </div>
+              <div class="ind-row-meta" data-meta-atual="80" data-meta-anterior="80" data-meta-ytd="80"><span class="ind-row-meta-label">Meta</span>80</div>
+              <div class="ind-row-real" data-real-atual="78" data-real-anterior="75" data-real-ytd="77"><span class="ind-row-real-label">Realizado</span>78</div>
+              <div class="ind-row-progress">
+                <div class="ind-row-bar"><div class="ind-row-bar-fill warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="96" style="width:98%"></div></div>
+              </div>
+              <div class="ind-row-pct warning" data-pct-atual="98" data-pct-anterior="94" data-pct-ytd="96">98%</div>
             </div>
           </div>
-
           <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
             <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
             Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
@@ -1589,6 +3407,83 @@
 </div>
 
 <script>
+  // ===== Filtro de data: re-renderiza valores conforme período selecionado =====
+  let currentPeriod = 'atual'; // 'atual' | 'anterior' | 'ytd'
+
+  function setPeriod(period) {
+    currentPeriod = period;
+    // Atualiza UI dos pills
+    document.querySelectorAll('.date-pill').forEach(p => {
+      p.classList.toggle('active', p.dataset.period === period);
+    });
+    // Atualiza valores de todas as linhas/cards
+    rerenderValues();
+  }
+
+  function rerenderValues() {
+    const attr = (k) => 'data-' + k + '-' + currentPeriod;
+
+    // Linhas de indicador
+    document.querySelectorAll('.indicador-row').forEach(row => {
+      const metaEl = row.querySelector('.ind-row-meta');
+      const realEl = row.querySelector('.ind-row-real');
+      const pctEl = row.querySelector('.ind-row-pct');
+      const barFill = row.querySelector('.ind-row-bar-fill');
+
+      if (metaEl) {
+        const metaVal = metaEl.getAttribute('data-meta-' + currentPeriod);
+        if (metaVal !== null) {
+          // Preserva o prefixo (R$, etc) — pega o que vinha antes do número original
+          const prefix = metaEl.dataset.prefix || (metaEl.textContent.includes('R$') ? 'R$ ' : '');
+          metaEl.innerHTML = '<span class="ind-row-meta-label">Meta</span>' +
+            (prefix && !metaVal.includes('R$') && !isNaN(parseFloat(metaVal.replace(',','.'))) ? prefix : '') + metaVal;
+        }
+      }
+      if (realEl) {
+        const realVal = realEl.getAttribute('data-real-' + currentPeriod);
+        if (realVal !== null) {
+          const prefix = realEl.dataset.prefix || (realEl.textContent.includes('R$') ? 'R$ ' : '');
+          realEl.innerHTML = '<span class="ind-row-real-label">Realizado</span>' +
+            (prefix && !realVal.includes('R$') && !isNaN(parseFloat(realVal.replace(',','.'))) ? prefix : '') + realVal;
+        }
+      }
+      if (pctEl) {
+        const pctVal = pctEl.getAttribute('data-pct-' + currentPeriod);
+        if (pctVal !== null) {
+          pctEl.textContent = pctVal + '%';
+          // Reaplica classe de cor conforme valor
+          pctEl.classList.remove('success', 'warning', 'error');
+          if (parseInt(pctVal) >= 95) pctEl.classList.add('success');
+          else if (parseInt(pctVal) >= 75) pctEl.classList.add('warning');
+          else pctEl.classList.add('error');
+        }
+      }
+      if (barFill) {
+        const pctVal = barFill.getAttribute('data-pct-' + currentPeriod);
+        if (pctVal !== null) {
+          const w = Math.min(100, Math.max(5, parseInt(pctVal)));
+          barFill.style.width = w + '%';
+          barFill.classList.remove('success', 'warning', 'error');
+          if (parseInt(pctVal) >= 95) barFill.classList.add('success');
+          else if (parseInt(pctVal) >= 75) barFill.classList.add('warning');
+          else barFill.classList.add('error');
+        }
+      }
+    });
+
+    // Atualiza % dos cabeçalhos de departamento
+    document.querySelectorAll('.depto-pct').forEach(el => {
+      const v = el.getAttribute('data-pct-' + currentPeriod);
+      if (v !== null) {
+        el.textContent = v + '%';
+        el.classList.remove('success', 'warning', 'error');
+        if (parseInt(v) >= 95) el.classList.add('success');
+        else if (parseInt(v) >= 75) el.classList.add('warning');
+        else el.classList.add('error');
+      }
+    });
+  }
+
   // Tab switching
   function switchTab(el, name) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
