@@ -113,7 +113,8 @@
     position: sticky; top: 0; height: 100vh;
     overflow-y: auto;
   }
-  .logo { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; color: var(--color-gold); margin-bottom: 28px; letter-spacing: -0.5px; }
+  .logo { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; color: var(--color-gold); margin-bottom: 28px; letter-spacing: -0.5px; padding-left: 56px; }
+  @media (min-width: 768px) { .logo { padding-left: 0; } }
   .logo .dot { color: var(--color-gold-hi); }
   .nav-section { margin-bottom: 20px; }
   .nav-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-fg-dim); margin-bottom: 8px; padding: 0 8px; }
@@ -150,9 +151,11 @@
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
   .kpi-card-hero { grid-column: span 2; }
   @media (max-width: 1100px) {
-    .kpi-card-hero { grid-column: span 2; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-card-hero { grid-column: 1 / -1; }
   }
   @media (max-width: 767px) {
+    .kpi-grid { grid-template-columns: 1fr; }
     .kpi-card-hero { grid-column: 1 / -1; }
   }
   .kpi-card {
@@ -613,7 +616,7 @@
     .main { padding: 24px 24px 60px 24px; }
   }
   @media (min-width: 768px) and (max-width: 1100px) {
-    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    /* kpi-grid já está em 2 cols pelo bloco @media (max-width: 1100px) acima */
     .kpi-card { padding: 14px; }
     .kpi-value { font-size: 24px; }
     .kpi-label { font-size: 10px; }
