@@ -5,248 +5,339 @@
 <title>Mockup — Indicadores · i2 Gestão</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2226%22>🎯</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
 <style>
-  /* ===== Design tokens (Neural Pulse — dark teal glassmorphism) ===== */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+</style>
+<style>
+  /* ===== Design tokens (Neural Pulse — i2 Gestão canon) =====
+     Espelho fiel de apps/gestao/src/app/globals.css */
   :root {
-    --bg-base: #0a1418;
-    --bg-elev-1: #0f1d23;
-    --bg-elev-2: #14252d;
-    --bg-elev-3: #1a2f38;
-    --glass: rgba(20, 37, 45, 0.55);
-    --glass-border: rgba(94, 234, 212, 0.12);
-    --ghost-border: rgba(94, 234, 212, 0.08);
-    --teal-50: #ccfbf1;
-    --teal-200: #5eead4;
-    --teal-300: #2dd4bf;
-    --teal-400: #14b8a6;
-    --teal-500: #0d9488;
-    --text-primary: #e6f4f1;
-    --text-secondary: #94a8a8;
-    --text-muted: #5d7575;
-    --red-400: #f87171;
-    --red-bg: rgba(248, 113, 113, 0.12);
-    --amber-400: #fbbf24;
-    --amber-bg: rgba(251, 191, 36, 0.12);
-    --green-400: #4ade80;
-    --green-bg: rgba(74, 222, 128, 0.12);
-    --blue-400: #60a5fa;
-    --blue-bg: rgba(96, 165, 250, 0.12);
-    --shadow-glow: 0 0 40px rgba(94, 234, 212, 0.08);
+    /* Surfaces (canon) */
+    --color-background: #0e1513;
+    --color-surface: #0e1513;
+    --color-surface-low: #161d1b;
+    --color-surface-container: #1a211f;
+    --color-surface-high: #242b29;
+    --color-surface-highest: #2f3634;
+    --color-card: #242b29;
+    --color-sidebar: rgba(4, 30, 25, 0.6);
+
+    /* Foreground scale */
+    --color-foreground: #dde4e0;
+    --color-fg-muted: #9ab2a9;
+    --color-fg-dim: #7d9a91;
+    --color-fg-faint: rgba(221, 228, 224, 0.4);
+    --color-muted-foreground: #88938f;
+
+    /* Marca + semântico */
+    --color-primary: #81d6c0;          /* teal — hover/link/active */
+    --color-secondary: #fecb00;        /* gold — marca i2, série-1, KPI principal */
+    --color-gold: #fecb00;
+    --color-gold-hi: #ffe08b;
+    --color-accent: #00daf3;           /* cyan */
+    --color-success: #34d399;          /* verde */
+    --color-warning: #f59e0b;           /* amber */
+    --color-warn: #f59e0b;
+    --color-destructive: #ffb4ab;      /* rose */
+
+    /* Containers e bordas */
+    --glass-bg: rgba(36, 43, 41, 0.4);
+    --color-hairline: rgba(20, 184, 166, 0.12);
+    --color-strong: rgba(20, 184, 166, 0.25);
+    --ghost-border-color: rgba(62, 73, 69, 0.15);
+
+    /* Backgrounds tonais (pra cells) */
+    --bg-success-soft: rgba(52, 211, 153, 0.10);
+    --bg-warn-soft: rgba(245, 158, 11, 0.12);
+    --bg-destructive-soft: rgba(255, 180, 171, 0.10);
+    --bg-secondary-soft: rgba(254, 203, 0, 0.10);
+
+    /* Sombras Neural */
+    --neural-glow: 0 0 20px rgba(254, 203, 0, 0.15);
+    --ambient-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
     font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg-base);
-    color: var(--text-primary);
+    background: var(--color-background);
+    color: var(--color-foreground);
     min-height: 100vh;
     font-size: 14px;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
   body {
     background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(94, 234, 212, 0.05), transparent 70%),
-      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(45, 212, 191, 0.04), transparent 70%),
-      var(--bg-base);
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(254, 203, 0, 0.04), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(129, 214, 192, 0.04), transparent 70%),
+      var(--color-background);
   }
   h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; font-weight: 700; }
+  .tabular-nums, .ds-mono { font-variant-numeric: tabular-nums; font-feature-settings: "ss01", "cv11"; }
+  .ds-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hi) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 
   /* ===== Layout ===== */
   .shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
   .main { min-width: 0; }
   .sidebar {
-    background: var(--bg-elev-1);
-    border-right: 1px solid var(--ghost-border);
+    background: var(--color-sidebar);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-right: 1px solid var(--ghost-border-color);
     padding: 24px 16px;
     position: sticky; top: 0; height: 100vh;
     overflow-y: auto;
   }
-  .logo { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; color: var(--teal-200); margin-bottom: 28px; letter-spacing: -0.5px; }
-  .logo .dot { color: var(--teal-400); }
+  .logo { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; color: var(--color-gold); margin-bottom: 28px; letter-spacing: -0.5px; }
+  .logo .dot { color: var(--color-gold-hi); }
   .nav-section { margin-bottom: 20px; }
-  .nav-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; padding: 0 8px; }
-  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; margin-bottom: 2px; }
-  .nav-item:hover { background: var(--bg-elev-2); color: var(--text-primary); }
-  .nav-item.active { background: linear-gradient(90deg, rgba(94,234,212,0.12), transparent); color: var(--teal-200); border-left: 2px solid var(--teal-300); padding-left: 14px; }
-  .nav-item .ico { width: 16px; height: 16px; opacity: 0.8; }
+  .nav-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-fg-dim); margin-bottom: 8px; padding: 0 8px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--color-fg-muted); font-size: 13px; cursor: pointer; transition: all 0.16s ease-out; margin-bottom: 2px; }
+  .nav-item:hover { background: rgba(254, 203, 0, 0.06); color: var(--color-foreground); }
+  .nav-item.active { background: linear-gradient(90deg, rgba(254,203,0,0.12), transparent); color: var(--color-gold); border-left: 2px solid var(--color-gold); padding-left: 14px; }
+  .nav-item .material-symbols-outlined { font-size: 18px; opacity: 0.9; }
 
   .main { padding: 32px 40px 80px 40px; max-width: 1840px; min-width: 0; }
 
   /* ===== Breadcrumb ===== */
-  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-  .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--teal-200); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-fg-dim); margin-bottom: 6px; }
+  .breadcrumb a { color: var(--color-fg-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--color-gold); }
   .breadcrumb .sep { opacity: 0.4; }
 
   /* ===== Page header ===== */
   .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
   .page-header h1 { font-size: 28px; letter-spacing: -0.5px; margin-bottom: 6px; }
-  .page-header .subtitle { color: var(--text-secondary); font-size: 14px; }
+  .page-header .subtitle { color: var(--color-fg-muted); font-size: 14px; }
   .header-actions { display: flex; gap: 8px; }
 
   /* ===== Buttons ===== */
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: inherit; }
-  .btn-primary { background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; box-shadow: 0 0 20px rgba(45,212,191,0.25); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(45,212,191,0.4); }
-  .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--ghost-border); }
-  .btn-ghost:hover { color: var(--teal-200); border-color: var(--glass-border); background: var(--glass); }
+  .btn-primary { background: linear-gradient(135deg, var(--color-primary), var(--color-gold-hi)); color: #001210; box-shadow: var(--neural-glow); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(254, 203, 0, 0.30); }
+  .btn-ghost { background: transparent; color: var(--color-fg-muted); border: 1px solid var(--ghost-border-color); }
+  .btn-ghost:hover { color: var(--color-gold); border-color: var(--color-hairline); background: var(--glass-bg); }
   .btn-sm { padding: 6px 10px; font-size: 12px; }
-  .btn-danger { background: rgba(248,113,113,0.15); color: var(--red-400); border: 1px solid rgba(248,113,113,0.3); }
-  .btn-danger:hover { background: rgba(248,113,113,0.25); }
+  .btn-danger { background: rgba(255,180,171,0.15); color: var(--color-destructive); border: 1px solid rgba(255,180,171,0.30); }
+  .btn-danger:hover { background: rgba(255,180,171,0.25); }
 
-  /* ===== KPI Cards ===== */
-  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-  .kpi-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 18px 20px; position: relative; overflow: hidden; }
-  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--teal-300), transparent); opacity: 0.4; }
-  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
-  .kpi-value { font-family: 'Manrope', sans-serif; font-size: 30px; font-weight: 800; line-height: 1; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -1px; }
-  .kpi-value.green { color: var(--green-400); }
-  .kpi-value.amber { color: var(--amber-400); }
-  .kpi-value.red { color: var(--red-400); }
-  .kpi-value.blue { color: var(--blue-400); }
-  .kpi-trend { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
-  .kpi-trend.up { color: var(--green-400); }
-  .kpi-trend.down { color: var(--red-400); }
+  /* ===== KPI Cards (canon — espelha @i2/shared KpiCard v1) ===== */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .kpi-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--ghost-border-color);
+    border-radius: 0.75rem; /* canon --radius */
+    padding: 16px;
+    position: relative;
+    transition: all 0.16s ease-out;
+  }
+  .kpi-card:hover { background: rgba(36, 43, 41, 0.45); border-color: var(--color-strong); }
+  .kpi-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .kpi-card-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .kpi-card-icon .material-symbols-outlined { font-size: 18px; }
+  .kpi-card-icon.default { background: rgba(254, 203, 0, 0.12); color: var(--color-gold); }
+  .kpi-card-icon.success { background: rgba(52, 211, 153, 0.12); color: var(--color-success); }
+  .kpi-card-icon.warning { background: rgba(245, 158, 11, 0.12); color: var(--color-warning); }
+  .kpi-card-icon.error { background: rgba(255, 180, 171, 0.12); color: var(--color-destructive); }
+  .kpi-card-icon.accent { background: rgba(0, 218, 243, 0.12); color: var(--color-accent); }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-fg-dim); font-weight: 600; line-height: 1.2; }
+  .kpi-value {
+    font-family: 'Manrope', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-foreground);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-value.gold { background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hi) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+  .kpi-value.success { color: var(--color-success); }
+  .kpi-value.warning { color: var(--color-warning); }
+  .kpi-value.error, .kpi-value.red { color: var(--color-destructive); }
+  .kpi-value.accent, .kpi-value.blue { color: var(--color-accent); }
+  /* Backward-compat com classes antigas que ainda podem aparecer */
+  .kpi-value.green { color: var(--color-success); }
+  .kpi-value.amber { color: var(--color-warning); }
+  .kpi-trend { font-size: 11px; color: var(--color-fg-muted); display: flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; }
+  .kpi-trend.up { color: var(--color-success); }
+  .kpi-trend.down { color: var(--color-destructive); }
+  .kpi-trend .material-symbols-outlined { font-size: 14px; }
 
   /* ===== Tabs ===== */
-  .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--ghost-border); padding-bottom: 0; }
-  .tab { padding: 12px 20px; cursor: pointer; color: var(--text-secondary); font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; }
-  .tab:hover { color: var(--text-primary); }
-  .tab.active { color: var(--teal-200); border-bottom-color: var(--teal-300); font-weight: 600; }
-  .tab .badge { display: inline-block; margin-left: 6px; padding: 2px 7px; background: var(--bg-elev-3); border-radius: 10px; font-size: 11px; font-weight: 600; }
-  .tab.active .badge { background: rgba(94,234,212,0.15); color: var(--teal-200); }
+  .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--ghost-border-color); padding-bottom: 0; }
+  .tab { padding: 12px 20px; cursor: pointer; color: var(--color-fg-muted); font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; }
+  .tab:hover { color: var(--color-foreground); }
+  .tab.active { color: var(--color-gold); border-bottom-color: var(--color-gold); font-weight: 600; }
+  .tab .badge { display: inline-block; margin-left: 6px; padding: 2px 7px; background: var(--color-surface-high); border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .tab.active .badge { background: rgba(254,203,0,0.15); color: var(--color-gold); }
 
   /* ===== Data table ===== */
-  .panel { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-glow); }
-  .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--ghost-border); }
-  .panel-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
-  .panel-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .panel { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--color-hairline); border-radius: 14px; overflow: hidden; box-shadow: var(--ambient-shadow); }
+  .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--ghost-border-color); }
+  .panel-title { font-size: 15px; font-weight: 600; color: var(--color-foreground); }
+  .panel-subtitle { font-size: 12px; color: var(--color-fg-dim); margin-top: 2px; }
   .panel-filter { display: flex; gap: 8px; align-items: center; }
-  .select-mock { background: var(--bg-elev-2); border: 1px solid var(--ghost-border); color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+  .select-mock { background: var(--color-surface-container); border: 1px solid var(--ghost-border-color); color: var(--color-foreground); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
 
   .table-wrap { overflow-x: auto; overflow-y: auto; max-height: 70vh; max-width: 100%; -webkit-overflow-scrolling: touch; }
   .table-wrap::-webkit-scrollbar { height: 8px; width: 8px; }
-  .table-wrap::-webkit-scrollbar-track { background: var(--bg-elev-2); }
-  .table-wrap::-webkit-scrollbar-thumb { background: var(--teal-500); border-radius: 4px; }
-  table.indicadores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
-  table.indicadores thead { position: sticky; top: 0; z-index: 10; background: var(--bg-elev-2); }
-  table.indicadores th { padding: 10px 8px; text-align: left; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--ghost-border); white-space: nowrap; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
-  table.indicadores th.month-header { text-align: center; background: var(--bg-elev-3); border-left: 1px solid var(--ghost-border); }
-  table.indicadores th.month-header.current { background: rgba(45,212,191,0.08); color: var(--teal-200); }
-  table.indicadores th.sub-header { padding: 6px 4px; font-size: 10px; background: var(--bg-elev-2); text-transform: none; letter-spacing: 0; color: var(--text-muted); border-bottom: 1px solid var(--ghost-border); }
-  table.indicadores th.sub-header.current { background: rgba(45,212,191,0.04); color: var(--teal-200); }
-  table.indicadores td { padding: 10px 8px; border-bottom: 1px solid var(--ghost-border); vertical-align: middle; }
-  table.indicadores td.indicador { font-weight: 600; color: var(--text-primary); min-width: 230px; }
-  table.indicadores td.indicador .desc { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
-  table.indicadores td.responsavel { color: var(--text-secondary); min-width: 140px; }
-  table.indicadores td.responsavel .avatar { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; margin-right: 6px; vertical-align: middle; }
-  table.indicadores td.month-cell { text-align: center; border-left: 1px solid var(--ghost-border); padding: 6px 4px; min-width: 70px; }
-  table.indicadores td.month-cell.meta { color: var(--text-muted); font-weight: 500; }
+  .table-wrap::-webkit-scrollbar-track { background: var(--color-surface-container); }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--color-gold-hi); border-radius: 4px; }
+  table.indicadores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; font-variant-numeric: tabular-nums; }
+  table.indicadores thead { position: sticky; top: 0; z-index: 10; background: var(--color-surface-container); }
+  table.indicadores th { padding: 10px 8px; text-align: left; font-weight: 600; color: var(--color-fg-muted); border-bottom: 1px solid var(--ghost-border-color); white-space: nowrap; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+  table.indicadores th.month-header { text-align: center; background: var(--color-surface-high); border-left: 1px solid var(--ghost-border-color); }
+  table.indicadores th.month-header.current { background: rgba(254,203,0,0.08); color: var(--color-gold); }
+  table.indicadores th.sub-header { padding: 6px 4px; font-size: 10px; background: var(--color-surface-container); text-transform: none; letter-spacing: 0; color: var(--color-fg-dim); border-bottom: 1px solid var(--ghost-border-color); }
+  table.indicadores th.sub-header.current { background: rgba(254,203,0,0.04); color: var(--color-gold); }
+  table.indicadores td { padding: 10px 8px; border-bottom: 1px solid var(--ghost-border-color); vertical-align: middle; }
+  table.indicadores td.indicador { font-weight: 600; color: var(--color-foreground); min-width: 230px; }
+  table.indicadores td.indicador .desc { font-size: 11px; color: var(--color-fg-dim); font-weight: 400; margin-top: 2px; }
+  table.indicadores td.responsavel { color: var(--color-fg-muted); min-width: 140px; }
+  table.indicadores td.responsavel .avatar { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-gold-hi)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; margin-right: 6px; vertical-align: middle; }
+  table.indicadores td.month-cell { text-align: center; border-left: 1px solid var(--ghost-border-color); padding: 6px 4px; min-width: 70px; }
+  table.indicadores td.month-cell.meta { color: var(--color-fg-dim); font-weight: 500; }
   table.indicadores td.month-cell.realizado { padding: 4px; position: relative; }
-  table.indicadores tbody tr:hover { background: rgba(94,234,212,0.03); }
+  table.indicadores tbody tr:hover { background: rgba(254,203,0,0.03); }
 
   /* Cell with progress bar */
   .cell-progress { position: relative; padding: 8px 6px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
-  .cell-progress:hover { background: var(--bg-elev-3); }
-  .cell-progress.editing { background: var(--bg-elev-3); outline: 1px solid var(--teal-300); }
+  .cell-progress:hover { background: var(--color-surface-high); }
+  .cell-progress.editing { background: var(--color-surface-high); outline: 1px solid var(--color-gold); }
   .cell-value { font-weight: 600; font-size: 12px; position: relative; z-index: 2; }
-  .cell-pct { font-size: 10px; color: var(--text-muted); margin-top: 2px; position: relative; z-index: 2; }
-  .cell-bar-bg { position: absolute; bottom: 4px; left: 6px; right: 6px; height: 3px; background: var(--bg-elev-3); border-radius: 2px; overflow: hidden; }
+  .cell-pct { font-size: 10px; color: var(--color-fg-dim); margin-top: 2px; position: relative; z-index: 2; }
+  .cell-bar-bg { position: absolute; bottom: 4px; left: 6px; right: 6px; height: 3px; background: var(--color-surface-high); border-radius: 2px; overflow: hidden; }
   .cell-bar-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
-  .cell-progress.red .cell-value { color: var(--red-400); }
-  .cell-progress.red .cell-bar-fill { background: linear-gradient(90deg, #ef4444, var(--red-400)); }
-  .cell-progress.amber .cell-value { color: var(--amber-400); }
-  .cell-progress.amber .cell-bar-fill { background: linear-gradient(90deg, #f59e0b, var(--amber-400)); }
-  .cell-progress.green .cell-value { color: var(--green-400); }
-  .cell-progress.green .cell-bar-fill { background: linear-gradient(90deg, #22c55e, var(--green-400)); }
-  .cell-progress.blue .cell-value { color: var(--blue-400); }
-  .cell-progress.blue .cell-bar-fill { background: linear-gradient(90deg, #3b82f6, var(--blue-400)); }
-  .cell-progress.empty { color: var(--text-muted); font-style: italic; font-size: 11px; }
+  .cell-progress.red .cell-value { color: var(--color-destructive); }
+  .cell-progress.red .cell-bar-fill { background: linear-gradient(90deg, #ef4444, var(--color-destructive)); }
+  .cell-progress.amber .cell-value { color: var(--color-warning); }
+  .cell-progress.amber .cell-bar-fill { background: linear-gradient(90deg, #f59e0b, var(--color-warning)); }
+  .cell-progress.green .cell-value { color: var(--color-success); }
+  .cell-progress.green .cell-bar-fill { background: linear-gradient(90deg, #22c55e, var(--color-success)); }
+  .cell-progress.blue .cell-value { color: var(--color-accent); }
+  .cell-progress.blue .cell-bar-fill { background: linear-gradient(90deg, #3b82f6, var(--color-accent)); }
+  .cell-progress.empty { color: var(--color-fg-dim); font-style: italic; font-size: 11px; }
   .cell-progress.future { opacity: 0.4; cursor: not-allowed; }
 
   /* Inline edit input */
-  .inline-edit { width: 100%; background: var(--bg-base); border: 1px solid var(--teal-300); color: var(--text-primary); padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: 600; text-align: center; font-family: inherit; outline: none; }
+  .inline-edit { width: 100%; background: var(--color-background); border: 1px solid var(--color-gold); color: var(--color-foreground); padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: 600; text-align: center; font-family: inherit; outline: none; }
   .inline-confirm { display: flex; gap: 2px; justify-content: center; margin-top: 3px; }
   .inline-confirm button { padding: 2px 6px; border-radius: 3px; border: none; font-size: 10px; font-weight: 600; cursor: pointer; font-family: inherit; }
-  .inline-confirm .ok { background: var(--green-400); color: #001210; }
-  .inline-confirm .cancel { background: var(--bg-elev-3); color: var(--text-secondary); }
+  .inline-confirm .ok { background: var(--color-success); color: #001210; }
+  .inline-confirm .cancel { background: var(--color-surface-high); color: var(--color-fg-muted); }
 
   /* Unidade badge */
-  .unidade-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--bg-elev-3); color: var(--text-muted); font-size: 9px; font-weight: 600; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.3px; vertical-align: middle; }
+  .unidade-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--color-surface-high); color: var(--color-fg-dim); font-size: 9px; font-weight: 600; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.3px; vertical-align: middle; }
   .direcao-badge { display: inline-block; font-size: 11px; margin-left: 4px; }
 
   /* Row total */
-  table.indicadores td.total { text-align: center; background: var(--bg-elev-2); font-weight: 700; border-left: 1px solid var(--glass-border); padding: 8px; }
-  table.indicadores th.total { background: var(--bg-elev-3); color: var(--teal-200); border-left: 1px solid var(--glass-border); }
+  table.indicadores td.total { text-align: center; background: var(--color-surface-container); font-weight: 700; border-left: 1px solid var(--color-hairline); padding: 8px; }
+  table.indicadores th.total { background: var(--color-surface-high); color: var(--color-gold); border-left: 1px solid var(--color-hairline); }
 
   /* ===== Resumo tab content ===== */
   .resumo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
-  .setor-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; }
-  .setor-card:hover { transform: translateY(-2px); border-color: rgba(94,234,212,0.3); box-shadow: 0 8px 32px rgba(94,234,212,0.1); }
+  .setor-card { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--color-hairline); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; }
+  .setor-card:hover { transform: translateY(-2px); border-color: rgba(254,203,0,0.30); box-shadow: 0 8px 32px rgba(254,203,0,0.10); }
   .setor-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .setor-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: var(--text-primary); }
-  .setor-count { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .setor-pct-big { font-family: 'Manrope', sans-serif; font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; }
-  .setor-pct-big.green { color: var(--green-400); }
-  .setor-pct-big.amber { color: var(--amber-400); }
-  .setor-pct-big.red { color: var(--red-400); }
-  .setor-stats { display: flex; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--ghost-border); font-size: 11px; }
-  .setor-stats span { display: flex; align-items: center; gap: 4px; color: var(--text-secondary); }
+  .setor-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: var(--color-foreground); }
+  .setor-count { font-size: 11px; color: var(--color-fg-dim); margin-top: 2px; }
+  .setor-pct-big { font-family: 'Manrope', sans-serif; font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; }
+  .setor-pct-big.green, .setor-pct-big.success { color: var(--color-success); }
+  .setor-pct-big.amber, .setor-pct-big.warning { color: var(--color-warning); }
+  .setor-pct-big.red, .setor-pct-big.error { color: var(--color-destructive); }
+  .setor-pct-big.gold { background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-hi) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .setor-stats { display: flex; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--ghost-border-color); font-size: 11px; }
+  .setor-stats span { display: flex; align-items: center; gap: 4px; color: var(--color-fg-muted); }
   .setor-stats .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-  .setor-stats .dot.red { background: var(--red-400); }
-  .setor-stats .dot.amber { background: var(--amber-400); }
-  .setor-stats .dot.green { background: var(--green-400); }
-  .setor-stats .dot.blue { background: var(--blue-400); }
+  .setor-stats .dot.red { background: var(--color-destructive); }
+  .setor-stats .dot.amber { background: var(--color-warning); }
+  .setor-stats .dot.green { background: var(--color-success); }
+  .setor-stats .dot.blue { background: var(--color-accent); }
 
   /* ===== UX showcase ===== */
-  .ux-showcase { margin-top: 32px; padding: 28px; background: var(--bg-elev-1); border: 1px dashed var(--glass-border); border-radius: 14px; }
-  .ux-showcase h2 { font-size: 18px; margin-bottom: 4px; color: var(--teal-200); }
-  .ux-showcase .ux-sub { color: var(--text-secondary); margin-bottom: 24px; font-size: 13px; }
+  .ux-showcase { margin-top: 32px; padding: 28px; background: var(--color-surface-low); border: 1px dashed var(--color-hairline); border-radius: 14px; }
+  .ux-showcase h2 { font-size: 18px; margin-bottom: 4px; color: var(--color-gold); }
+  .ux-showcase .ux-sub { color: var(--color-fg-muted); margin-bottom: 24px; font-size: 13px; }
   .ux-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .ux-option { background: var(--bg-elev-2); border: 1px solid var(--ghost-border); border-radius: 10px; padding: 18px; }
-  .ux-option-title { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; font-size: 14px; }
-  .ux-option-badge { padding: 2px 8px; border-radius: 4px; background: var(--bg-elev-3); font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
-  .ux-option-badge.recommended { background: rgba(74,222,128,0.15); color: var(--green-400); }
-  .ux-option p { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; min-height: 50px; }
-  .ux-demo { background: var(--bg-base); border-radius: 8px; padding: 12px; min-height: 100px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
+  .ux-option { background: var(--color-surface-container); border: 1px solid var(--ghost-border-color); border-radius: 10px; padding: 18px; }
+  .ux-option-title { font-weight: 700; color: var(--color-foreground); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .ux-option-badge { padding: 2px 8px; border-radius: 4px; background: var(--color-surface-high); font-size: 10px; font-weight: 600; color: var(--color-fg-dim); text-transform: uppercase; letter-spacing: 0.3px; }
+  .ux-option-badge.recommended { background: rgba(52,211,153,0.15); color: var(--color-success); }
+  .ux-option p { font-size: 12px; color: var(--color-fg-muted); margin-bottom: 14px; min-height: 50px; }
+  .ux-demo { background: var(--color-background); border-radius: 8px; padding: 12px; min-height: 100px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
   .ux-pros { margin-top: 12px; font-size: 11px; }
-  .ux-pros .li-ok { color: var(--green-400); }
-  .ux-pros .li-no { color: var(--red-400); }
+  .ux-pros .li-ok { color: var(--color-success); }
+  .ux-pros .li-no { color: var(--color-destructive); }
   .ux-pros div { margin-top: 3px; }
 
   /* ===== Modal ===== */
   .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; }
   .modal-bg.open { display: flex; }
-  .modal { background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 14px; padding: 28px; max-width: 520px; width: 90vw; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .modal { background: var(--color-surface-low); border: 1px solid var(--color-hairline); border-radius: 14px; padding: 28px; max-width: 520px; width: 90vw; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
   .modal h3 { font-size: 20px; margin-bottom: 6px; }
-  .modal .modal-sub { color: var(--text-secondary); font-size: 13px; margin-bottom: 22px; }
+  .modal .modal-sub { color: var(--color-fg-muted); font-size: 13px; margin-bottom: 22px; }
   .form-group { margin-bottom: 14px; }
-  .form-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+  .form-group label { display: block; font-size: 12px; color: var(--color-fg-muted); margin-bottom: 4px; font-weight: 500; }
   .form-group input, .form-group select, .form-group textarea {
-    width: 100%; background: var(--bg-elev-2); border: 1px solid var(--ghost-border);
-    color: var(--text-primary); padding: 9px 12px; border-radius: 6px; font-size: 13px; font-family: inherit;
+    width: 100%; background: var(--color-surface-container); border: 1px solid var(--ghost-border-color);
+    color: var(--color-foreground); padding: 9px 12px; border-radius: 6px; font-size: 13px; font-family: inherit;
   }
-  .form-group input:focus, .form-group select:focus { outline: 1px solid var(--teal-300); border-color: var(--teal-300); }
+  .form-group input:focus, .form-group select:focus { outline: 1px solid var(--color-gold); border-color: var(--color-gold); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--ghost-border); }
-  .close-btn { position: absolute; top: 16px; right: 16px; background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 20px; }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--ghost-border-color); }
+  .close-btn { position: absolute; top: 16px; right: 16px; background: transparent; border: none; color: var(--color-fg-muted); cursor: pointer; font-size: 20px; }
 
   /* Confirmation modal */
   .confirm-modal { max-width: 400px; }
-  .confirm-modal .icon-warn { font-size: 40px; text-align: center; margin-bottom: 12px; color: var(--amber-400); }
-  .confirm-modal .confirm-detail { background: var(--bg-elev-2); border-radius: 8px; padding: 14px; margin: 16px 0; font-family: 'Manrope', monospace; font-size: 13px; }
-  .confirm-modal .confirm-detail .old-val { color: var(--text-muted); text-decoration: line-through; }
-  .confirm-modal .confirm-detail .new-val { color: var(--teal-200); font-weight: 700; font-size: 16px; }
-  .confirm-modal .confirm-detail .arrow { color: var(--text-muted); margin: 0 8px; }
+  .confirm-modal .icon-warn { font-size: 40px; text-align: center; margin-bottom: 12px; color: var(--color-warning); }
+  .confirm-modal .confirm-detail { background: var(--color-surface-container); border-radius: 8px; padding: 14px; margin: 16px 0; font-family: 'Manrope', monospace; font-size: 13px; }
+  .confirm-modal .confirm-detail .old-val { color: var(--color-fg-dim); text-decoration: line-through; }
+  .confirm-modal .confirm-detail .new-val { color: var(--color-gold); font-weight: 700; font-size: 16px; }
+  .confirm-modal .confirm-detail .arrow { color: var(--color-fg-dim); margin: 0 8px; }
 
   /* Footer notice */
-  .footer-notice { margin-top: 40px; padding: 16px; background: var(--bg-elev-1); border-left: 3px solid var(--teal-300); border-radius: 8px; font-size: 12px; color: var(--text-secondary); }
-  .footer-notice strong { color: var(--teal-200); }
+  .footer-notice { margin-top: 40px; padding: 16px; background: var(--color-surface-low); border-left: 3px solid var(--color-gold); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); }
+  .footer-notice strong { color: var(--color-gold); }
 
   /* Anchor sections */
   .section-anchor { padding-top: 8px; margin-top: 24px; }
-  .section-anchor h2.h2-section { font-size: 20px; margin-bottom: 16px; color: var(--text-primary); }
+  .section-anchor h2.h2-section { font-size: 20px; margin-bottom: 16px; color: var(--color-foreground); }
 
   /* ===== Mobile toggle button (só aparece em mobile) ===== */
   .mobile-menu-btn {
@@ -255,10 +346,10 @@
     top: 14px;
     left: 14px;
     z-index: 50;
-    background: var(--glass);
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    color: var(--teal-200);
+    border: 1px solid var(--color-hairline);
+    color: var(--color-gold);
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -418,8 +509,8 @@
 
   /* ===== Mobile cards CSS (mesma estrutura, isolada do mobile-media) ===== */
   .mobile-cards .indicador-card {
-    background: var(--bg-elev-2);
-    border: 1px solid var(--ghost-border);
+    background: var(--color-surface-container);
+    border: 1px solid var(--ghost-border-color);
     border-radius: 12px;
     padding: 14px;
     margin-bottom: 12px;
@@ -431,18 +522,18 @@
     gap: 10px;
     margin-bottom: 12px;
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--ghost-border);
+    border-bottom: 1px solid var(--ghost-border-color);
   }
   .mobile-cards .ind-card-titulo {
     flex: 1;
     font-weight: 700;
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--color-foreground);
     line-height: 1.3;
   }
   .mobile-cards .ind-card-titulo .desc {
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--color-fg-dim);
     font-weight: 400;
     margin-top: 4px;
   }
@@ -455,13 +546,13 @@
     line-height: 1;
     white-space: nowrap;
   }
-  .mobile-cards .ind-card-pct.green { color: var(--green-400); }
-  .mobile-cards .ind-card-pct.amber { color: var(--amber-400); }
-  .mobile-cards .ind-card-pct.red { color: var(--red-400); }
-  .mobile-cards .ind-card-pct.blue { color: var(--blue-400); }
-  .mobile-cards .ind-card-pct-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-  .mobile-cards .ind-card-resp { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-  .mobile-cards .ind-card-resp .avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; }
+  .mobile-cards .ind-card-pct.green { color: var(--color-success); }
+  .mobile-cards .ind-card-pct.amber { color: var(--color-warning); }
+  .mobile-cards .ind-card-pct.red { color: var(--color-destructive); }
+  .mobile-cards .ind-card-pct.blue { color: var(--color-accent); }
+  .mobile-cards .ind-card-pct-label { font-size: 9px; color: var(--color-fg-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .mobile-cards .ind-card-resp { font-size: 11px; color: var(--color-fg-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .mobile-cards .ind-card-resp .avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-gold-hi)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; }
   .mobile-cards .ind-card-resp .badges { margin-left: auto; display: flex; gap: 4px; }
   .mobile-cards .ind-meses-grid {
     display: grid;
@@ -469,8 +560,8 @@
     gap: 6px;
   }
   .mobile-cards .ind-mes-cell {
-    background: var(--bg-elev-1);
-    border: 1px solid var(--ghost-border);
+    background: var(--color-surface-low);
+    border: 1px solid var(--ghost-border-color);
     border-radius: 8px;
     padding: 6px 4px 10px 4px;
     text-align: center;
@@ -480,26 +571,26 @@
     flex-direction: column;
     justify-content: center;
   }
-  .mobile-cards .ind-mes-cell.current { border-color: var(--teal-300); background: rgba(45,212,191,0.08); }
+  .mobile-cards .ind-mes-cell.current { border-color: var(--color-gold); background: rgba(254,203,0,0.08); }
   .mobile-cards .ind-mes-cell.future { opacity: 0.35; }
-  .mobile-cards .ind-mes-nome { font-size: 9px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.4px; margin-bottom: 3px; }
-  .mobile-cards .ind-mes-cell.current .ind-mes-nome { color: var(--teal-200); }
-  .mobile-cards .ind-mes-meta { font-size: 9px; color: var(--text-muted); margin-bottom: 2px; }
+  .mobile-cards .ind-mes-nome { font-size: 9px; color: var(--color-fg-dim); text-transform: uppercase; font-weight: 700; letter-spacing: 0.4px; margin-bottom: 3px; }
+  .mobile-cards .ind-mes-cell.current .ind-mes-nome { color: var(--color-gold); }
+  .mobile-cards .ind-mes-meta { font-size: 9px; color: var(--color-fg-dim); margin-bottom: 2px; }
   .mobile-cards .ind-mes-real { font-size: 11px; font-weight: 700; }
   .mobile-cards .ind-mes-pct { font-size: 9px; margin-top: 1px; opacity: 0.85; }
-  .mobile-cards .ind-mes-cell.green .ind-mes-real, .mobile-cards .ind-mes-cell.green .ind-mes-pct { color: var(--green-400); }
-  .mobile-cards .ind-mes-cell.amber .ind-mes-real, .mobile-cards .ind-mes-cell.amber .ind-mes-pct { color: var(--amber-400); }
-  .mobile-cards .ind-mes-cell.red .ind-mes-real, .mobile-cards .ind-mes-cell.red .ind-mes-pct { color: var(--red-400); }
-  .mobile-cards .ind-mes-cell.blue .ind-mes-real, .mobile-cards .ind-mes-cell.blue .ind-mes-pct { color: var(--blue-400); }
-  .mobile-cards .ind-mes-cell.empty .ind-mes-real { color: var(--text-muted); font-weight: 500; font-size: 11px; }
-  .mobile-cards .ind-mes-cell.pending { background: var(--red-bg); border-color: rgba(248,113,113,0.3); }
-  .mobile-cards .ind-mes-cell.pending .ind-mes-real { color: var(--red-400); font-size: 10px; }
-  .mobile-cards .ind-mes-bar { position: absolute; bottom: 3px; left: 5px; right: 5px; height: 2px; background: var(--bg-elev-3); border-radius: 1px; overflow: hidden; }
+  .mobile-cards .ind-mes-cell.green .ind-mes-real, .mobile-cards .ind-mes-cell.green .ind-mes-pct { color: var(--color-success); }
+  .mobile-cards .ind-mes-cell.amber .ind-mes-real, .mobile-cards .ind-mes-cell.amber .ind-mes-pct { color: var(--color-warning); }
+  .mobile-cards .ind-mes-cell.red .ind-mes-real, .mobile-cards .ind-mes-cell.red .ind-mes-pct { color: var(--color-destructive); }
+  .mobile-cards .ind-mes-cell.blue .ind-mes-real, .mobile-cards .ind-mes-cell.blue .ind-mes-pct { color: var(--color-accent); }
+  .mobile-cards .ind-mes-cell.empty .ind-mes-real { color: var(--color-fg-dim); font-weight: 500; font-size: 11px; }
+  .mobile-cards .ind-mes-cell.pending { background: var(--bg-destructive-soft); border-color: rgba(255,180,171,0.30); }
+  .mobile-cards .ind-mes-cell.pending .ind-mes-real { color: var(--color-destructive); font-size: 10px; }
+  .mobile-cards .ind-mes-bar { position: absolute; bottom: 3px; left: 5px; right: 5px; height: 2px; background: var(--color-surface-high); border-radius: 1px; overflow: hidden; }
   .mobile-cards .ind-mes-bar > div { height: 100%; border-radius: 1px; }
-  .mobile-cards .ind-mes-cell.green .ind-mes-bar > div { background: var(--green-400); }
-  .mobile-cards .ind-mes-cell.amber .ind-mes-bar > div { background: var(--amber-400); }
-  .mobile-cards .ind-mes-cell.red .ind-mes-bar > div { background: var(--red-400); }
-  .mobile-cards .ind-mes-cell.blue .ind-mes-bar > div { background: var(--blue-400); }
+  .mobile-cards .ind-mes-cell.green .ind-mes-bar > div { background: var(--color-success); }
+  .mobile-cards .ind-mes-cell.amber .ind-mes-bar > div { background: var(--color-warning); }
+  .mobile-cards .ind-mes-cell.red .ind-mes-bar > div { background: var(--color-destructive); }
+  .mobile-cards .ind-mes-cell.blue .ind-mes-bar > div { background: var(--color-accent); }
 
   /* ===== Touch targets gerais (>= 44px é a recomendação Apple/Google) ===== */
   @media (hover: none) and (pointer: coarse), (max-width: 768px) {
@@ -519,7 +610,7 @@
 <body>
 
 <!-- Mobile menu trigger -->
-<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">☰</button>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu"><span class="material-symbols-outlined">menu</span></button>
 <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
 <div class="shell">
@@ -530,23 +621,23 @@
 
     <div class="nav-section">
       <div class="nav-title">Dashboards</div>
-      <div class="nav-item">📊 Comercial</div>
-      <div class="nav-item">⚙️ Operações</div>
-      <div class="nav-item">📁 Administrativo</div>
+      <div class="nav-item"><span class="material-symbols-outlined">storefront</span> Comercial</div>
+      <div class="nav-item"><span class="material-symbols-outlined">precision_manufacturing</span> Operações</div>
+      <div class="nav-item"><span class="material-symbols-outlined">folder_managed</span> Administrativo</div>
     </div>
 
     <div class="nav-section">
       <div class="nav-title">Diretoria</div>
-      <div class="nav-item">🏠 Overview</div>
-      <div class="nav-item">📋 Painel</div>
-      <div class="nav-item active">🎯 Indicadores</div>
+      <div class="nav-item"><span class="material-symbols-outlined">dashboard</span> Overview</div>
+      <div class="nav-item"><span class="material-symbols-outlined">monitoring</span> Painel</div>
+      <div class="nav-item active"><span class="material-symbols-outlined">flag</span> Indicadores</div>
     </div>
 
     <div class="nav-section">
       <div class="nav-title">Configurações</div>
-      <div class="nav-item">👥 Usuários</div>
-      <div class="nav-item">🏢 Setores</div>
-      <div class="nav-item">📐 Indicadores (cadastro)</div>
+      <div class="nav-item"><span class="material-symbols-outlined">group</span> Usuários</div>
+      <div class="nav-item"><span class="material-symbols-outlined">domain</span> Setores</div>
+      <div class="nav-item"><span class="material-symbols-outlined">tune</span> Indicadores (cadastro)</div>
     </div>
   </aside>
 
@@ -556,7 +647,7 @@
     <div class="breadcrumb">
       <a href="#">Gestão</a><span class="sep">/</span>
       <a href="#">Diretoria</a><span class="sep">/</span>
-      <span style="color: var(--text-primary);">Indicadores</span>
+      <span style="color: var(--color-foreground);">Indicadores</span>
     </div>
 
     <div class="page-header">
@@ -578,24 +669,36 @@
     <!-- ===== KPIs no topo ===== -->
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">% Meta atingida · YTD</div>
-        <div class="kpi-value amber">83,4%</div>
-        <div class="kpi-trend down">↓ -2,1 p.p. vs mês anterior</div>
+        <div class="kpi-card-header">
+          <span class="kpi-card-icon warning"><span class="material-symbols-outlined">flag</span></span>
+          <div class="kpi-label">% Meta atingida · YTD</div>
+        </div>
+        <div class="kpi-value warning">83,4%</div>
+        <div class="kpi-trend down"><span class="material-symbols-outlined">trending_down</span> -2,1 p.p. vs mês anterior</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">% Meta atingida · Maio/26</div>
-        <div class="kpi-value green">94,7%</div>
-        <div class="kpi-trend up">↑ +5,3 p.p. vs Abr/26</div>
+        <div class="kpi-card-header">
+          <span class="kpi-card-icon success"><span class="material-symbols-outlined">target</span></span>
+          <div class="kpi-label">% Meta atingida · Maio/26</div>
+        </div>
+        <div class="kpi-value gold">94,7%</div>
+        <div class="kpi-trend up"><span class="material-symbols-outlined">trending_up</span> +5,3 p.p. vs Abr/26</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Indicadores em vermelho</div>
-        <div class="kpi-value red">4</div>
+        <div class="kpi-card-header">
+          <span class="kpi-card-icon error"><span class="material-symbols-outlined">warning</span></span>
+          <div class="kpi-label">Indicadores em vermelho</div>
+        </div>
+        <div class="kpi-value error">4</div>
         <div class="kpi-trend">de 23 indicadores ativos</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Sem realizado lançado</div>
-        <div class="kpi-value blue">3</div>
-        <div class="kpi-trend">⚠ Abril ainda pendente</div>
+        <div class="kpi-card-header">
+          <span class="kpi-card-icon accent"><span class="material-symbols-outlined">pending</span></span>
+          <div class="kpi-label">Sem realizado lançado</div>
+        </div>
+        <div class="kpi-value accent">3</div>
+        <div class="kpi-trend"><span class="material-symbols-outlined">schedule</span> Abril ainda pendente</div>
       </div>
     </div>
 
@@ -614,10 +717,10 @@
         <div class="setor-card" onclick="switchTabByName('comercial')">
           <div class="setor-card-head">
             <div>
-              <div class="setor-name">💼 Comercial</div>
+              <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-success);">storefront</span> Comercial</div>
               <div class="setor-count">8 indicadores · Gestor: Gestor A</div>
             </div>
-            <div class="setor-pct-big green">91%</div>
+            <div class="setor-pct-big success">91%</div>
           </div>
           <div class="setor-stats">
             <span><span class="dot green"></span> 5 OK</span>
@@ -631,10 +734,10 @@
         <div class="setor-card" onclick="switchTabByName('operacoes')">
           <div class="setor-card-head">
             <div>
-              <div class="setor-name">⚙️ Operações</div>
+              <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-warning);">precision_manufacturing</span> Operações</div>
               <div class="setor-count">9 indicadores · Gestor: Gestor B</div>
             </div>
-            <div class="setor-pct-big amber">78%</div>
+            <div class="setor-pct-big warning">78%</div>
           </div>
           <div class="setor-stats">
             <span><span class="dot green"></span> 4 OK</span>
@@ -648,10 +751,10 @@
         <div class="setor-card" onclick="switchTabByName('administrativo')">
           <div class="setor-card-head">
             <div>
-              <div class="setor-name">📁 Administrativo</div>
+              <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-accent);">folder_managed</span> Administrativo</div>
               <div class="setor-count">6 indicadores · Gestor: Gestor C</div>
             </div>
-            <div class="setor-pct-big green">87%</div>
+            <div class="setor-pct-big success">87%</div>
           </div>
           <div class="setor-stats">
             <span><span class="dot green"></span> 4 OK</span>
@@ -684,35 +787,35 @@
               <tbody>
                 <tr>
                   <td class="indicador">Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span><div class="desc">Cancelamentos / base total</div></td>
-                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td><span style="color: var(--color-warning);"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-warning);">precision_manufacturing</span> Operações</span></td>
                   <td class="responsavel"><span class="avatar">B1</span>Gestor B</td>
                   <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">62%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 62%;"></div></div></div></td>
                   <td style="text-align: center;">📉 piora</td>
                 </tr>
                 <tr>
                   <td class="indicador">Tempo médio resolução OS <span class="unidade-badge">h</span><span class="direcao-badge" title="Menor é melhor">↓</span></td>
-                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td><span style="color: var(--color-warning);"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-warning);">precision_manufacturing</span> Operações</span></td>
                   <td class="responsavel"><span class="avatar">B2</span>Resp. B2</td>
                   <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">65%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 65%;"></div></div></div></td>
                   <td style="text-align: center;">📉 piora</td>
                 </tr>
                 <tr>
                   <td class="indicador">Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span></td>
-                  <td><span style="color: var(--green-400);">💼 Comercial</span></td>
+                  <td><span style="color: var(--color-success);"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-success);">storefront</span> Comercial</span></td>
                   <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
                   <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">68%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 68%;"></div></div></div></td>
                   <td style="text-align: center;">📈 melhora</td>
                 </tr>
                 <tr>
                   <td class="indicador">Inadimplência <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span></td>
-                  <td><span style="color: var(--blue-400);">📁 Administrativo</span></td>
+                  <td><span style="color: var(--color-accent);"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-accent);">folder_managed</span> Administrativo</span></td>
                   <td class="responsavel"><span class="avatar">C1</span>Gestor C</td>
                   <td><div class="cell-progress amber" style="display: inline-block; min-width: 80px;"><div class="cell-value">76%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 76%;"></div></div></div></td>
                   <td style="text-align: center;">➡️ estável</td>
                 </tr>
                 <tr>
                   <td class="indicador">NPS <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span></td>
-                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td><span style="color: var(--color-warning);"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-warning);">precision_manufacturing</span> Operações</span></td>
                   <td class="responsavel"><span class="avatar">B3</span>Resp. B3</td>
                   <td><div class="cell-progress amber" style="display: inline-block; min-width: 80px;"><div class="cell-value">82%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 82%;"></div></div></div></td>
                   <td style="text-align: center;">📈 melhora</td>
@@ -1143,9 +1246,9 @@
                 <td class="month-cell meta">R$ 99</td>
                 <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 88</div><div class="cell-pct">89%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 89%;"></div></div></div></td>
                 <td class="month-cell meta">R$ 105</td>
-                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--red-bg); color: var(--red-400); font-weight: 600;">⚠ pendente</div></td>
+                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--bg-destructive-soft); color: var(--color-destructive); font-weight: 600;">⚠ pendente</div></td>
                 <td class="month-cell meta">R$ 105</td>
-                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--red-bg); color: var(--red-400); font-weight: 600;">⚠ pendente</div></td>
+                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--bg-destructive-soft); color: var(--color-destructive); font-weight: 600;">⚠ pendente</div></td>
                 <td class="month-cell meta">R$ 110</td>
                 <td class="month-cell realizado"><div class="cell-progress empty">—</div></td>
                 <td class="month-cell meta">R$ 110</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
@@ -1167,7 +1270,7 @@
     <div class="tab-content" id="tab-operacoes" style="display: none;">
       <div class="panel">
         <div class="panel-header"><div class="panel-title">⚙️ Indicadores · Operações · 2026</div></div>
-        <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+        <div style="padding: 60px; text-align: center; color: var(--color-fg-dim);">
           Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
           • NPS · Tempo médio resolução OS · % SLA cumprido · Disponibilidade rede · OS retrabalho · Reclamações Anatel
         </div>
@@ -1178,7 +1281,7 @@
     <div class="tab-content" id="tab-administrativo" style="display: none;">
       <div class="panel">
         <div class="panel-header"><div class="panel-title">📁 Indicadores · Administrativo · 2026</div></div>
-        <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+        <div style="padding: 60px; text-align: center; color: var(--color-fg-dim);">
           Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
           • Inadimplência · DSO · Margem operacional · Custo por colaborador · Turnover · Tempo médio fechamento contábil
         </div>
@@ -1206,7 +1309,7 @@
                   <button class="cancel">✕</button>
                 </div>
               </div>
-              <div style="font-size: 10px; color: var(--text-muted);">↑ é assim que aparece no clique</div>
+              <div style="font-size: 10px; color: var(--color-fg-dim);">↑ é assim que aparece no clique</div>
             </div>
             <div class="ux-pros">
               <div class="li-ok">✓ 2 passos só: rápido pra uso diário</div>
@@ -1221,11 +1324,11 @@
             <div class="ux-option-title">B) Clique → input → Modal "tem certeza?"</div>
             <p>Mesmo fluxo de A, mas depois do Salvar abre modal mostrando valor antigo → novo. Você precisa confirmar de novo.</p>
             <div class="ux-demo" style="position: relative; padding: 0; overflow: hidden;">
-              <div style="background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 8px; padding: 14px; width: 90%; font-size: 11px;">
+              <div style="background: var(--color-surface-low); border: 1px solid var(--color-hairline); border-radius: 8px; padding: 14px; width: 90%; font-size: 11px;">
                 <div style="font-weight: 700; margin-bottom: 6px;">⚠ Confirmar alteração</div>
-                <div style="font-family: monospace; font-size: 11px; color: var(--text-secondary);">
+                <div style="font-family: monospace; font-size: 11px; color: var(--color-fg-muted);">
                   <span style="text-decoration: line-through; opacity: 0.5;">R$ 80.000</span>
-                  → <span style="color: var(--teal-200); font-weight: 700;">R$ 62.000</span>
+                  → <span style="color: var(--color-gold); font-weight: 700;">R$ 62.000</span>
                 </div>
                 <div style="display: flex; gap: 4px; margin-top: 8px;">
                   <button class="btn btn-primary btn-sm">Confirmar</button>
@@ -1246,17 +1349,17 @@
             <div class="ux-option-title">C) Botão "Fechar mês" → formulário em lote</div>
             <p>Sem edição inline. Você clica "Fechar Maio/26" e abre form com TODOS indicadores do setor pra preencher de uma vez. Cada campo tem label, valor atual, novo valor.</p>
             <div class="ux-demo" style="padding: 0; overflow: hidden;">
-              <div style="background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 8px; padding: 12px; width: 90%; font-size: 11px;">
-                <div style="font-weight: 700; margin-bottom: 8px; color: var(--teal-200);">Fechar Maio/26 · Comercial</div>
+              <div style="background: var(--color-surface-low); border: 1px solid var(--color-hairline); border-radius: 8px; padding: 12px; width: 90%; font-size: 11px;">
+                <div style="font-weight: 700; margin-bottom: 8px; color: var(--color-gold);">Fechar Maio/26 · Comercial</div>
                 <div style="margin-bottom: 6px;">
-                  <div style="color: var(--text-muted); font-size: 10px;">Novas vendas (meta: 160)</div>
+                  <div style="color: var(--color-fg-dim); font-size: 10px;">Novas vendas (meta: 160)</div>
                   <input class="inline-edit" value="178" type="number" style="margin-top: 2px;">
                 </div>
                 <div>
-                  <div style="color: var(--text-muted); font-size: 10px;">Faturamento (meta: R$ 80k)</div>
+                  <div style="color: var(--color-fg-dim); font-size: 10px;">Faturamento (meta: R$ 80k)</div>
                   <input class="inline-edit" value="62000" type="number" style="margin-top: 2px;">
                 </div>
-                <div style="font-size: 10px; color: var(--text-muted); margin-top: 8px;">+ 6 indicadores</div>
+                <div style="font-size: 10px; color: var(--color-fg-dim); margin-top: 8px;">+ 6 indicadores</div>
               </div>
             </div>
             <div class="ux-pros">
@@ -1269,8 +1372,8 @@
 
         </div>
 
-        <div style="margin-top: 20px; padding: 14px; background: rgba(45,212,191,0.06); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
-          <strong style="color: var(--teal-200);">💡 Minha recomendação:</strong> Opção <strong>A (default)</strong> + Opção <strong>B</strong> ativada automaticamente quando o delta é grande (>30% pra mais OU pra menos). Assim 95% do uso é rápido (A) e os 5% perigosos pegam confirmação extra (B). Opção C pode entrar como botão "Fechar mês" no canto pra quando você quer ritualizar.
+        <div style="margin-top: 20px; padding: 14px; background: rgba(254,203,0,0.06); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted);">
+          <strong style="color: var(--color-gold);">💡 Minha recomendação:</strong> Opção <strong>A (default)</strong> + Opção <strong>B</strong> ativada automaticamente quando o delta é grande (>30% pra mais OU pra menos). Assim 95% do uso é rápido (A) e os 5% perigosos pegam confirmação extra (B). Opção C pode entrar como botão "Fechar mês" no canto pra quando você quer ritualizar.
         </div>
       </div>
     </section>
@@ -1345,7 +1448,7 @@
       <span class="arrow">→</span>
       <span class="new-val">R$ 62.000</span>
     </div>
-    <div style="font-size: 11px; color: var(--text-muted); text-align: center;">Esta alteração ficará registrada no histórico (audit log).</div>
+    <div style="font-size: 11px; color: var(--color-fg-dim); text-align: center;">Esta alteração ficará registrada no histórico (audit log).</div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal('modalConfirm')">Cancelar</button>
       <button class="btn btn-primary" onclick="closeModal('modalConfirm')">Confirmar alteração</button>
