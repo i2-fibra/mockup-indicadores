@@ -206,6 +206,58 @@
   .tab .badge { display: inline-block; margin-left: 6px; padding: 2px 7px; background: var(--color-surface-high); border-radius: 10px; font-size: 11px; font-weight: 600; }
   .tab.active .badge { background: rgba(254,203,0,0.15); color: var(--color-gold); }
 
+  /* ===== Departamento sub-header (dentro da tab de setor) ===== */
+  .depto-section { margin-bottom: 20px; }
+  .depto-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, rgba(254,203,0,0.08), transparent 70%);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 6px 0 0 6px;
+  }
+  .depto-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-gold);
+  }
+  .depto-title .material-symbols-outlined { font-size: 20px; }
+  .depto-meta {
+    font-size: 11px;
+    color: var(--color-fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .depto-pct {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+  }
+  .depto-pct.success { color: var(--color-success); }
+  .depto-pct.warning { color: var(--color-warning); }
+  .depto-pct.error { color: var(--color-destructive); }
+
+  /* Sub-divisão dentro de departamento (ex: RH e DP dentro de DH) */
+  .subdept-header {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px 4px;
+    margin-top: 12px;
+    border-bottom: 1px dashed var(--ghost-border-color);
+  }
+
   /* ===== Data table ===== */
   .panel { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--color-hairline); border-radius: 14px; overflow: hidden; box-shadow: var(--ambient-shadow); }
   .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--ghost-border-color); }
@@ -386,6 +438,17 @@
   /* ===== Mobile cards (escondidos no desktop, mostrados em <=768) ===== */
   .mobile-cards { display: none; }
   .desktop-table { display: block; }
+  .always-visible { display: block; }
+
+  /* Em mobile, ajusta containers always-visible (Operações e Admin) */
+  @media (max-width: 767px) {
+    .always-visible { padding: 10px !important; }
+    .always-visible .depto-header { padding: 10px 12px; flex-wrap: wrap; }
+    .always-visible .depto-title { font-size: 13px; flex-wrap: wrap; }
+    .always-visible .depto-meta { font-size: 10px; flex-basis: 100%; margin-top: 2px; }
+    .always-visible .depto-pct { font-size: 14px; }
+    .always-visible .subdept-header { font-size: 10px; padding: 6px 8px 2px; }
+  }
 
   /* ===== Mobile (<=768px) ===== */
   @media (max-width: 767px) {
@@ -666,8 +729,35 @@
       </div>
     </div>
 
-    <!-- ===== KPIs no topo ===== -->
+    <!-- ===== KPIs no topo: Base global + indicadores transversais ===== -->
     <div class="kpi-grid">
+      <!-- KPI Global: Base de clientes ativos + projeção 10k -->
+      <div class="kpi-card" style="grid-column: span 2;">
+        <div class="kpi-card-header">
+          <span class="kpi-card-icon default"><span class="material-symbols-outlined">groups</span></span>
+          <div class="kpi-label">Base de clientes ativos · meta 10.000 (dez/26)</div>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;">
+          <div class="kpi-value gold" style="font-size: 36px;">8.780</div>
+          <div style="color: var(--color-fg-muted); font-size: 12px;">
+            <div>Mai/26 · Real</div>
+          </div>
+          <div style="margin-left: auto; text-align: right;">
+            <div style="font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 13px; color: var(--color-success);">+180 / mês</div>
+            <div style="font-size: 10px; color: var(--color-fg-dim);">crescimento líquido</div>
+          </div>
+        </div>
+        <!-- Barra projeção -->
+        <div style="margin-top: 12px; height: 6px; background: var(--color-surface-container); border-radius: 3px; overflow: hidden; position: relative;">
+          <div style="width: 87.8%; height: 100%; background: linear-gradient(90deg, var(--color-gold), var(--color-gold-hi)); border-radius: 3px;"></div>
+          <div style="position: absolute; right: 0; top: -4px; bottom: -4px; width: 2px; background: var(--color-success);" title="Meta 10k"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; color: var(--color-fg-dim);">
+          <span>87,8% da meta</span>
+          <span><span class="material-symbols-outlined" style="font-size: 12px; vertical-align: -2px;">trending_up</span> Projeção dez/26: <strong style="color: var(--color-success);">10.045</strong></span>
+        </div>
+      </div>
+
       <div class="kpi-card">
         <div class="kpi-card-header">
           <span class="kpi-card-icon warning"><span class="material-symbols-outlined">flag</span></span>
@@ -676,38 +766,32 @@
         <div class="kpi-value warning">83,4%</div>
         <div class="kpi-trend down"><span class="material-symbols-outlined">trending_down</span> -2,1 p.p. vs mês anterior</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-card-header">
-          <span class="kpi-card-icon success"><span class="material-symbols-outlined">target</span></span>
-          <div class="kpi-label">% Meta atingida · Maio/26</div>
-        </div>
-        <div class="kpi-value gold">94,7%</div>
-        <div class="kpi-trend up"><span class="material-symbols-outlined">trending_up</span> +5,3 p.p. vs Abr/26</div>
-      </div>
+
       <div class="kpi-card">
         <div class="kpi-card-header">
           <span class="kpi-card-icon error"><span class="material-symbols-outlined">warning</span></span>
-          <div class="kpi-label">Indicadores em vermelho</div>
+          <div class="kpi-label">Em vermelho · sem lançamento</div>
         </div>
-        <div class="kpi-value error">4</div>
-        <div class="kpi-trend">de 23 indicadores ativos</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-card-header">
-          <span class="kpi-card-icon accent"><span class="material-symbols-outlined">pending</span></span>
-          <div class="kpi-label">Sem realizado lançado</div>
+        <div style="display: flex; gap: 16px; align-items: baseline;">
+          <div>
+            <div class="kpi-value error" style="font-size: 24px;">12</div>
+            <div style="font-size: 9px; color: var(--color-fg-dim); margin-top: -4px;">CRÍTICOS</div>
+          </div>
+          <div>
+            <div class="kpi-value accent" style="font-size: 24px;">8</div>
+            <div style="font-size: 9px; color: var(--color-fg-dim); margin-top: -4px;">PENDENTES</div>
+          </div>
         </div>
-        <div class="kpi-value accent">3</div>
-        <div class="kpi-trend"><span class="material-symbols-outlined">schedule</span> Abril ainda pendente</div>
+        <div class="kpi-trend">de 142 indicadores ativos</div>
       </div>
     </div>
 
     <!-- ===== Tabs ===== -->
     <div class="tabs">
       <div class="tab active" onclick="switchTab(this, 'resumo')">Resumo</div>
-      <div class="tab" onclick="switchTab(this, 'comercial')">Comercial <span class="badge">8</span></div>
-      <div class="tab" onclick="switchTab(this, 'operacoes')">Operações <span class="badge">9</span></div>
-      <div class="tab" onclick="switchTab(this, 'administrativo')">Administrativo <span class="badge">6</span></div>
+      <div class="tab" onclick="switchTab(this, 'comercial')">Comercial <span class="badge">21</span></div>
+      <div class="tab" onclick="switchTab(this, 'operacoes')">Operações <span class="badge">58</span></div>
+      <div class="tab" onclick="switchTab(this, 'administrativo')">Administrativo <span class="badge">62</span></div>
     </div>
 
     <!-- ===== TAB RESUMO ===== -->
@@ -718,15 +802,15 @@
           <div class="setor-card-head">
             <div>
               <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-success);">storefront</span> Comercial</div>
-              <div class="setor-count">8 indicadores · Gestor: Gestor A</div>
+              <div class="setor-count">21 indicadores · 5 departamentos</div>
             </div>
             <div class="setor-pct-big success">91%</div>
           </div>
           <div class="setor-stats">
-            <span><span class="dot green"></span> 5 OK</span>
-            <span><span class="dot amber"></span> 2 atenção</span>
-            <span><span class="dot red"></span> 1 crítico</span>
-            <span><span class="dot blue"></span> 0 superou</span>
+            <span><span class="dot green"></span> 13 OK</span>
+            <span><span class="dot amber"></span> 5 atenção</span>
+            <span><span class="dot red"></span> 2 crítico</span>
+            <span><span class="dot blue"></span> 1 superou</span>
           </div>
         </div>
 
@@ -735,15 +819,15 @@
           <div class="setor-card-head">
             <div>
               <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-warning);">precision_manufacturing</span> Operações</div>
-              <div class="setor-count">9 indicadores · Gestor: Gestor B</div>
+              <div class="setor-count">58 indicadores · 6 departamentos</div>
             </div>
             <div class="setor-pct-big warning">78%</div>
           </div>
           <div class="setor-stats">
-            <span><span class="dot green"></span> 4 OK</span>
-            <span><span class="dot amber"></span> 3 atenção</span>
-            <span><span class="dot red"></span> 2 crítico</span>
-            <span><span class="dot blue"></span> 0 superou</span>
+            <span><span class="dot green"></span> 32 OK</span>
+            <span><span class="dot amber"></span> 18 atenção</span>
+            <span><span class="dot red"></span> 7 crítico</span>
+            <span><span class="dot blue"></span> 1 superou</span>
           </div>
         </div>
 
@@ -752,15 +836,15 @@
           <div class="setor-card-head">
             <div>
               <div class="setor-name"><span class="material-symbols-outlined" style="vertical-align:-4px;font-size:18px;color:var(--color-accent);">folder_managed</span> Administrativo</div>
-              <div class="setor-count">6 indicadores · Gestor: Gestor C</div>
+              <div class="setor-count">62 indicadores · 5 departamentos</div>
             </div>
             <div class="setor-pct-big success">87%</div>
           </div>
           <div class="setor-stats">
-            <span><span class="dot green"></span> 4 OK</span>
-            <span><span class="dot amber"></span> 1 atenção</span>
-            <span><span class="dot red"></span> 1 crítico</span>
-            <span><span class="dot blue"></span> 0 superou</span>
+            <span><span class="dot green"></span> 42 OK</span>
+            <span><span class="dot amber"></span> 12 atenção</span>
+            <span><span class="dot red"></span> 6 crítico</span>
+            <span><span class="dot blue"></span> 2 superou</span>
           </div>
         </div>
       </div>
@@ -832,458 +916,484 @@
       <div class="panel">
         <div class="panel-header">
           <div>
-            <div class="panel-title">💼 Indicadores · Comercial · 2026</div>
-            <div class="panel-subtitle">8 indicadores ativos · Última atualização: hoje 10:42 por Gestor A</div>
+            <div class="panel-title"><span class="material-symbols-outlined" style="vertical-align:-4px;color:var(--color-success);">storefront</span> Comercial · 2026</div>
+            <div class="panel-subtitle">21 indicadores ativos · 5 departamentos · Última atualização: hoje 10:42</div>
           </div>
           <div class="panel-filter">
+            <select class="select-mock"><option>Todos departamentos</option><option>Vendas</option><option>Pós-venda</option><option>Marketing</option><option>Lojas físicas</option><option>Corporativo/PJ</option></select>
             <select class="select-mock"><option>Todos status</option><option>Em vermelho</option><option>Sem realizado</option></select>
-            <button class="btn btn-ghost btn-sm">🔍 Buscar</button>
           </div>
         </div>
 
-        <!-- ===== Mobile: cards (1 por indicador, 12 meses em grid 4x3) ===== -->
-        <div class="mobile-cards">
+        <!-- ===== Sub-headers de departamento (desktop) ===== -->
+        <div class="desktop-table" style="padding: 16px;">
 
-          <!-- Card 1: Novas vendas -->
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                Novas vendas <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                <div class="desc">Contratos novos ativados · acumulado</div>
+          <!-- DEPTO 1: Vendas (12 indicadores) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">point_of_sale</span>
+                Vendas
+                <span class="depto-meta">· 12 indicadores · Resp: Gestor A1</span>
               </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct green">102%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
+              <div class="depto-pct success">95%</div>
             </div>
-            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
-            <div class="ind-meses-grid">
-              <div class="ind-mes-cell green">
-                <div class="ind-mes-nome">Jan</div>
-                <div class="ind-mes-meta">m 120</div>
-                <div class="ind-mes-real">125</div>
-                <div class="ind-mes-pct">104%</div>
-                <div class="ind-mes-bar"><div style="width:100%"></div></div>
-              </div>
-              <div class="ind-mes-cell green">
-                <div class="ind-mes-nome">Fev</div>
-                <div class="ind-mes-meta">m 130</div>
-                <div class="ind-mes-real">142</div>
-                <div class="ind-mes-pct">109%</div>
-                <div class="ind-mes-bar"><div style="width:100%"></div></div>
-              </div>
-              <div class="ind-mes-cell amber">
-                <div class="ind-mes-nome">Mar</div>
-                <div class="ind-mes-meta">m 140</div>
-                <div class="ind-mes-real">118</div>
-                <div class="ind-mes-pct">84%</div>
-                <div class="ind-mes-bar"><div style="width:84%"></div></div>
-              </div>
-              <div class="ind-mes-cell green">
-                <div class="ind-mes-nome">Abr</div>
-                <div class="ind-mes-meta">m 150</div>
-                <div class="ind-mes-real">156</div>
-                <div class="ind-mes-pct">104%</div>
-                <div class="ind-mes-bar"><div style="width:100%"></div></div>
-              </div>
-              <div class="ind-mes-cell blue current">
-                <div class="ind-mes-nome">Mai ⬅</div>
-                <div class="ind-mes-meta">m 160</div>
-                <div class="ind-mes-real">178</div>
-                <div class="ind-mes-pct">111%</div>
-                <div class="ind-mes-bar"><div style="width:100%"></div></div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Jun</div>
-                <div class="ind-mes-meta">m 170</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Jul</div>
-                <div class="ind-mes-meta">m 180</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Ago</div>
-                <div class="ind-mes-meta">m 180</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Set</div>
-                <div class="ind-mes-meta">m 190</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Out</div>
-                <div class="ind-mes-meta">m 200</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Nov</div>
-                <div class="ind-mes-meta">m 210</div>
-                <div class="ind-mes-real">—</div>
-              </div>
-              <div class="ind-mes-cell empty future">
-                <div class="ind-mes-nome">Dez</div>
-                <div class="ind-mes-meta">m 220</div>
-                <div class="ind-mes-real">—</div>
-              </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Vendas habilitadas ↑ · Novas vendas ↑ · Taxa de habilitação ↑ · MRR mensal ↑ ·
+              Ticket médio ↑ · Upgrades líquidos ↑ · % mix plano 1G ↑ · Vendas por indicação ↑ ·
+              Auditoria de vendas ↑ · Auditoria upgrade/downgrade ↑ · Engajamento equipe Vendas
             </div>
           </div>
 
-          <!-- Card 2: Faturamento (em risco) -->
+          <!-- DEPTO 2: Pós-venda / Sucesso do Cliente (4) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">favorite</span>
+                Pós-venda / Sucesso do Cliente
+                <span class="depto-meta">· 4 indicadores · Resp: Gestor B2</span>
+              </div>
+              <div class="depto-pct warning">82%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Churn mensal ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Crescimento de base ↑ ·
+              Churn score médio ↓ · Cancelamento precoce D+90 ↓ · Engajamento equipe Pós-venda
+            </div>
+          </div>
+
+          <!-- DEPTO 3: Marketing (5) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">campaign</span>
+                Marketing
+                <span class="depto-meta">· 5 indicadores · Resp: Resp C1</span>
+              </div>
+              <div class="depto-pct success">93%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Nº de prospectos ↑ · Conversão de prospectos ↑ · Prospectos pendentes &gt;5 dias ↓ ·
+              SLA resposta ao prospecto ≤5min ↑ · CPL (custo por prospecto) ↓ · Engajamento equipe Marketing
+            </div>
+          </div>
+
+          <!-- DEPTO 4: Lojas físicas (4) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">store</span>
+                Lojas físicas
+                <span class="depto-meta">· 4 indicadores · Resp: Resp D1</span>
+              </div>
+              <div class="depto-pct success">100%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Vendas habilitadas em loja ↑ · Atendimentos em loja ↑ ·
+              Conversão atendimento→venda ↑ · Engajamento equipe Lojas
+            </div>
+          </div>
+
+          <!-- DEPTO 5: Corporativo / PJ (4) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">business_center</span>
+                Corporativo / PJ
+                <span class="depto-meta">· 4 indicadores · Resp: Resp E1</span>
+              </div>
+              <div class="depto-pct error">68%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Vendas habilitadas PJ ↑ · MRR PJ ↑ ·
+              Ticket médio PJ ↑ · Engajamento equipe Corporativo
+            </div>
+          </div>
+
+          <!-- Hint: detalhes ao clicar -->
+          <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
+            <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
+            Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
+          </div>
+        </div>
+
+        <!-- ===== Mobile: cards por departamento ===== -->
+        <div class="mobile-cards">
+
           <div class="indicador-card">
             <div class="ind-card-head">
               <div class="ind-card-titulo">
-                Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                <div class="desc">MRR adicionado no mês</div>
+                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">point_of_sale</span>
+                Vendas
+                <div class="desc">12 indicadores · Resp: Gestor A1</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct green">95%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
+              Vendas habilitadas ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · Novas vendas · Taxa de habilitação · MRR mensal · Ticket médio · Upgrades líquidos · % mix plano 1G · Vendas por indicação · Auditorias · Engajamento
+            </div>
+          </div>
+
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">favorite</span>
+                Pós-venda / Sucesso do Cliente
+                <div class="desc">4 indicadores · Resp: Gestor B2</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct amber">82%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
+              Churn mensal ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Crescimento de base · Churn score médio · Cancelamento precoce D+90 · Engajamento
+            </div>
+          </div>
+
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">campaign</span>
+                Marketing
+                <div class="desc">5 indicadores · Resp: Resp C1</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct green">93%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
+              Nº prospectos ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · Conversão · Pendentes &gt;5d · SLA resposta ≤5min · CPL · Engajamento
+            </div>
+          </div>
+
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">store</span>
+                Lojas físicas
+                <div class="desc">4 indicadores · Resp: Resp D1</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct green">100%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
+              Vendas em loja ↑ · Atendimentos em loja · Conversão atendimento→venda · Engajamento
+            </div>
+          </div>
+
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                <span class="material-symbols-outlined" style="color:var(--color-gold);vertical-align:-4px;">business_center</span>
+                Corporativo / PJ
+                <div class="desc">4 indicadores · Resp: Resp E1</div>
               </div>
               <div class="ind-card-pct-wrap">
                 <div class="ind-card-pct red">68%</div>
                 <div class="ind-card-pct-label">YTD</div>
               </div>
             </div>
-            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
-            <div class="ind-meses-grid">
-              <div class="ind-mes-cell amber">
-                <div class="ind-mes-nome">Jan</div>
-                <div class="ind-mes-meta">m 60k</div>
-                <div class="ind-mes-real">48k</div>
-                <div class="ind-mes-pct">80%</div>
-                <div class="ind-mes-bar"><div style="width:80%"></div></div>
-              </div>
-              <div class="ind-mes-cell red">
-                <div class="ind-mes-nome">Fev</div>
-                <div class="ind-mes-meta">m 65k</div>
-                <div class="ind-mes-real">42k</div>
-                <div class="ind-mes-pct">65%</div>
-                <div class="ind-mes-bar"><div style="width:65%"></div></div>
-              </div>
-              <div class="ind-mes-cell amber">
-                <div class="ind-mes-nome">Mar</div>
-                <div class="ind-mes-meta">m 70k</div>
-                <div class="ind-mes-real">56k</div>
-                <div class="ind-mes-pct">80%</div>
-                <div class="ind-mes-bar"><div style="width:80%"></div></div>
-              </div>
-              <div class="ind-mes-cell amber">
-                <div class="ind-mes-nome">Abr</div>
-                <div class="ind-mes-meta">m 75k</div>
-                <div class="ind-mes-real">58k</div>
-                <div class="ind-mes-pct">77%</div>
-                <div class="ind-mes-bar"><div style="width:77%"></div></div>
-              </div>
-              <div class="ind-mes-cell red current">
-                <div class="ind-mes-nome">Mai ⬅</div>
-                <div class="ind-mes-meta">m 80k</div>
-                <div class="ind-mes-real">62k</div>
-                <div class="ind-mes-pct">78%</div>
-                <div class="ind-mes-bar"><div style="width:78%"></div></div>
-              </div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 85k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 90k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 90k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 95k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 100k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 110k</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 120k</div><div class="ind-mes-real">—</div></div>
+            <div style="font-size:11px;color:var(--color-fg-dim);line-height:1.6;">
+              Vendas habilitadas PJ ↑ · MRR PJ · Ticket médio PJ · Engajamento
             </div>
           </div>
 
-          <!-- Card 3: Conversão de leads -->
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                Conversão de leads <span class="unidade-badge">%</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                <div class="desc">Leads que viram contrato</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct green">103%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div class="ind-card-resp"><span class="avatar">A2</span> Resp. A2</div>
-            <div class="ind-meses-grid">
-              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">m 15%</div><div class="ind-mes-real">16,2%</div><div class="ind-mes-pct">108%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell green"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">m 15%</div><div class="ind-mes-real">15,8%</div><div class="ind-mes-pct">105%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell green"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">m 16%</div><div class="ind-mes-real">17,1%</div><div class="ind-mes-pct">107%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">m 16%</div><div class="ind-mes-real">14,3%</div><div class="ind-mes-pct">89%</div><div class="ind-mes-bar"><div style="width:89%"></div></div></div>
-              <div class="ind-mes-cell green current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">m 17%</div><div class="ind-mes-real">17,5%</div><div class="ind-mes-pct">103%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 17%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 19%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 19%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 20%</div><div class="ind-mes-real">—</div></div>
-            </div>
+          <div style="margin-top:14px;padding:10px;background:var(--bg-secondary-soft);border-radius:8px;font-size:11px;color:var(--color-fg-muted);border-left:3px solid var(--color-gold);">
+            <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:14px;color:var(--color-gold);">info</span>
+            Toque em um departamento para ver detalhes e fazer lançamento.
           </div>
 
-          <!-- Card 4: Churn (MENOR É MELHOR) -->
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span>
-                <div class="desc">Cancelamentos / base ativa</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct amber">85%</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
-            <div class="ind-meses-grid">
-              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">≤2,0%</div><div class="ind-mes-real">1,8%</div><div class="ind-mes-pct">110%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">≤2,0%</div><div class="ind-mes-real">2,2%</div><div class="ind-mes-pct">91%</div><div class="ind-mes-bar"><div style="width:91%"></div></div></div>
-              <div class="ind-mes-cell red"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">≤1,8%</div><div class="ind-mes-real">2,5%</div><div class="ind-mes-pct">72%</div><div class="ind-mes-bar"><div style="width:72%"></div></div></div>
-              <div class="ind-mes-cell red"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">≤1,8%</div><div class="ind-mes-real">2,8%</div><div class="ind-mes-pct">64%</div><div class="ind-mes-bar"><div style="width:64%"></div></div></div>
-              <div class="ind-mes-cell amber current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">1,7%</div><div class="ind-mes-pct">88%</div><div class="ind-mes-bar"><div style="width:88%"></div></div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
-            </div>
-          </div>
 
-          <!-- Card 5: Ticket médio (com pendências) -->
-          <div class="indicador-card">
-            <div class="ind-card-head">
-              <div class="ind-card-titulo">
-                Ticket médio <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                <div class="desc">Receita / nº contratos novos</div>
-              </div>
-              <div class="ind-card-pct-wrap">
-                <div class="ind-card-pct amber">—</div>
-                <div class="ind-card-pct-label">YTD</div>
-              </div>
-            </div>
-            <div class="ind-card-resp"><span class="avatar">A2</span> Resp. A2</div>
-            <div class="ind-meses-grid">
-              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">m 99</div><div class="ind-mes-real">R$102</div><div class="ind-mes-pct">103%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
-              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">m 99</div><div class="ind-mes-real">R$88</div><div class="ind-mes-pct">89%</div><div class="ind-mes-bar"><div style="width:89%"></div></div></div>
-              <div class="ind-mes-cell pending"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">m 105</div><div class="ind-mes-real">⚠ pend.</div></div>
-              <div class="ind-mes-cell pending"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">m 105</div><div class="ind-mes-real">⚠ pend.</div></div>
-              <div class="ind-mes-cell empty current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">m 110</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 110</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 120</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 120</div><div class="ind-mes-real">—</div></div>
-              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 125</div><div class="ind-mes-real">—</div></div>
-            </div>
-          </div>
-
-        </div>
-        <!-- ===== /Mobile cards ===== -->
-
-        <div class="table-wrap desktop-table">
-          <table class="indicadores">
-            <thead>
-              <tr>
-                <th rowspan="2" style="vertical-align: bottom;">Indicador</th>
-                <th rowspan="2" style="vertical-align: bottom;">Responsável</th>
-                <th colspan="2" class="month-header">Jan/26</th>
-                <th colspan="2" class="month-header">Fev/26</th>
-                <th colspan="2" class="month-header">Mar/26</th>
-                <th colspan="2" class="month-header">Abr/26</th>
-                <th colspan="2" class="month-header current">Mai/26 ⬅</th>
-                <th colspan="2" class="month-header">Jun/26</th>
-                <th colspan="2" class="month-header">Jul/26</th>
-                <th colspan="2" class="month-header">Ago/26</th>
-                <th colspan="2" class="month-header">Set/26</th>
-                <th colspan="2" class="month-header">Out/26</th>
-                <th colspan="2" class="month-header">Nov/26</th>
-                <th colspan="2" class="month-header">Dez/26</th>
-                <th rowspan="2" style="vertical-align: bottom;" class="total">YTD</th>
-              </tr>
-              <tr>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header current">Meta</th><th class="sub-header current">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Row 1: Novas vendas -->
-              <tr>
-                <td class="indicador">
-                  Novas vendas <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                  <div class="desc">Contratos novos ativados · acumulado</div>
-                </td>
-                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
-                <td class="month-cell meta">120</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">125</div><div class="cell-pct">104%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">130</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">142</div><div class="cell-pct">109%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">140</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">118</div><div class="cell-pct">84%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 84%;"></div></div></div></td>
-                <td class="month-cell meta">150</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">156</div><div class="cell-pct">104%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">160</td>
-                <td class="month-cell realizado"><div class="cell-progress blue"><div class="cell-value">178</div><div class="cell-pct">111%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">170</td>
-                <td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">180</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">180</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">190</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">200</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">210</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">220</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="total"><div class="cell-progress green" style="display: inline-block; min-width: 60px;"><div class="cell-value">102%</div></div></td>
-              </tr>
-
-              <!-- Row 2: Faturamento (R$, acumulado) - célula em edição -->
-              <tr>
-                <td class="indicador">
-                  Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                  <div class="desc">MRR adicionado no mês</div>
-                </td>
-                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
-                <td class="month-cell meta">R$ 60k</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 48k</div><div class="cell-pct">80%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 80%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 65k</td>
-                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">R$ 42k</div><div class="cell-pct">65%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 65%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 70k</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 56k</div><div class="cell-pct">80%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 80%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 75k</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 58k</div><div class="cell-pct">77%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 77%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 80k</td>
-                <!-- Célula em modo de edição (showcase do clique 2 cliques) -->
-                <td class="month-cell realizado">
-                  <div class="cell-progress editing">
-                    <input class="inline-edit" value="62000" type="number" />
-                    <div class="inline-confirm">
-                      <button class="ok" title="Salvar">✓ Salvar</button>
-                      <button class="cancel" title="Cancelar">✕</button>
-                    </div>
-                  </div>
-                </td>
-                <td class="month-cell meta">R$ 85k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 90k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 90k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 95k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 100k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 110k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 120k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="total"><div class="cell-progress red" style="display: inline-block; min-width: 60px;"><div class="cell-value">68%</div></div></td>
-              </tr>
-
-              <!-- Row 3: Conversão de leads (%) -->
-              <tr>
-                <td class="indicador">
-                  Conversão de leads <span class="unidade-badge">%</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                  <div class="desc">Leads que viram contrato</div>
-                </td>
-                <td class="responsavel"><span class="avatar">A2</span>Resp. A2</td>
-                <td class="month-cell meta">15%</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">16,2%</div><div class="cell-pct">108%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">15%</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">15,8%</div><div class="cell-pct">105%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">16%</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">17,1%</div><div class="cell-pct">107%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">16%</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">14,3%</div><div class="cell-pct">89%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 89%;"></div></div></div></td>
-                <td class="month-cell meta">17%</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">17,5%</div><div class="cell-pct">103%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">17%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">19%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">19%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">20%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="total"><div class="cell-progress green" style="display: inline-block; min-width: 60px;"><div class="cell-value">103%</div></div></td>
-              </tr>
-
-              <!-- Row 4: Churn (% - MENOR É MELHOR — demonstração da direção invertida) -->
-              <tr>
-                <td class="indicador">
-                  Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span>
-                  <div class="desc">Cancelamentos / base ativa · meta é não passar</div>
-                </td>
-                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
-                <td class="month-cell meta">≤ 2,0%</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">1,8%</div><div class="cell-pct">110%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">≤ 2,0%</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">2,2%</div><div class="cell-pct">91%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 91%;"></div></div></div></td>
-                <td class="month-cell meta">≤ 1,8%</td>
-                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">2,5%</div><div class="cell-pct">72%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 72%;"></div></div></div></td>
-                <td class="month-cell meta">≤ 1,8%</td>
-                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">2,8%</div><div class="cell-pct">64%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 64%;"></div></div></div></td>
-                <td class="month-cell meta">≤ 1,5%</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">1,7%</div><div class="cell-pct">88%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 88%;"></div></div></div></td>
-                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="total"><div class="cell-progress amber" style="display: inline-block; min-width: 60px;"><div class="cell-value">85%</div></div></td>
-              </tr>
-
-              <!-- Row 5: indicador novo, sem realizado -->
-              <tr>
-                <td class="indicador">
-                  Ticket médio <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
-                  <div class="desc">Receita / nº contratos novos</div>
-                </td>
-                <td class="responsavel"><span class="avatar">A2</span>Resp. A2</td>
-                <td class="month-cell meta">R$ 99</td>
-                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">R$ 102</div><div class="cell-pct">103%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 99</td>
-                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 88</div><div class="cell-pct">89%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 89%;"></div></div></div></td>
-                <td class="month-cell meta">R$ 105</td>
-                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--bg-destructive-soft); color: var(--color-destructive); font-weight: 600;">⚠ pendente</div></td>
-                <td class="month-cell meta">R$ 105</td>
-                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--bg-destructive-soft); color: var(--color-destructive); font-weight: 600;">⚠ pendente</div></td>
-                <td class="month-cell meta">R$ 110</td>
-                <td class="month-cell realizado"><div class="cell-progress empty">—</div></td>
-                <td class="month-cell meta">R$ 110</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 120</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 120</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="month-cell meta">R$ 125</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
-                <td class="total"><div class="cell-progress amber" style="display: inline-block; min-width: 60px;"><div class="cell-value">—</div></div></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
 
-    <!-- ===== TAB OPERAÇÕES (placeholder) ===== -->
+    <!-- ===== TAB OPERAÇÕES ===== -->
     <div class="tab-content" id="tab-operacoes" style="display: none;">
       <div class="panel">
-        <div class="panel-header"><div class="panel-title">⚙️ Indicadores · Operações · 2026</div></div>
-        <div style="padding: 60px; text-align: center; color: var(--color-fg-dim);">
-          Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
-          • NPS · Tempo médio resolução OS · % SLA cumprido · Disponibilidade rede · OS retrabalho · Reclamações Anatel
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><span class="material-symbols-outlined" style="vertical-align:-4px;color:var(--color-warning);">precision_manufacturing</span> Operações · 2026</div>
+            <div class="panel-subtitle">58 indicadores ativos · 6 departamentos · Última atualização: hoje 10:42</div>
+          </div>
+          <div class="panel-filter">
+            <select class="select-mock"><option>Todos departamentos</option><option>Campo + Rotas</option><option>Central de Atendimento</option><option>Redes (NOC)</option><option>TI</option><option>Frotas</option><option>Estoque</option></select>
+            <select class="select-mock"><option>Todos status</option><option>Em vermelho</option></select>
+          </div>
+        </div>
+
+        <div class="always-visible" style="padding: 16px;">
+
+          <!-- DEPTO 1: Campo + Rotas (9) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">engineering</span>
+                Campo + Rotas
+                <span class="depto-meta">· 9 indicadores · Resp: Gestor F1</span>
+              </div>
+              <div class="depto-pct warning">76%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              SLA reparo ≤6h ↑ <strong style="color:var(--color-destructive);">(principal)</strong> · SLA demais serviços ≤12h ↑ ·
+              Produtividade técnico (8 pts/dia) ↑ · Reincidência de OS ≤5% ↓ · KM médio por OS ↓ ·
+              NPS pós-OS ≥85% ↑ · Auditoria de execução de OS ↑ · Auditoria de serviço em campo ↑ ·
+              Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 2: Central de Atendimento (14) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">support_agent</span>
+                Central de Atendimento (CAC)
+                <span class="depto-meta">· 14 indicadores · Resp: Gestor G1</span>
+              </div>
+              <div class="depto-pct success">88%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Nº de atendimentos ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              Atendimentos 100% resolvidos pela IA ↑ · Atendimento/dia/atendente ↑ · TMA ↓ · TME ↓ ·
+              Abandono de chamada ↓ · CSAT ↑ · FCR ↑ · Incidentes 3min sem resposta ↓ ·
+              NPS de atendimento ↑ · NPS geral cliente ↑ · Reclamações Anatel (RA1000) ↓ ·
+              Auditoria de atendimento ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 3: Redes (NOC) (9) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">lan</span>
+                Redes (NOC)
+                <span class="depto-meta">· 9 indicadores · Resp: Gestor H1</span>
+              </div>
+              <div class="depto-pct success">93%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Uptime da rede ≥99,5% ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              MTTR ↓ · MTBF ↑ · Alertas críticos abertos ↓ · Saturação dos links ↓ ·
+              CPEs offline ↓ · Tempo médio incidente crítico ↓ ·
+              Auditoria de mudanças de rede ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 4: TI (9) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">dns</span>
+                TI · Sistemas internos
+                <span class="depto-meta">· 9 indicadores · Resp: Resp I1</span>
+              </div>
+              <div class="depto-pct warning">71%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Uptime sistemas internos ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              SLA chamados internos ↑ · Chamados internos abertos ↓ · Incidentes críticos sistemas ↓ ·
+              Tempo médio resolução chamado interno ↓ · % deploy sem rollback ↑ ·
+              Cobertura de backup ↑ · Auditoria de segurança ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 5: Frotas (8) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">local_shipping</span>
+                Frotas
+                <span class="depto-meta">· 8 indicadores · Resp: Resp J1</span>
+              </div>
+              <div class="depto-pct error">62%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Disponibilidade da frota ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              Custo médio por km ↓ · Custo médio mensal por veículo ↓ ·
+              Manutenções preventivas em dia ↑ · Manutenções corretivas ↓ · Sinistros/multas ↓ ·
+              Km rodado/OS atendida ↓ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 6: Estoque (9) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">inventory_2</span>
+                Estoque
+                <span class="depto-meta">· 9 indicadores · Resp: Resp K1</span>
+              </div>
+              <div class="depto-pct success">85%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Ruptura de estoque ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              Giro de estoque ↑ · Valor parado em estoque ↓ · % comodatos vs próprio (acompanhar) ·
+              Comodatos perdidos ↓ · Acurácia do inventário ↑ · Tempo médio reposição ↓ ·
+              Auditoria de saída de estoque ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
+            <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
+            Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ===== TAB ADMINISTRATIVO (placeholder) ===== -->
+    <!-- ===== TAB ADMINISTRATIVO ===== -->
     <div class="tab-content" id="tab-administrativo" style="display: none;">
       <div class="panel">
-        <div class="panel-header"><div class="panel-title">📁 Indicadores · Administrativo · 2026</div></div>
-        <div style="padding: 60px; text-align: center; color: var(--color-fg-dim);">
-          Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
-          • Inadimplência · DSO · Margem operacional · Custo por colaborador · Turnover · Tempo médio fechamento contábil
+        <div class="panel-header">
+          <div>
+            <div class="panel-title"><span class="material-symbols-outlined" style="vertical-align:-4px;color:var(--color-accent);">folder_managed</span> Administrativo · 2026</div>
+            <div class="panel-subtitle">62 indicadores ativos · 5 departamentos · Última atualização: hoje 10:42</div>
+          </div>
+          <div class="panel-filter">
+            <select class="select-mock"><option>Todos departamentos</option><option>DH (RH + DP)</option><option>Contábil</option><option>Jurídico</option><option>Gestão da Qualidade</option><option>Financeiro</option></select>
+            <select class="select-mock"><option>Todos status</option><option>Em vermelho</option></select>
+          </div>
+        </div>
+
+        <div class="always-visible" style="padding: 16px;">
+
+          <!-- DEPTO 1: DH (RH + DP) com subdivisão -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">groups</span>
+                DH · Desenvolvimento Humano
+                <span class="depto-meta">· 17 indicadores · Resp: Gestor L1</span>
+              </div>
+              <div class="depto-pct success">89%</div>
+            </div>
+
+            <!-- Sub RH -->
+            <div class="subdept-header">RH · Recursos Humanos (10)</div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Turnover total ↓ <strong style="color:var(--color-destructive);">(principal)</strong> · Turnover precoce &lt;90d ↓ ·
+              Absenteísmo ↓ · eNPS ↑ · Clima organizacional ↑ · Headcount (acompanhar) ·
+              Tempo médio de contratação ↓ · Custo médio por contratação ↓ ·
+              Horas de treinamento/colaborador ↑ · ROI de treinamento ↑ · Onboarding concluído ↑
+            </div>
+
+            <!-- Sub DP -->
+            <div class="subdept-header">DP · Departamento Pessoal (5)</div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              % folha em dia ↑ · % FGTS/INSS sem atraso ↑ · % férias programadas no prazo ↑ ·
+              Erros na folha ↓ · Tempo médio rescisão ↓
+            </div>
+
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 11px; font-style: italic;">
+              + Engajamento da equipe DH
+            </div>
+          </div>
+
+          <!-- DEPTO 2: Contábil (7) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">calculate</span>
+                Contábil
+                <span class="depto-meta">· 7 indicadores · Resp: Externo (contabilidade)</span>
+              </div>
+              <div class="depto-pct success">95%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Liquidez corrente · Liquidez imediata · Endividamento total ↓ · Margem líquida ↑ ·
+              Tempo médio fechamento contábil ↓ · % conciliações em dia ↑ ·
+              Engajamento equipe Contábil
+            </div>
+          </div>
+
+          <!-- DEPTO 3: Jurídico (11) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">gavel</span>
+                Jurídico
+                <span class="depto-meta">· 11 indicadores · Resp: Resp M1</span>
+              </div>
+              <div class="depto-pct warning">79%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Volume de processos ativos ↓ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              Processos trabalhistas ativos ↓ · Turnover jurídico trabalhista ↓ ·
+              Processos cíveis (consumidor) ↓ · Taxa de acordos ↑ · Custo médio por processo ↓ ·
+              Provisão de contingências (acompanhar) · Tempo médio duração processo ↓ ·
+              Taxa de êxito ↑ · % contratos revisados no prazo ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 4: Gestão da Qualidade (11) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">verified</span>
+                Gestão da Qualidade
+                <span class="depto-meta">· 11 indicadores · Resp: Resp N1</span>
+              </div>
+              <div class="depto-pct success">91%</div>
+            </div>
+            <div class="subdept-header">Consolidados (puxa de outros setores) (4)</div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              Nota geral consolidada ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              Nota Comercial ↑ · Nota Operações ↑ · Nota Administrativo ↑
+            </div>
+            <div class="subdept-header">Próprios do depto (7)</div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              NCs abertas ↓ · Taxa fechamento NCs no prazo ↑ · Taxa de reincidência NC ↓ ·
+              Auditorias planejadas vs realizadas ↑ · CAPA implementadas no prazo ↑ ·
+              % POPs documentados ↑ · Engajamento da equipe
+            </div>
+          </div>
+
+          <!-- DEPTO 5: Financeiro (17) -->
+          <div class="depto-section">
+            <div class="depto-header">
+              <div class="depto-title">
+                <span class="material-symbols-outlined">payments</span>
+                Financeiro
+                <span class="depto-meta">· 17 indicadores · Resp: Gestor O1</span>
+              </div>
+              <div class="depto-pct warning">81%</div>
+            </div>
+            <div style="padding: 8px 12px; color: var(--color-fg-dim); font-size: 12px; line-height: 1.8;">
+              <strong style="color: var(--color-foreground);">Indicadores:</strong>
+              Faturamento total mensal ↑ <strong style="color:var(--color-destructive);">(principal)</strong> ·
+              % Inadimplência ↓ · DSO ↓ · % Recuperação de inadimplência ↑ ·
+              Inadimplência 1ª fatura (FPD) ↓ · Distribuição inadimplência por faixa ↓ ·
+              Ticket médio fatura ↑ · Fluxo de caixa ↑ · Margem operacional ↑ ·
+              EBITDA mensal ↑ · Margem EBITDA ↑ · Dívida Líquida/EBITDA ↓ ·
+              CAC ↓ · LTV ↑ · LTV/CAC ↑ · Custo operacional/receita ≤65% ↓ ·
+              Engajamento da equipe
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; padding: 12px 16px; background: var(--bg-secondary-soft); border-radius: 8px; font-size: 12px; color: var(--color-fg-muted); border-left: 3px solid var(--color-gold);">
+            <span class="material-symbols-outlined" style="vertical-align:-4px;font-size:16px;color:var(--color-gold);">info</span>
+            Clique em qualquer departamento para ver a tabela detalhada (indicador × meta × realizado mês a mês) e fazer lançamentos.
+          </div>
         </div>
       </div>
     </div>
