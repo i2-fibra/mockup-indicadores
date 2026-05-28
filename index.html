@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Mockup — Indicadores · i2 Gestão</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2226%22 font-size=%2226%22>🎯</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ===== Design tokens (Neural Pulse — dark teal glassmorphism) ===== */
@@ -51,7 +52,8 @@
   h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; font-weight: 700; }
 
   /* ===== Layout ===== */
-  .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  .shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
+  .main { min-width: 0; }
   .sidebar {
     background: var(--bg-elev-1);
     border-right: 1px solid var(--ghost-border);
@@ -68,7 +70,7 @@
   .nav-item.active { background: linear-gradient(90deg, rgba(94,234,212,0.12), transparent); color: var(--teal-200); border-left: 2px solid var(--teal-300); padding-left: 14px; }
   .nav-item .ico { width: 16px; height: 16px; opacity: 0.8; }
 
-  .main { padding: 32px 40px 80px 40px; max-width: 1600px; }
+  .main { padding: 32px 40px 80px 40px; max-width: 1840px; min-width: 0; }
 
   /* ===== Breadcrumb ===== */
   .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
@@ -122,7 +124,10 @@
   .panel-filter { display: flex; gap: 8px; align-items: center; }
   .select-mock { background: var(--bg-elev-2); border: 1px solid var(--ghost-border); color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
 
-  .table-wrap { overflow-x: auto; max-height: 70vh; }
+  .table-wrap { overflow-x: auto; overflow-y: auto; max-height: 70vh; max-width: 100%; -webkit-overflow-scrolling: touch; }
+  .table-wrap::-webkit-scrollbar { height: 8px; width: 8px; }
+  .table-wrap::-webkit-scrollbar-track { background: var(--bg-elev-2); }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--teal-500); border-radius: 4px; }
   table.indicadores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
   table.indicadores thead { position: sticky; top: 0; z-index: 10; background: var(--bg-elev-2); }
   table.indicadores th { padding: 10px 8px; text-align: left; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--ghost-border); white-space: nowrap; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
@@ -280,16 +285,21 @@
     .main { padding: 24px 24px 60px 24px; }
   }
 
+  /* ===== Mobile cards (escondidos no desktop, mostrados em <=768) ===== */
+  .mobile-cards { display: none; }
+  .desktop-table { display: block; }
+
   /* ===== Mobile (<=768px) ===== */
   @media (max-width: 768px) {
-    .shell { grid-template-columns: 1fr; }
+    .shell { grid-template-columns: minmax(0, 1fr); }
 
     /* Sidebar vira drawer */
     .sidebar {
       position: fixed;
       top: 0;
       left: 0;
-      width: 260px;
+      width: 80vw;
+      max-width: 300px;
       height: 100vh;
       z-index: 40;
       transform: translateX(-100%);
@@ -300,18 +310,19 @@
 
     .mobile-menu-btn { display: flex; }
 
-    .main { padding: 60px 14px 60px 14px; }
+    .main { padding: 70px 14px 60px 14px; min-width: 0; overflow-x: hidden; }
 
     /* Header empilhado */
     .page-header { flex-direction: column; align-items: stretch; gap: 14px; }
     .page-header h1 { font-size: 22px; }
-    .header-actions { flex-wrap: wrap; }
-    .header-actions .btn { flex: 1; justify-content: center; min-width: 120px; }
-    .header-actions .select-mock { flex: 1; min-width: 100px; }
+    .page-header .subtitle { font-size: 12px; }
+    .header-actions { flex-wrap: wrap; gap: 8px; }
+    .header-actions .select-mock { width: 100%; min-width: 0; }
+    .header-actions .btn { flex: 1 1 40%; justify-content: center; min-width: 0; font-size: 13px; }
 
-    /* KPIs 2x2 → 1x4 (mais legível no celular) */
+    /* KPIs */
     .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-    .kpi-card { padding: 14px; border-radius: 12px; }
+    .kpi-card { padding: 14px; border-radius: 12px; min-width: 0; }
     .kpi-value { font-size: 22px; }
     .kpi-label { font-size: 10px; }
     .kpi-trend { font-size: 10px; }
@@ -324,16 +335,17 @@
       scrollbar-width: none;
     }
     .tabs::-webkit-scrollbar { display: none; }
-    .tab { padding: 10px 14px; font-size: 13px; white-space: nowrap; }
+    .tab { padding: 12px 14px; font-size: 13px; white-space: nowrap; }
     .tab .badge { font-size: 10px; }
 
-    /* Cards de setor */
+    /* Cards de setor (tab resumo) */
     .setor-card { padding: 16px; }
     .setor-name { font-size: 16px; }
     .setor-pct-big { font-size: 36px; }
     .setor-stats { flex-wrap: wrap; gap: 10px; font-size: 10px; }
 
     /* Painel e tabela */
+    .panel { border-radius: 12px; }
     .panel-header {
       flex-direction: column;
       align-items: stretch;
@@ -345,53 +357,15 @@
     .panel-filter { width: 100%; }
     .panel-filter .select-mock { flex: 1; }
 
-    .table-wrap {
-      max-height: 60vh;
-      -webkit-overflow-scrolling: touch;
-    }
-    table.indicadores { font-size: 11px; }
-    table.indicadores th { padding: 8px 6px; font-size: 10px; }
-    table.indicadores td { padding: 8px 6px; }
+    /* No mobile: esconde tabela desktop, mostra cards */
+    .desktop-table { display: none; }
+    .mobile-cards { display: block; padding: 10px; }
 
-    /* Sticky nas 2 primeiras colunas (indicador + responsável) */
-    table.indicadores th:nth-child(1),
-    table.indicadores td.indicador {
-      position: sticky;
-      left: 0;
-      background: var(--bg-elev-2);
-      z-index: 5;
-      min-width: 160px;
-      max-width: 180px;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+    /* Top 5 tabela (resumo) — esconde coluna 5 (Tendência) em mobile */
+    #tab-resumo .panel .table-wrap table thead th:nth-child(5),
+    #tab-resumo .panel .table-wrap table tbody td:nth-child(5) {
+      display: none;
     }
-    table.indicadores thead th:nth-child(1) {
-      background: var(--bg-elev-3);
-      z-index: 11;
-    }
-    table.indicadores td.indicador {
-      font-size: 11px;
-    }
-    table.indicadores td.indicador .desc {
-      font-size: 9px;
-    }
-    table.indicadores td.responsavel {
-      min-width: 100px;
-    }
-    table.indicadores td.responsavel .avatar {
-      width: 20px; height: 20px; line-height: 20px; font-size: 9px;
-    }
-
-    /* Células com mais altura pra touch */
-    table.indicadores td.month-cell {
-      min-width: 60px;
-      padding: 8px 4px;
-    }
-    .cell-progress {
-      padding: 10px 4px;
-      min-height: 38px;
-    }
-    .cell-value { font-size: 11px; }
-    .cell-pct { font-size: 9px; }
 
     /* Inline edit no mobile fica maior */
     .inline-edit {
@@ -428,13 +402,110 @@
     .footer-notice { font-size: 11px; padding: 12px; }
   }
 
+  /* Mobile pequeno (<=480px): KPI 1 coluna horizontal */
+  @media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; gap: 8px; }
+    .kpi-card { padding: 14px 16px; }
+    .kpi-value { font-size: 26px; }
+  }
+
+  /* ===== Mobile cards CSS (mesma estrutura, isolada do mobile-media) ===== */
+  .mobile-cards .indicador-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--ghost-border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .mobile-cards .ind-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ghost-border);
+  }
+  .mobile-cards .ind-card-titulo {
+    flex: 1;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .mobile-cards .ind-card-titulo .desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .mobile-cards .ind-card-pct-wrap { text-align: right; flex-shrink: 0; }
+  .mobile-cards .ind-card-pct {
+    font-family: 'Manrope', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .mobile-cards .ind-card-pct.green { color: var(--green-400); }
+  .mobile-cards .ind-card-pct.amber { color: var(--amber-400); }
+  .mobile-cards .ind-card-pct.red { color: var(--red-400); }
+  .mobile-cards .ind-card-pct.blue { color: var(--blue-400); }
+  .mobile-cards .ind-card-pct-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .mobile-cards .ind-card-resp { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .mobile-cards .ind-card-resp .avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; }
+  .mobile-cards .ind-card-resp .badges { margin-left: auto; display: flex; gap: 4px; }
+  .mobile-cards .ind-meses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .mobile-cards .ind-mes-cell {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--ghost-border);
+    border-radius: 8px;
+    padding: 6px 4px 10px 4px;
+    text-align: center;
+    position: relative;
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .mobile-cards .ind-mes-cell.current { border-color: var(--teal-300); background: rgba(45,212,191,0.08); }
+  .mobile-cards .ind-mes-cell.future { opacity: 0.35; }
+  .mobile-cards .ind-mes-nome { font-size: 9px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.4px; margin-bottom: 3px; }
+  .mobile-cards .ind-mes-cell.current .ind-mes-nome { color: var(--teal-200); }
+  .mobile-cards .ind-mes-meta { font-size: 9px; color: var(--text-muted); margin-bottom: 2px; }
+  .mobile-cards .ind-mes-real { font-size: 11px; font-weight: 700; }
+  .mobile-cards .ind-mes-pct { font-size: 9px; margin-top: 1px; opacity: 0.85; }
+  .mobile-cards .ind-mes-cell.green .ind-mes-real, .mobile-cards .ind-mes-cell.green .ind-mes-pct { color: var(--green-400); }
+  .mobile-cards .ind-mes-cell.amber .ind-mes-real, .mobile-cards .ind-mes-cell.amber .ind-mes-pct { color: var(--amber-400); }
+  .mobile-cards .ind-mes-cell.red .ind-mes-real, .mobile-cards .ind-mes-cell.red .ind-mes-pct { color: var(--red-400); }
+  .mobile-cards .ind-mes-cell.blue .ind-mes-real, .mobile-cards .ind-mes-cell.blue .ind-mes-pct { color: var(--blue-400); }
+  .mobile-cards .ind-mes-cell.empty .ind-mes-real { color: var(--text-muted); font-weight: 500; font-size: 11px; }
+  .mobile-cards .ind-mes-cell.pending { background: var(--red-bg); border-color: rgba(248,113,113,0.3); }
+  .mobile-cards .ind-mes-cell.pending .ind-mes-real { color: var(--red-400); font-size: 10px; }
+  .mobile-cards .ind-mes-bar { position: absolute; bottom: 3px; left: 5px; right: 5px; height: 2px; background: var(--bg-elev-3); border-radius: 1px; overflow: hidden; }
+  .mobile-cards .ind-mes-bar > div { height: 100%; border-radius: 1px; }
+  .mobile-cards .ind-mes-cell.green .ind-mes-bar > div { background: var(--green-400); }
+  .mobile-cards .ind-mes-cell.amber .ind-mes-bar > div { background: var(--amber-400); }
+  .mobile-cards .ind-mes-cell.red .ind-mes-bar > div { background: var(--red-400); }
+  .mobile-cards .ind-mes-cell.blue .ind-mes-bar > div { background: var(--blue-400); }
+
   /* ===== Touch targets gerais (>= 44px é a recomendação Apple/Google) ===== */
-  @media (hover: none) and (pointer: coarse) {
-    .btn { min-height: 40px; }
-    .nav-item { padding: 12px; min-height: 44px; }
-    .tab { min-height: 44px; }
+  @media (hover: none) and (pointer: coarse), (max-width: 768px) {
+    .btn { min-height: 44px; padding: 10px 16px; }
+    .btn-sm { min-height: 36px; }
+    .nav-item { padding: 14px 12px; min-height: 48px; font-size: 14px; }
+    .tab { min-height: 48px; padding: 12px 16px; }
     .cell-progress { min-height: 44px; }
-    .inline-confirm button { min-height: 36px; min-width: 36px; }
+    .inline-confirm button { min-height: 40px; min-width: 60px; padding: 8px 12px; }
+    .mobile-menu-btn { width: 48px; height: 48px; font-size: 20px; }
+    .select-mock { min-height: 44px; padding: 10px 14px; }
+    .breadcrumb a { min-height: 32px; padding: 4px 0; display: inline-block; }
+    .close-btn { width: 44px; height: 44px; }
   }
 </style>
 </head>
@@ -659,7 +730,247 @@
             <button class="btn btn-ghost btn-sm">🔍 Buscar</button>
           </div>
         </div>
-        <div class="table-wrap">
+
+        <!-- ===== Mobile: cards (1 por indicador, 12 meses em grid 4x3) ===== -->
+        <div class="mobile-cards">
+
+          <!-- Card 1: Novas vendas -->
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                Novas vendas <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                <div class="desc">Contratos novos ativados · acumulado</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct green">102%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
+            <div class="ind-meses-grid">
+              <div class="ind-mes-cell green">
+                <div class="ind-mes-nome">Jan</div>
+                <div class="ind-mes-meta">m 120</div>
+                <div class="ind-mes-real">125</div>
+                <div class="ind-mes-pct">104%</div>
+                <div class="ind-mes-bar"><div style="width:100%"></div></div>
+              </div>
+              <div class="ind-mes-cell green">
+                <div class="ind-mes-nome">Fev</div>
+                <div class="ind-mes-meta">m 130</div>
+                <div class="ind-mes-real">142</div>
+                <div class="ind-mes-pct">109%</div>
+                <div class="ind-mes-bar"><div style="width:100%"></div></div>
+              </div>
+              <div class="ind-mes-cell amber">
+                <div class="ind-mes-nome">Mar</div>
+                <div class="ind-mes-meta">m 140</div>
+                <div class="ind-mes-real">118</div>
+                <div class="ind-mes-pct">84%</div>
+                <div class="ind-mes-bar"><div style="width:84%"></div></div>
+              </div>
+              <div class="ind-mes-cell green">
+                <div class="ind-mes-nome">Abr</div>
+                <div class="ind-mes-meta">m 150</div>
+                <div class="ind-mes-real">156</div>
+                <div class="ind-mes-pct">104%</div>
+                <div class="ind-mes-bar"><div style="width:100%"></div></div>
+              </div>
+              <div class="ind-mes-cell blue current">
+                <div class="ind-mes-nome">Mai ⬅</div>
+                <div class="ind-mes-meta">m 160</div>
+                <div class="ind-mes-real">178</div>
+                <div class="ind-mes-pct">111%</div>
+                <div class="ind-mes-bar"><div style="width:100%"></div></div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Jun</div>
+                <div class="ind-mes-meta">m 170</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Jul</div>
+                <div class="ind-mes-meta">m 180</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Ago</div>
+                <div class="ind-mes-meta">m 180</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Set</div>
+                <div class="ind-mes-meta">m 190</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Out</div>
+                <div class="ind-mes-meta">m 200</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Nov</div>
+                <div class="ind-mes-meta">m 210</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+              <div class="ind-mes-cell empty future">
+                <div class="ind-mes-nome">Dez</div>
+                <div class="ind-mes-meta">m 220</div>
+                <div class="ind-mes-real">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Faturamento (em risco) -->
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                <div class="desc">MRR adicionado no mês</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct red">68%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
+            <div class="ind-meses-grid">
+              <div class="ind-mes-cell amber">
+                <div class="ind-mes-nome">Jan</div>
+                <div class="ind-mes-meta">m 60k</div>
+                <div class="ind-mes-real">48k</div>
+                <div class="ind-mes-pct">80%</div>
+                <div class="ind-mes-bar"><div style="width:80%"></div></div>
+              </div>
+              <div class="ind-mes-cell red">
+                <div class="ind-mes-nome">Fev</div>
+                <div class="ind-mes-meta">m 65k</div>
+                <div class="ind-mes-real">42k</div>
+                <div class="ind-mes-pct">65%</div>
+                <div class="ind-mes-bar"><div style="width:65%"></div></div>
+              </div>
+              <div class="ind-mes-cell amber">
+                <div class="ind-mes-nome">Mar</div>
+                <div class="ind-mes-meta">m 70k</div>
+                <div class="ind-mes-real">56k</div>
+                <div class="ind-mes-pct">80%</div>
+                <div class="ind-mes-bar"><div style="width:80%"></div></div>
+              </div>
+              <div class="ind-mes-cell amber">
+                <div class="ind-mes-nome">Abr</div>
+                <div class="ind-mes-meta">m 75k</div>
+                <div class="ind-mes-real">58k</div>
+                <div class="ind-mes-pct">77%</div>
+                <div class="ind-mes-bar"><div style="width:77%"></div></div>
+              </div>
+              <div class="ind-mes-cell red current">
+                <div class="ind-mes-nome">Mai ⬅</div>
+                <div class="ind-mes-meta">m 80k</div>
+                <div class="ind-mes-real">62k</div>
+                <div class="ind-mes-pct">78%</div>
+                <div class="ind-mes-bar"><div style="width:78%"></div></div>
+              </div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 85k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 90k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 90k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 95k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 100k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 110k</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 120k</div><div class="ind-mes-real">—</div></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Conversão de leads -->
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                Conversão de leads <span class="unidade-badge">%</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                <div class="desc">Leads que viram contrato</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct green">103%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div class="ind-card-resp"><span class="avatar">A2</span> Resp. A2</div>
+            <div class="ind-meses-grid">
+              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">m 15%</div><div class="ind-mes-real">16,2%</div><div class="ind-mes-pct">108%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell green"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">m 15%</div><div class="ind-mes-real">15,8%</div><div class="ind-mes-pct">105%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell green"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">m 16%</div><div class="ind-mes-real">17,1%</div><div class="ind-mes-pct">107%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">m 16%</div><div class="ind-mes-real">14,3%</div><div class="ind-mes-pct">89%</div><div class="ind-mes-bar"><div style="width:89%"></div></div></div>
+              <div class="ind-mes-cell green current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">m 17%</div><div class="ind-mes-real">17,5%</div><div class="ind-mes-pct">103%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 17%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 18%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 19%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 19%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 20%</div><div class="ind-mes-real">—</div></div>
+            </div>
+          </div>
+
+          <!-- Card 4: Churn (MENOR É MELHOR) -->
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span>
+                <div class="desc">Cancelamentos / base ativa</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct amber">85%</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div class="ind-card-resp"><span class="avatar">A1</span> Gestor A</div>
+            <div class="ind-meses-grid">
+              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">≤2,0%</div><div class="ind-mes-real">1,8%</div><div class="ind-mes-pct">110%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">≤2,0%</div><div class="ind-mes-real">2,2%</div><div class="ind-mes-pct">91%</div><div class="ind-mes-bar"><div style="width:91%"></div></div></div>
+              <div class="ind-mes-cell red"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">≤1,8%</div><div class="ind-mes-real">2,5%</div><div class="ind-mes-pct">72%</div><div class="ind-mes-bar"><div style="width:72%"></div></div></div>
+              <div class="ind-mes-cell red"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">≤1,8%</div><div class="ind-mes-real">2,8%</div><div class="ind-mes-pct">64%</div><div class="ind-mes-bar"><div style="width:64%"></div></div></div>
+              <div class="ind-mes-cell amber current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">1,7%</div><div class="ind-mes-pct">88%</div><div class="ind-mes-bar"><div style="width:88%"></div></div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">≤1,5%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">≤1,3%</div><div class="ind-mes-real">—</div></div>
+            </div>
+          </div>
+
+          <!-- Card 5: Ticket médio (com pendências) -->
+          <div class="indicador-card">
+            <div class="ind-card-head">
+              <div class="ind-card-titulo">
+                Ticket médio <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                <div class="desc">Receita / nº contratos novos</div>
+              </div>
+              <div class="ind-card-pct-wrap">
+                <div class="ind-card-pct amber">—</div>
+                <div class="ind-card-pct-label">YTD</div>
+              </div>
+            </div>
+            <div class="ind-card-resp"><span class="avatar">A2</span> Resp. A2</div>
+            <div class="ind-meses-grid">
+              <div class="ind-mes-cell green"><div class="ind-mes-nome">Jan</div><div class="ind-mes-meta">m 99</div><div class="ind-mes-real">R$102</div><div class="ind-mes-pct">103%</div><div class="ind-mes-bar"><div style="width:100%"></div></div></div>
+              <div class="ind-mes-cell amber"><div class="ind-mes-nome">Fev</div><div class="ind-mes-meta">m 99</div><div class="ind-mes-real">R$88</div><div class="ind-mes-pct">89%</div><div class="ind-mes-bar"><div style="width:89%"></div></div></div>
+              <div class="ind-mes-cell pending"><div class="ind-mes-nome">Mar</div><div class="ind-mes-meta">m 105</div><div class="ind-mes-real">⚠ pend.</div></div>
+              <div class="ind-mes-cell pending"><div class="ind-mes-nome">Abr</div><div class="ind-mes-meta">m 105</div><div class="ind-mes-real">⚠ pend.</div></div>
+              <div class="ind-mes-cell empty current"><div class="ind-mes-nome">Mai ⬅</div><div class="ind-mes-meta">m 110</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jun</div><div class="ind-mes-meta">m 110</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Jul</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Ago</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Set</div><div class="ind-mes-meta">m 115</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Out</div><div class="ind-mes-meta">m 120</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Nov</div><div class="ind-mes-meta">m 120</div><div class="ind-mes-real">—</div></div>
+              <div class="ind-mes-cell empty future"><div class="ind-mes-nome">Dez</div><div class="ind-mes-meta">m 125</div><div class="ind-mes-real">—</div></div>
+            </div>
+          </div>
+
+        </div>
+        <!-- ===== /Mobile cards ===== -->
+
+        <div class="table-wrap desktop-table">
           <table class="indicadores">
             <thead>
               <tr>
