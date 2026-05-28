@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mockup — Indicadores · i2 Gestão</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design tokens (Neural Pulse — dark teal glassmorphism) ===== */
+  :root {
+    --bg-base: #0a1418;
+    --bg-elev-1: #0f1d23;
+    --bg-elev-2: #14252d;
+    --bg-elev-3: #1a2f38;
+    --glass: rgba(20, 37, 45, 0.55);
+    --glass-border: rgba(94, 234, 212, 0.12);
+    --ghost-border: rgba(94, 234, 212, 0.08);
+    --teal-50: #ccfbf1;
+    --teal-200: #5eead4;
+    --teal-300: #2dd4bf;
+    --teal-400: #14b8a6;
+    --teal-500: #0d9488;
+    --text-primary: #e6f4f1;
+    --text-secondary: #94a8a8;
+    --text-muted: #5d7575;
+    --red-400: #f87171;
+    --red-bg: rgba(248, 113, 113, 0.12);
+    --amber-400: #fbbf24;
+    --amber-bg: rgba(251, 191, 36, 0.12);
+    --green-400: #4ade80;
+    --green-bg: rgba(74, 222, 128, 0.12);
+    --blue-400: #60a5fa;
+    --blue-bg: rgba(96, 165, 250, 0.12);
+    --shadow-glow: 0 0 40px rgba(94, 234, 212, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  body {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(94, 234, 212, 0.05), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(45, 212, 191, 0.04), transparent 70%),
+      var(--bg-base);
+  }
+  h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; font-weight: 700; }
+
+  /* ===== Layout ===== */
+  .shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  .sidebar {
+    background: var(--bg-elev-1);
+    border-right: 1px solid var(--ghost-border);
+    padding: 24px 16px;
+    position: sticky; top: 0; height: 100vh;
+    overflow-y: auto;
+  }
+  .logo { font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; color: var(--teal-200); margin-bottom: 28px; letter-spacing: -0.5px; }
+  .logo .dot { color: var(--teal-400); }
+  .nav-section { margin-bottom: 20px; }
+  .nav-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; padding: 0 8px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: var(--text-secondary); font-size: 13px; cursor: pointer; transition: all 0.15s; margin-bottom: 2px; }
+  .nav-item:hover { background: var(--bg-elev-2); color: var(--text-primary); }
+  .nav-item.active { background: linear-gradient(90deg, rgba(94,234,212,0.12), transparent); color: var(--teal-200); border-left: 2px solid var(--teal-300); padding-left: 14px; }
+  .nav-item .ico { width: 16px; height: 16px; opacity: 0.8; }
+
+  .main { padding: 32px 40px 80px 40px; max-width: 1600px; }
+
+  /* ===== Breadcrumb ===== */
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--teal-200); }
+  .breadcrumb .sep { opacity: 0.4; }
+
+  /* ===== Page header ===== */
+  .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+  .page-header h1 { font-size: 28px; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .page-header .subtitle { color: var(--text-secondary); font-size: 14px; }
+  .header-actions { display: flex; gap: 8px; }
+
+  /* ===== Buttons ===== */
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: inherit; }
+  .btn-primary { background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; box-shadow: 0 0 20px rgba(45,212,191,0.25); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(45,212,191,0.4); }
+  .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--ghost-border); }
+  .btn-ghost:hover { color: var(--teal-200); border-color: var(--glass-border); background: var(--glass); }
+  .btn-sm { padding: 6px 10px; font-size: 12px; }
+  .btn-danger { background: rgba(248,113,113,0.15); color: var(--red-400); border: 1px solid rgba(248,113,113,0.3); }
+  .btn-danger:hover { background: rgba(248,113,113,0.25); }
+
+  /* ===== KPI Cards ===== */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 18px 20px; position: relative; overflow: hidden; }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--teal-300), transparent); opacity: 0.4; }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+  .kpi-value { font-family: 'Manrope', sans-serif; font-size: 30px; font-weight: 800; line-height: 1; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -1px; }
+  .kpi-value.green { color: var(--green-400); }
+  .kpi-value.amber { color: var(--amber-400); }
+  .kpi-value.red { color: var(--red-400); }
+  .kpi-value.blue { color: var(--blue-400); }
+  .kpi-trend { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
+  .kpi-trend.up { color: var(--green-400); }
+  .kpi-trend.down { color: var(--red-400); }
+
+  /* ===== Tabs ===== */
+  .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--ghost-border); padding-bottom: 0; }
+  .tab { padding: 12px 20px; cursor: pointer; color: var(--text-secondary); font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; }
+  .tab:hover { color: var(--text-primary); }
+  .tab.active { color: var(--teal-200); border-bottom-color: var(--teal-300); font-weight: 600; }
+  .tab .badge { display: inline-block; margin-left: 6px; padding: 2px 7px; background: var(--bg-elev-3); border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .tab.active .badge { background: rgba(94,234,212,0.15); color: var(--teal-200); }
+
+  /* ===== Data table ===== */
+  .panel { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-glow); }
+  .panel-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--ghost-border); }
+  .panel-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .panel-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .panel-filter { display: flex; gap: 8px; align-items: center; }
+  .select-mock { background: var(--bg-elev-2); border: 1px solid var(--ghost-border); color: var(--text-primary); padding: 6px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+
+  .table-wrap { overflow-x: auto; max-height: 70vh; }
+  table.indicadores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
+  table.indicadores thead { position: sticky; top: 0; z-index: 10; background: var(--bg-elev-2); }
+  table.indicadores th { padding: 10px 8px; text-align: left; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--ghost-border); white-space: nowrap; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+  table.indicadores th.month-header { text-align: center; background: var(--bg-elev-3); border-left: 1px solid var(--ghost-border); }
+  table.indicadores th.month-header.current { background: rgba(45,212,191,0.08); color: var(--teal-200); }
+  table.indicadores th.sub-header { padding: 6px 4px; font-size: 10px; background: var(--bg-elev-2); text-transform: none; letter-spacing: 0; color: var(--text-muted); border-bottom: 1px solid var(--ghost-border); }
+  table.indicadores th.sub-header.current { background: rgba(45,212,191,0.04); color: var(--teal-200); }
+  table.indicadores td { padding: 10px 8px; border-bottom: 1px solid var(--ghost-border); vertical-align: middle; }
+  table.indicadores td.indicador { font-weight: 600; color: var(--text-primary); min-width: 230px; }
+  table.indicadores td.indicador .desc { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+  table.indicadores td.responsavel { color: var(--text-secondary); min-width: 140px; }
+  table.indicadores td.responsavel .avatar { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-400), var(--teal-500)); color: #001210; text-align: center; line-height: 22px; font-weight: 700; font-size: 10px; margin-right: 6px; vertical-align: middle; }
+  table.indicadores td.month-cell { text-align: center; border-left: 1px solid var(--ghost-border); padding: 6px 4px; min-width: 70px; }
+  table.indicadores td.month-cell.meta { color: var(--text-muted); font-weight: 500; }
+  table.indicadores td.month-cell.realizado { padding: 4px; position: relative; }
+  table.indicadores tbody tr:hover { background: rgba(94,234,212,0.03); }
+
+  /* Cell with progress bar */
+  .cell-progress { position: relative; padding: 8px 6px; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+  .cell-progress:hover { background: var(--bg-elev-3); }
+  .cell-progress.editing { background: var(--bg-elev-3); outline: 1px solid var(--teal-300); }
+  .cell-value { font-weight: 600; font-size: 12px; position: relative; z-index: 2; }
+  .cell-pct { font-size: 10px; color: var(--text-muted); margin-top: 2px; position: relative; z-index: 2; }
+  .cell-bar-bg { position: absolute; bottom: 4px; left: 6px; right: 6px; height: 3px; background: var(--bg-elev-3); border-radius: 2px; overflow: hidden; }
+  .cell-bar-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+  .cell-progress.red .cell-value { color: var(--red-400); }
+  .cell-progress.red .cell-bar-fill { background: linear-gradient(90deg, #ef4444, var(--red-400)); }
+  .cell-progress.amber .cell-value { color: var(--amber-400); }
+  .cell-progress.amber .cell-bar-fill { background: linear-gradient(90deg, #f59e0b, var(--amber-400)); }
+  .cell-progress.green .cell-value { color: var(--green-400); }
+  .cell-progress.green .cell-bar-fill { background: linear-gradient(90deg, #22c55e, var(--green-400)); }
+  .cell-progress.blue .cell-value { color: var(--blue-400); }
+  .cell-progress.blue .cell-bar-fill { background: linear-gradient(90deg, #3b82f6, var(--blue-400)); }
+  .cell-progress.empty { color: var(--text-muted); font-style: italic; font-size: 11px; }
+  .cell-progress.future { opacity: 0.4; cursor: not-allowed; }
+
+  /* Inline edit input */
+  .inline-edit { width: 100%; background: var(--bg-base); border: 1px solid var(--teal-300); color: var(--text-primary); padding: 4px 6px; border-radius: 4px; font-size: 12px; font-weight: 600; text-align: center; font-family: inherit; outline: none; }
+  .inline-confirm { display: flex; gap: 2px; justify-content: center; margin-top: 3px; }
+  .inline-confirm button { padding: 2px 6px; border-radius: 3px; border: none; font-size: 10px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .inline-confirm .ok { background: var(--green-400); color: #001210; }
+  .inline-confirm .cancel { background: var(--bg-elev-3); color: var(--text-secondary); }
+
+  /* Unidade badge */
+  .unidade-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--bg-elev-3); color: var(--text-muted); font-size: 9px; font-weight: 600; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.3px; vertical-align: middle; }
+  .direcao-badge { display: inline-block; font-size: 11px; margin-left: 4px; }
+
+  /* Row total */
+  table.indicadores td.total { text-align: center; background: var(--bg-elev-2); font-weight: 700; border-left: 1px solid var(--glass-border); padding: 8px; }
+  table.indicadores th.total { background: var(--bg-elev-3); color: var(--teal-200); border-left: 1px solid var(--glass-border); }
+
+  /* ===== Resumo tab content ===== */
+  .resumo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .setor-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; }
+  .setor-card:hover { transform: translateY(-2px); border-color: rgba(94,234,212,0.3); box-shadow: 0 8px 32px rgba(94,234,212,0.1); }
+  .setor-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .setor-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: var(--text-primary); }
+  .setor-count { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .setor-pct-big { font-family: 'Manrope', sans-serif; font-size: 42px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; }
+  .setor-pct-big.green { color: var(--green-400); }
+  .setor-pct-big.amber { color: var(--amber-400); }
+  .setor-pct-big.red { color: var(--red-400); }
+  .setor-stats { display: flex; gap: 16px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--ghost-border); font-size: 11px; }
+  .setor-stats span { display: flex; align-items: center; gap: 4px; color: var(--text-secondary); }
+  .setor-stats .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .setor-stats .dot.red { background: var(--red-400); }
+  .setor-stats .dot.amber { background: var(--amber-400); }
+  .setor-stats .dot.green { background: var(--green-400); }
+  .setor-stats .dot.blue { background: var(--blue-400); }
+
+  /* ===== UX showcase ===== */
+  .ux-showcase { margin-top: 32px; padding: 28px; background: var(--bg-elev-1); border: 1px dashed var(--glass-border); border-radius: 14px; }
+  .ux-showcase h2 { font-size: 18px; margin-bottom: 4px; color: var(--teal-200); }
+  .ux-showcase .ux-sub { color: var(--text-secondary); margin-bottom: 24px; font-size: 13px; }
+  .ux-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .ux-option { background: var(--bg-elev-2); border: 1px solid var(--ghost-border); border-radius: 10px; padding: 18px; }
+  .ux-option-title { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .ux-option-badge { padding: 2px 8px; border-radius: 4px; background: var(--bg-elev-3); font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+  .ux-option-badge.recommended { background: rgba(74,222,128,0.15); color: var(--green-400); }
+  .ux-option p { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; min-height: 50px; }
+  .ux-demo { background: var(--bg-base); border-radius: 8px; padding: 12px; min-height: 100px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
+  .ux-pros { margin-top: 12px; font-size: 11px; }
+  .ux-pros .li-ok { color: var(--green-400); }
+  .ux-pros .li-no { color: var(--red-400); }
+  .ux-pros div { margin-top: 3px; }
+
+  /* ===== Modal ===== */
+  .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; }
+  .modal-bg.open { display: flex; }
+  .modal { background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 14px; padding: 28px; max-width: 520px; width: 90vw; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .modal h3 { font-size: 20px; margin-bottom: 6px; }
+  .modal .modal-sub { color: var(--text-secondary); font-size: 13px; margin-bottom: 22px; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--bg-elev-2); border: 1px solid var(--ghost-border);
+    color: var(--text-primary); padding: 9px 12px; border-radius: 6px; font-size: 13px; font-family: inherit;
+  }
+  .form-group input:focus, .form-group select:focus { outline: 1px solid var(--teal-300); border-color: var(--teal-300); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--ghost-border); }
+  .close-btn { position: absolute; top: 16px; right: 16px; background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 20px; }
+
+  /* Confirmation modal */
+  .confirm-modal { max-width: 400px; }
+  .confirm-modal .icon-warn { font-size: 40px; text-align: center; margin-bottom: 12px; color: var(--amber-400); }
+  .confirm-modal .confirm-detail { background: var(--bg-elev-2); border-radius: 8px; padding: 14px; margin: 16px 0; font-family: 'Manrope', monospace; font-size: 13px; }
+  .confirm-modal .confirm-detail .old-val { color: var(--text-muted); text-decoration: line-through; }
+  .confirm-modal .confirm-detail .new-val { color: var(--teal-200); font-weight: 700; font-size: 16px; }
+  .confirm-modal .confirm-detail .arrow { color: var(--text-muted); margin: 0 8px; }
+
+  /* Footer notice */
+  .footer-notice { margin-top: 40px; padding: 16px; background: var(--bg-elev-1); border-left: 3px solid var(--teal-300); border-radius: 8px; font-size: 12px; color: var(--text-secondary); }
+  .footer-notice strong { color: var(--teal-200); }
+
+  /* Anchor sections */
+  .section-anchor { padding-top: 8px; margin-top: 24px; }
+  .section-anchor h2.h2-section { font-size: 20px; margin-bottom: 16px; color: var(--text-primary); }
+
+  /* ===== Mobile toggle button (só aparece em mobile) ===== */
+  .mobile-menu-btn {
+    display: none;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 50;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    color: var(--teal-200);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 30;
+  }
+  .sidebar-backdrop.open { display: block; }
+
+  /* ===== Tablet (<=1100px) ===== */
+  @media (max-width: 1100px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .resumo-grid { grid-template-columns: 1fr; }
+    .ux-options { grid-template-columns: 1fr; }
+    .main { padding: 24px 24px 60px 24px; }
+  }
+
+  /* ===== Mobile (<=768px) ===== */
+  @media (max-width: 768px) {
+    .shell { grid-template-columns: 1fr; }
+
+    /* Sidebar vira drawer */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      z-index: 40;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      box-shadow: 4px 0 30px rgba(0,0,0,0.5);
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .mobile-menu-btn { display: flex; }
+
+    .main { padding: 60px 14px 60px 14px; }
+
+    /* Header empilhado */
+    .page-header { flex-direction: column; align-items: stretch; gap: 14px; }
+    .page-header h1 { font-size: 22px; }
+    .header-actions { flex-wrap: wrap; }
+    .header-actions .btn { flex: 1; justify-content: center; min-width: 120px; }
+    .header-actions .select-mock { flex: 1; min-width: 100px; }
+
+    /* KPIs 2x2 → 1x4 (mais legível no celular) */
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+    .kpi-card { padding: 14px; border-radius: 12px; }
+    .kpi-value { font-size: 22px; }
+    .kpi-label { font-size: 10px; }
+    .kpi-trend { font-size: 10px; }
+
+    /* Tabs com scroll horizontal */
+    .tabs {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { padding: 10px 14px; font-size: 13px; white-space: nowrap; }
+    .tab .badge { font-size: 10px; }
+
+    /* Cards de setor */
+    .setor-card { padding: 16px; }
+    .setor-name { font-size: 16px; }
+    .setor-pct-big { font-size: 36px; }
+    .setor-stats { flex-wrap: wrap; gap: 10px; font-size: 10px; }
+
+    /* Painel e tabela */
+    .panel-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 12px 14px;
+    }
+    .panel-title { font-size: 14px; }
+    .panel-subtitle { font-size: 11px; }
+    .panel-filter { width: 100%; }
+    .panel-filter .select-mock { flex: 1; }
+
+    .table-wrap {
+      max-height: 60vh;
+      -webkit-overflow-scrolling: touch;
+    }
+    table.indicadores { font-size: 11px; }
+    table.indicadores th { padding: 8px 6px; font-size: 10px; }
+    table.indicadores td { padding: 8px 6px; }
+
+    /* Sticky nas 2 primeiras colunas (indicador + responsável) */
+    table.indicadores th:nth-child(1),
+    table.indicadores td.indicador {
+      position: sticky;
+      left: 0;
+      background: var(--bg-elev-2);
+      z-index: 5;
+      min-width: 160px;
+      max-width: 180px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+    }
+    table.indicadores thead th:nth-child(1) {
+      background: var(--bg-elev-3);
+      z-index: 11;
+    }
+    table.indicadores td.indicador {
+      font-size: 11px;
+    }
+    table.indicadores td.indicador .desc {
+      font-size: 9px;
+    }
+    table.indicadores td.responsavel {
+      min-width: 100px;
+    }
+    table.indicadores td.responsavel .avatar {
+      width: 20px; height: 20px; line-height: 20px; font-size: 9px;
+    }
+
+    /* Células com mais altura pra touch */
+    table.indicadores td.month-cell {
+      min-width: 60px;
+      padding: 8px 4px;
+    }
+    .cell-progress {
+      padding: 10px 4px;
+      min-height: 38px;
+    }
+    .cell-value { font-size: 11px; }
+    .cell-pct { font-size: 9px; }
+
+    /* Inline edit no mobile fica maior */
+    .inline-edit {
+      font-size: 14px;
+      padding: 8px 6px;
+    }
+    .inline-confirm button {
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+
+    /* UX showcase empilhado */
+    .ux-showcase { padding: 16px; }
+    .ux-showcase h2 { font-size: 15px; }
+    .ux-showcase .ux-sub { font-size: 12px; }
+    .ux-option { padding: 14px; }
+    .ux-option p { min-height: 0; }
+
+    /* Modal full-screen em mobile */
+    .modal {
+      max-width: 100%;
+      width: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+      padding: 20px;
+    }
+    .modal h3 { font-size: 18px; }
+    .form-row, .form-row-3 { grid-template-columns: 1fr; }
+
+    /* Breadcrumb mais compacto */
+    .breadcrumb { font-size: 11px; flex-wrap: wrap; }
+
+    /* Footer notice */
+    .footer-notice { font-size: 11px; padding: 12px; }
+  }
+
+  /* ===== Touch targets gerais (>= 44px é a recomendação Apple/Google) ===== */
+  @media (hover: none) and (pointer: coarse) {
+    .btn { min-height: 40px; }
+    .nav-item { padding: 12px; min-height: 44px; }
+    .tab { min-height: 44px; }
+    .cell-progress { min-height: 44px; }
+    .inline-confirm button { min-height: 36px; min-width: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile menu trigger -->
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">☰</button>
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="shell">
+
+  <!-- ===== Sidebar (contexto navegacional) ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">i2 <span class="dot">·</span> Gestão</div>
+
+    <div class="nav-section">
+      <div class="nav-title">Dashboards</div>
+      <div class="nav-item">📊 Comercial</div>
+      <div class="nav-item">⚙️ Operações</div>
+      <div class="nav-item">📁 Administrativo</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-title">Diretoria</div>
+      <div class="nav-item">🏠 Overview</div>
+      <div class="nav-item">📋 Painel</div>
+      <div class="nav-item active">🎯 Indicadores</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-title">Configurações</div>
+      <div class="nav-item">👥 Usuários</div>
+      <div class="nav-item">🏢 Setores</div>
+      <div class="nav-item">📐 Indicadores (cadastro)</div>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="#">Gestão</a><span class="sep">/</span>
+      <a href="#">Diretoria</a><span class="sep">/</span>
+      <span style="color: var(--text-primary);">Indicadores</span>
+    </div>
+
+    <div class="page-header">
+      <div>
+        <h1>Indicadores e Metas</h1>
+        <div class="subtitle">Acompanhamento mensal de meta vs realizado · Ano 2026</div>
+      </div>
+      <div class="header-actions">
+        <select class="select-mock" id="anoSelect">
+          <option>Ano · 2026</option>
+          <option>Ano · 2025</option>
+          <option>+ Adicionar ano</option>
+        </select>
+        <button class="btn btn-ghost" onclick="openModal('modalExport')">⬇ Exportar XLSX</button>
+        <button class="btn btn-primary" onclick="openModal('modalNovoIndicador')">+ Novo indicador</button>
+      </div>
+    </div>
+
+    <!-- ===== KPIs no topo ===== -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">% Meta atingida · YTD</div>
+        <div class="kpi-value amber">83,4%</div>
+        <div class="kpi-trend down">↓ -2,1 p.p. vs mês anterior</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">% Meta atingida · Maio/26</div>
+        <div class="kpi-value green">94,7%</div>
+        <div class="kpi-trend up">↑ +5,3 p.p. vs Abr/26</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Indicadores em vermelho</div>
+        <div class="kpi-value red">4</div>
+        <div class="kpi-trend">de 23 indicadores ativos</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Sem realizado lançado</div>
+        <div class="kpi-value blue">3</div>
+        <div class="kpi-trend">⚠ Abril ainda pendente</div>
+      </div>
+    </div>
+
+    <!-- ===== Tabs ===== -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab(this, 'resumo')">Resumo</div>
+      <div class="tab" onclick="switchTab(this, 'comercial')">Comercial <span class="badge">8</span></div>
+      <div class="tab" onclick="switchTab(this, 'operacoes')">Operações <span class="badge">9</span></div>
+      <div class="tab" onclick="switchTab(this, 'administrativo')">Administrativo <span class="badge">6</span></div>
+    </div>
+
+    <!-- ===== TAB RESUMO ===== -->
+    <div class="tab-content" id="tab-resumo">
+      <div class="resumo-grid">
+        <!-- Card Comercial -->
+        <div class="setor-card" onclick="switchTabByName('comercial')">
+          <div class="setor-card-head">
+            <div>
+              <div class="setor-name">💼 Comercial</div>
+              <div class="setor-count">8 indicadores · Gestor: Gestor A</div>
+            </div>
+            <div class="setor-pct-big green">91%</div>
+          </div>
+          <div class="setor-stats">
+            <span><span class="dot green"></span> 5 OK</span>
+            <span><span class="dot amber"></span> 2 atenção</span>
+            <span><span class="dot red"></span> 1 crítico</span>
+            <span><span class="dot blue"></span> 0 superou</span>
+          </div>
+        </div>
+
+        <!-- Card Operações -->
+        <div class="setor-card" onclick="switchTabByName('operacoes')">
+          <div class="setor-card-head">
+            <div>
+              <div class="setor-name">⚙️ Operações</div>
+              <div class="setor-count">9 indicadores · Gestor: Gestor B</div>
+            </div>
+            <div class="setor-pct-big amber">78%</div>
+          </div>
+          <div class="setor-stats">
+            <span><span class="dot green"></span> 4 OK</span>
+            <span><span class="dot amber"></span> 3 atenção</span>
+            <span><span class="dot red"></span> 2 crítico</span>
+            <span><span class="dot blue"></span> 0 superou</span>
+          </div>
+        </div>
+
+        <!-- Card Administrativo -->
+        <div class="setor-card" onclick="switchTabByName('administrativo')">
+          <div class="setor-card-head">
+            <div>
+              <div class="setor-name">📁 Administrativo</div>
+              <div class="setor-count">6 indicadores · Gestor: Gestor C</div>
+            </div>
+            <div class="setor-pct-big green">87%</div>
+          </div>
+          <div class="setor-stats">
+            <span><span class="dot green"></span> 4 OK</span>
+            <span><span class="dot amber"></span> 1 atenção</span>
+            <span><span class="dot red"></span> 1 crítico</span>
+            <span><span class="dot blue"></span> 0 superou</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Top 5 indicadores em risco · YTD 2026</div>
+              <div class="panel-subtitle">Indicadores com menor % de meta atingida</div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="indicadores">
+              <thead>
+                <tr>
+                  <th>Indicador</th>
+                  <th>Setor</th>
+                  <th>Responsável</th>
+                  <th style="text-align:center;">% YTD</th>
+                  <th style="text-align:center;">Tendência</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="indicador">Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span><div class="desc">Cancelamentos / base total</div></td>
+                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td class="responsavel"><span class="avatar">B1</span>Gestor B</td>
+                  <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">62%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 62%;"></div></div></div></td>
+                  <td style="text-align: center;">📉 piora</td>
+                </tr>
+                <tr>
+                  <td class="indicador">Tempo médio resolução OS <span class="unidade-badge">h</span><span class="direcao-badge" title="Menor é melhor">↓</span></td>
+                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td class="responsavel"><span class="avatar">B2</span>Resp. B2</td>
+                  <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">65%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 65%;"></div></div></div></td>
+                  <td style="text-align: center;">📉 piora</td>
+                </tr>
+                <tr>
+                  <td class="indicador">Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span></td>
+                  <td><span style="color: var(--green-400);">💼 Comercial</span></td>
+                  <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
+                  <td><div class="cell-progress red" style="display: inline-block; min-width: 80px;"><div class="cell-value">68%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 68%;"></div></div></div></td>
+                  <td style="text-align: center;">📈 melhora</td>
+                </tr>
+                <tr>
+                  <td class="indicador">Inadimplência <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span></td>
+                  <td><span style="color: var(--blue-400);">📁 Administrativo</span></td>
+                  <td class="responsavel"><span class="avatar">C1</span>Gestor C</td>
+                  <td><div class="cell-progress amber" style="display: inline-block; min-width: 80px;"><div class="cell-value">76%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 76%;"></div></div></div></td>
+                  <td style="text-align: center;">➡️ estável</td>
+                </tr>
+                <tr>
+                  <td class="indicador">NPS <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span></td>
+                  <td><span style="color: var(--amber-400);">⚙️ Operações</span></td>
+                  <td class="responsavel"><span class="avatar">B3</span>Resp. B3</td>
+                  <td><div class="cell-progress amber" style="display: inline-block; min-width: 80px;"><div class="cell-value">82%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 82%;"></div></div></div></td>
+                  <td style="text-align: center;">📈 melhora</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB COMERCIAL ===== -->
+    <div class="tab-content" id="tab-comercial" style="display: none;">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">💼 Indicadores · Comercial · 2026</div>
+            <div class="panel-subtitle">8 indicadores ativos · Última atualização: hoje 10:42 por Gestor A</div>
+          </div>
+          <div class="panel-filter">
+            <select class="select-mock"><option>Todos status</option><option>Em vermelho</option><option>Sem realizado</option></select>
+            <button class="btn btn-ghost btn-sm">🔍 Buscar</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="indicadores">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: bottom;">Indicador</th>
+                <th rowspan="2" style="vertical-align: bottom;">Responsável</th>
+                <th colspan="2" class="month-header">Jan/26</th>
+                <th colspan="2" class="month-header">Fev/26</th>
+                <th colspan="2" class="month-header">Mar/26</th>
+                <th colspan="2" class="month-header">Abr/26</th>
+                <th colspan="2" class="month-header current">Mai/26 ⬅</th>
+                <th colspan="2" class="month-header">Jun/26</th>
+                <th colspan="2" class="month-header">Jul/26</th>
+                <th colspan="2" class="month-header">Ago/26</th>
+                <th colspan="2" class="month-header">Set/26</th>
+                <th colspan="2" class="month-header">Out/26</th>
+                <th colspan="2" class="month-header">Nov/26</th>
+                <th colspan="2" class="month-header">Dez/26</th>
+                <th rowspan="2" style="vertical-align: bottom;" class="total">YTD</th>
+              </tr>
+              <tr>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header current">Meta</th><th class="sub-header current">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+                <th class="sub-header">Meta</th><th class="sub-header">Real.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: Novas vendas -->
+              <tr>
+                <td class="indicador">
+                  Novas vendas <span class="unidade-badge">nº</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                  <div class="desc">Contratos novos ativados · acumulado</div>
+                </td>
+                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
+                <td class="month-cell meta">120</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">125</div><div class="cell-pct">104%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">130</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">142</div><div class="cell-pct">109%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">140</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">118</div><div class="cell-pct">84%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 84%;"></div></div></div></td>
+                <td class="month-cell meta">150</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">156</div><div class="cell-pct">104%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">160</td>
+                <td class="month-cell realizado"><div class="cell-progress blue"><div class="cell-value">178</div><div class="cell-pct">111%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">170</td>
+                <td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">180</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">180</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">190</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">200</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">210</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">220</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="total"><div class="cell-progress green" style="display: inline-block; min-width: 60px;"><div class="cell-value">102%</div></div></td>
+              </tr>
+
+              <!-- Row 2: Faturamento (R$, acumulado) - célula em edição -->
+              <tr>
+                <td class="indicador">
+                  Faturamento novos clientes <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                  <div class="desc">MRR adicionado no mês</div>
+                </td>
+                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
+                <td class="month-cell meta">R$ 60k</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 48k</div><div class="cell-pct">80%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 80%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 65k</td>
+                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">R$ 42k</div><div class="cell-pct">65%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 65%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 70k</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 56k</div><div class="cell-pct">80%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 80%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 75k</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 58k</div><div class="cell-pct">77%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 77%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 80k</td>
+                <!-- Célula em modo de edição (showcase do clique 2 cliques) -->
+                <td class="month-cell realizado">
+                  <div class="cell-progress editing">
+                    <input class="inline-edit" value="62000" type="number" />
+                    <div class="inline-confirm">
+                      <button class="ok" title="Salvar">✓ Salvar</button>
+                      <button class="cancel" title="Cancelar">✕</button>
+                    </div>
+                  </div>
+                </td>
+                <td class="month-cell meta">R$ 85k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 90k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 90k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 95k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 100k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 110k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 120k</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="total"><div class="cell-progress red" style="display: inline-block; min-width: 60px;"><div class="cell-value">68%</div></div></td>
+              </tr>
+
+              <!-- Row 3: Conversão de leads (%) -->
+              <tr>
+                <td class="indicador">
+                  Conversão de leads <span class="unidade-badge">%</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                  <div class="desc">Leads que viram contrato</div>
+                </td>
+                <td class="responsavel"><span class="avatar">A2</span>Resp. A2</td>
+                <td class="month-cell meta">15%</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">16,2%</div><div class="cell-pct">108%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">15%</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">15,8%</div><div class="cell-pct">105%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">16%</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">17,1%</div><div class="cell-pct">107%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">16%</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">14,3%</div><div class="cell-pct">89%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 89%;"></div></div></div></td>
+                <td class="month-cell meta">17%</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">17,5%</div><div class="cell-pct">103%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">17%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">18%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">19%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">19%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">20%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="total"><div class="cell-progress green" style="display: inline-block; min-width: 60px;"><div class="cell-value">103%</div></div></td>
+              </tr>
+
+              <!-- Row 4: Churn (% - MENOR É MELHOR — demonstração da direção invertida) -->
+              <tr>
+                <td class="indicador">
+                  Churn mensal <span class="unidade-badge">%</span><span class="direcao-badge" title="Menor é melhor">↓</span>
+                  <div class="desc">Cancelamentos / base ativa · meta é não passar</div>
+                </td>
+                <td class="responsavel"><span class="avatar">A1</span>Gestor A</td>
+                <td class="month-cell meta">≤ 2,0%</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">1,8%</div><div class="cell-pct">110%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">≤ 2,0%</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">2,2%</div><div class="cell-pct">91%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 91%;"></div></div></div></td>
+                <td class="month-cell meta">≤ 1,8%</td>
+                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">2,5%</div><div class="cell-pct">72%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 72%;"></div></div></div></td>
+                <td class="month-cell meta">≤ 1,8%</td>
+                <td class="month-cell realizado"><div class="cell-progress red"><div class="cell-value">2,8%</div><div class="cell-pct">64%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 64%;"></div></div></div></td>
+                <td class="month-cell meta">≤ 1,5%</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">1,7%</div><div class="cell-pct">88%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 88%;"></div></div></div></td>
+                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,5%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">≤ 1,3%</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="total"><div class="cell-progress amber" style="display: inline-block; min-width: 60px;"><div class="cell-value">85%</div></div></td>
+              </tr>
+
+              <!-- Row 5: indicador novo, sem realizado -->
+              <tr>
+                <td class="indicador">
+                  Ticket médio <span class="unidade-badge">R$</span><span class="direcao-badge" title="Maior é melhor">↑</span>
+                  <div class="desc">Receita / nº contratos novos</div>
+                </td>
+                <td class="responsavel"><span class="avatar">A2</span>Resp. A2</td>
+                <td class="month-cell meta">R$ 99</td>
+                <td class="month-cell realizado"><div class="cell-progress green"><div class="cell-value">R$ 102</div><div class="cell-pct">103%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 100%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 99</td>
+                <td class="month-cell realizado"><div class="cell-progress amber"><div class="cell-value">R$ 88</div><div class="cell-pct">89%</div><div class="cell-bar-bg"><div class="cell-bar-fill" style="width: 89%;"></div></div></div></td>
+                <td class="month-cell meta">R$ 105</td>
+                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--red-bg); color: var(--red-400); font-weight: 600;">⚠ pendente</div></td>
+                <td class="month-cell meta">R$ 105</td>
+                <td class="month-cell realizado"><div class="cell-progress empty" style="background: var(--red-bg); color: var(--red-400); font-weight: 600;">⚠ pendente</div></td>
+                <td class="month-cell meta">R$ 110</td>
+                <td class="month-cell realizado"><div class="cell-progress empty">—</div></td>
+                <td class="month-cell meta">R$ 110</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 115</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 120</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 120</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="month-cell meta">R$ 125</td><td class="month-cell realizado"><div class="cell-progress empty future">—</div></td>
+                <td class="total"><div class="cell-progress amber" style="display: inline-block; min-width: 60px;"><div class="cell-value">—</div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB OPERAÇÕES (placeholder) ===== -->
+    <div class="tab-content" id="tab-operacoes" style="display: none;">
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">⚙️ Indicadores · Operações · 2026</div></div>
+        <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+          Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
+          • NPS · Tempo médio resolução OS · % SLA cumprido · Disponibilidade rede · OS retrabalho · Reclamações Anatel
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB ADMINISTRATIVO (placeholder) ===== -->
+    <div class="tab-content" id="tab-administrativo" style="display: none;">
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">📁 Indicadores · Administrativo · 2026</div></div>
+        <div style="padding: 60px; text-align: center; color: var(--text-muted);">
+          Mesma estrutura da tab Comercial — exemplos de indicadores aqui:<br><br>
+          • Inadimplência · DSO · Margem operacional · Custo por colaborador · Turnover · Tempo médio fechamento contábil
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== UX Showcase: 3 padrões de lançamento de valor ===== -->
+    <section class="section-anchor">
+      <h2 class="h2-section">💡 3 padrões de UX pra lançamento seguro (escolha um)</h2>
+      <div class="ux-showcase">
+        <h2>Como evitar lançar valor por engano?</h2>
+        <p class="ux-sub">Clique único é perigoso (errou e gravou no banco). Aqui estão 3 opções de UX, cada uma com um "atrito" diferente. Você vai usar isso toda hora — peso da escolha é alto.</p>
+
+        <div class="ux-options">
+
+          <!-- Opção A: 2 cliques inline -->
+          <div class="ux-option">
+            <div class="ux-option-title">A) Clique → input → Salvar <span class="ux-option-badge recommended">⭐ recomendado</span></div>
+            <p>1 clique na célula abre input. Você digita. Clica em ✓ Salvar (ou Enter). Sem botão Salvar não grava nada — fechar a célula clica fora cancela.</p>
+            <div class="ux-demo">
+              <div class="cell-progress editing" style="width: 140px;">
+                <input class="inline-edit" value="62000" type="number" />
+                <div class="inline-confirm">
+                  <button class="ok">✓ Salvar</button>
+                  <button class="cancel">✕</button>
+                </div>
+              </div>
+              <div style="font-size: 10px; color: var(--text-muted);">↑ é assim que aparece no clique</div>
+            </div>
+            <div class="ux-pros">
+              <div class="li-ok">✓ 2 passos só: rápido pra uso diário</div>
+              <div class="li-ok">✓ Impossível salvar sem confirmar</div>
+              <div class="li-ok">✓ Esc / clique-fora = cancela</div>
+              <div class="li-no">✕ Pode passar batido se você confirma no automático</div>
+            </div>
+          </div>
+
+          <!-- Opção B: Modal de confirmação -->
+          <div class="ux-option">
+            <div class="ux-option-title">B) Clique → input → Modal "tem certeza?"</div>
+            <p>Mesmo fluxo de A, mas depois do Salvar abre modal mostrando valor antigo → novo. Você precisa confirmar de novo.</p>
+            <div class="ux-demo" style="position: relative; padding: 0; overflow: hidden;">
+              <div style="background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 8px; padding: 14px; width: 90%; font-size: 11px;">
+                <div style="font-weight: 700; margin-bottom: 6px;">⚠ Confirmar alteração</div>
+                <div style="font-family: monospace; font-size: 11px; color: var(--text-secondary);">
+                  <span style="text-decoration: line-through; opacity: 0.5;">R$ 80.000</span>
+                  → <span style="color: var(--teal-200); font-weight: 700;">R$ 62.000</span>
+                </div>
+                <div style="display: flex; gap: 4px; margin-top: 8px;">
+                  <button class="btn btn-primary btn-sm">Confirmar</button>
+                  <button class="btn btn-ghost btn-sm">Cancelar</button>
+                </div>
+              </div>
+            </div>
+            <div class="ux-pros">
+              <div class="li-ok">✓ Mostra valor velho × novo — pega erros de zero</div>
+              <div class="li-ok">✓ Pega audit trail "pq mudou"</div>
+              <div class="li-no">✕ 3 cliques pra lançar — fica chato em uso intensivo</div>
+              <div class="li-no">✕ Pode ativar só pra mudança grande (>30% delta)</div>
+            </div>
+          </div>
+
+          <!-- Opção C: Fechamento de mês -->
+          <div class="ux-option">
+            <div class="ux-option-title">C) Botão "Fechar mês" → formulário em lote</div>
+            <p>Sem edição inline. Você clica "Fechar Maio/26" e abre form com TODOS indicadores do setor pra preencher de uma vez. Cada campo tem label, valor atual, novo valor.</p>
+            <div class="ux-demo" style="padding: 0; overflow: hidden;">
+              <div style="background: var(--bg-elev-1); border: 1px solid var(--glass-border); border-radius: 8px; padding: 12px; width: 90%; font-size: 11px;">
+                <div style="font-weight: 700; margin-bottom: 8px; color: var(--teal-200);">Fechar Maio/26 · Comercial</div>
+                <div style="margin-bottom: 6px;">
+                  <div style="color: var(--text-muted); font-size: 10px;">Novas vendas (meta: 160)</div>
+                  <input class="inline-edit" value="178" type="number" style="margin-top: 2px;">
+                </div>
+                <div>
+                  <div style="color: var(--text-muted); font-size: 10px;">Faturamento (meta: R$ 80k)</div>
+                  <input class="inline-edit" value="62000" type="number" style="margin-top: 2px;">
+                </div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 8px;">+ 6 indicadores</div>
+              </div>
+            </div>
+            <div class="ux-pros">
+              <div class="li-ok">✓ Foco em fechamento ritualizado (1×/mês)</div>
+              <div class="li-ok">✓ Vê tudo do mês de uma vez — contexto pleno</div>
+              <div class="li-no">✕ Não dá pra corrigir 1 célula isolada</div>
+              <div class="li-no">✕ Fluxo único: precisa "fechar" o mês inteiro</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 20px; padding: 14px; background: rgba(45,212,191,0.06); border-radius: 8px; font-size: 12px; color: var(--text-secondary);">
+          <strong style="color: var(--teal-200);">💡 Minha recomendação:</strong> Opção <strong>A (default)</strong> + Opção <strong>B</strong> ativada automaticamente quando o delta é grande (>30% pra mais OU pra menos). Assim 95% do uso é rápido (A) e os 5% perigosos pegam confirmação extra (B). Opção C pode entrar como botão "Fechar mês" no canto pra quando você quer ritualizar.
+        </div>
+      </div>
+    </section>
+
+    <!-- Notice final -->
+    <div class="footer-notice">
+      <strong>⚠ Mockup estático.</strong> Cliques nas tabs funcionam · Botões abrem modais demo · Permissões/RBAC seriam validadas no backend (não simulado aqui) · Dados são fictícios.<br>
+      Após sua validação visual, sigo pra: ADR de decisão arquitetural · Migration SQL · Doc em <code>docs/gestao/rastreio-dashboards/diretoria/indicadores.md</code> · Implementação real.
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== Modal: Novo Indicador ===== -->
+<div class="modal-bg" id="modalNovoIndicador">
+  <div class="modal" style="position: relative;">
+    <button class="close-btn" onclick="closeModal('modalNovoIndicador')">×</button>
+    <h3>Novo indicador</h3>
+    <div class="modal-sub">Configurar metas mensais será o próximo passo (após criar).</div>
+    <div class="form-group">
+      <label>Descrição do indicador</label>
+      <input type="text" placeholder="Ex: Novas vendas, NPS, Churn mensal">
+    </div>
+    <div class="form-group">
+      <label>Descrição auxiliar (opcional)</label>
+      <input type="text" placeholder="Ex: Contratos novos ativados · acumulado">
+    </div>
+    <div class="form-row-3">
+      <div class="form-group">
+        <label>Setor</label>
+        <select><option>Comercial</option><option>Operações</option><option>Administrativo</option></select>
+      </div>
+      <div class="form-group">
+        <label>Unidade</label>
+        <select><option>Número</option><option>Moeda (R$)</option><option>Percentual (%)</option></select>
+      </div>
+      <div class="form-group">
+        <label>Direção</label>
+        <select><option>↑ Maior é melhor</option><option>↓ Menor é melhor</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Tipo de acumulação</label>
+        <select><option>Mês independente</option><option>Acumulado (YTD)</option></select>
+      </div>
+      <div class="form-group">
+        <label>Responsável</label>
+        <select><option>Gestor A</option><option>Resp. A2</option><option>Gestor B</option></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Ano</label>
+      <select><option>2026</option><option>2025</option></select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modalNovoIndicador')">Cancelar</button>
+      <button class="btn btn-primary">Criar e definir metas →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal: Confirmação (showcase Opção B) ===== -->
+<div class="modal-bg" id="modalConfirm">
+  <div class="modal confirm-modal" style="position: relative;">
+    <button class="close-btn" onclick="closeModal('modalConfirm')">×</button>
+    <div class="icon-warn">⚠</div>
+    <h3 style="text-align: center;">Confirmar alteração</h3>
+    <div class="modal-sub" style="text-align: center;">Você está alterando o realizado de <strong>Faturamento novos clientes</strong> em <strong>Maio/26</strong>.</div>
+    <div class="confirm-detail" style="text-align: center;">
+      <span class="old-val">R$ 80.000</span>
+      <span class="arrow">→</span>
+      <span class="new-val">R$ 62.000</span>
+    </div>
+    <div style="font-size: 11px; color: var(--text-muted); text-align: center;">Esta alteração ficará registrada no histórico (audit log).</div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modalConfirm')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modalConfirm')">Confirmar alteração</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal: Export ===== -->
+<div class="modal-bg" id="modalExport">
+  <div class="modal" style="position: relative; max-width: 420px;">
+    <button class="close-btn" onclick="closeModal('modalExport')">×</button>
+    <h3>Exportar para Excel</h3>
+    <div class="modal-sub">Escolha o que incluir no XLSX:</div>
+    <div class="form-group">
+      <label><input type="checkbox" checked> Todos os setores</label>
+    </div>
+    <div class="form-group">
+      <label><input type="checkbox" checked> Incluir % atingido por célula</label>
+    </div>
+    <div class="form-group">
+      <label><input type="checkbox"> Incluir indicadores arquivados</label>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('modalExport')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('modalExport')">⬇ Baixar XLSX</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Tab switching
+  function switchTab(el, name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    document.getElementById('tab-' + name).style.display = 'block';
+  }
+  function switchTabByName(name) {
+    document.querySelectorAll('.tab').forEach(t => {
+      if (t.textContent.toLowerCase().includes(name)) {
+        t.click();
+      }
+    });
+    // Fallback: ativa pela ordem
+    const map = { 'comercial': 1, 'operacoes': 2, 'administrativo': 3 };
+    if (map[name] !== undefined) {
+      const tabs = document.querySelectorAll('.tab');
+      switchTab(tabs[map[name]], name);
+    }
+  }
+
+  // Modais
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  // Esc fecha modais
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-bg.open').forEach(m => m.classList.remove('open'));
+  });
+  // Clique fora fecha modal
+  document.querySelectorAll('.modal-bg').forEach(bg => {
+    bg.addEventListener('click', (e) => { if (e.target === bg) bg.classList.remove('open'); });
+  });
+
+  // Demo: clicar em célula editing já existente abre modal de confirmação (showcase opção B)
+  document.querySelectorAll('.inline-confirm .ok').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal('modalConfirm');
+    });
+  });
+
+  // Mobile menu
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  function toggleSidebar() {
+    sidebar.classList.toggle('open');
+    backdrop.classList.toggle('open');
+  }
+  menuBtn.addEventListener('click', toggleSidebar);
+  backdrop.addEventListener('click', toggleSidebar);
+  // Fecha drawer ao clicar em qualquer item de navegação
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 768) toggleSidebar();
+    });
+  });
+</script>
+
+</body>
+</html>
