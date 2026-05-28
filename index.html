@@ -278,11 +278,18 @@
   .sidebar-backdrop.open { display: block; }
 
   /* ===== Tablet (<=1100px) ===== */
+  /* Tablet (768-1100): KPI 4 cols pequenos, resumo 3 cols, ux 1 col */
   @media (max-width: 1100px) {
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
     .resumo-grid { grid-template-columns: 1fr; }
     .ux-options { grid-template-columns: 1fr; }
     .main { padding: 24px 24px 60px 24px; }
+  }
+  @media (min-width: 768px) and (max-width: 1100px) {
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .kpi-card { padding: 14px; }
+    .kpi-value { font-size: 24px; }
+    .kpi-label { font-size: 10px; }
+    .resumo-grid { grid-template-columns: 1fr; gap: 12px; }
   }
 
   /* ===== Mobile cards (escondidos no desktop, mostrados em <=768) ===== */
@@ -290,7 +297,7 @@
   .desktop-table { display: block; }
 
   /* ===== Mobile (<=768px) ===== */
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .shell { grid-template-columns: minmax(0, 1fr); }
 
     /* Sidebar vira drawer */
